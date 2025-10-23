@@ -29,44 +29,90 @@ classDiagram
     class BattleSystem {
         +StartBattle()
         +Update()
+        +Draw(SpriteBatch spriteBatch)
         +EndBattle()
     }
-    
+
     class Character {
         -string name
         -int hp
         -int attack
         -int defense
+        -CharacterSprite sprite
         +TakeDamage(int amount)
         +IsAlive() bool
+        +Draw(SpriteBatch spriteBatch)
+        +Update(GameTime gameTime)
     }
-    
+
+    class CharacterSprite {
+        -Texture2D texture
+        -Vector2 position
+        -AnimationController animator
+        +Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        +PlayAnimation(string animName)
+    }
+
+    class AnimationController {
+        -Dictionary~string, Animation~ animations
+        -Animation currentAnimation
+        -DateTime animationStartTime
+        +PlayAnimation(string name)
+        +GetCurrentFrame(GameTime gameTime) Rectangle
+    }
+
+
+    class Animation {
+        -List~Rectangle~ frames
+        -float frameTime
+        -bool isLooping
+        +GetFrame(int index) Rectangle
+    }
+
     class Player {
         -Inventory inventory
         +ChooseAction() Action
     }
-    
+
     class Enemy {
         +ChooseAction() Action
     }
-    
+
     class Action {
-        +Execute(Character target)
+        -string name
+        -ActionAnimation animation
+        +Execute(Character actor, Character target)
+        -PlayActorAnimation(Character actor)
+        -PlayTargetAnimation(Character target)
     }
-    
+
+    class ActionAnimation {
+        -string actorAnimationName
+        -string targetAnimationName
+        -float actorAnimationDelay
+        -float targetAnimationDelay
+        -bool waitForCompletion
+        +GetActorAnimation() string
+        +GetTargetAnimation() string
+    }
+
     class Inventory {
         -List~Item~ items
         +UseItem(Item item, Character target)
     }
-    
+
     class Item
-    
+
     BattleSystem --> Character
+    Character --> CharacterSprite
+    CharacterSprite --> AnimationController
+    AnimationController --> Animation
+    Action --> ActionAnimation
     Character <|-- Player
     Character <|-- Enemy
     Player --> Inventory
     Inventory --> Item
-    
+
     Player -->"*" Action
     Enemy -->"*" Action
 
