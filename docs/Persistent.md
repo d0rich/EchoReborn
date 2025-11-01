@@ -209,16 +209,16 @@ classDiagram
         Failed
     }
 
-    GameState "1" --> "1" Player
-    GameState "1" --> "1" World
-    GameState "1" --> "*" Quest
-    GameState "1" --> "*" InventoryItem
-    Player "1" --> "*" Skill
-    World "1" --> "*" Location
-    World "1" --> "*" NPC
-    World "1" --> "*" WorldObject
-    Quest "1" --> "*" QuestObjective
-    Quest --> QuestStatus
+    GameState "1" *-- "1" Player
+    GameState "1" *-- "1" World
+    GameState "1" *-- "*" Quest
+    GameState "1" *-- "*" InventoryItem
+    Player "1" *-- "*" Skill
+    World "1" *-- "*" Location
+    World "1" *-- "*" NPC
+    World "1" *-- "*" WorldObject
+    Quest "1" *-- "*" QuestObjective
+    Quest *-- QuestStatus
 ```
 
 ## Notes

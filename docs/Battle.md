@@ -103,18 +103,18 @@ classDiagram
 
     class Item
 
-    BattleSystem --> Character
-    Character --> CharacterSprite
-    CharacterSprite --> AnimationController
-    AnimationController --> Animation
-    Action --> ActionAnimation
+    BattleSystem *-- Character
+    Character *-- CharacterSprite
+    CharacterSprite *-- AnimationController
+    AnimationController *-- Animation
+    Action *-- ActionAnimation
     Character <|-- Player
     Character <|-- Enemy
-    Player --> Inventory
-    Inventory --> Item
+    Player *-- Inventory
+    Inventory *-- Item
 
-    Player -->"*" Action
-    Enemy -->"*" Action
+    Player *--"*" Action
+    Enemy *--"*" Action
 
 ```
 
