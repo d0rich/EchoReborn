@@ -10,13 +10,15 @@ namespace EchoReborn.UI.Components;
 /// </summary>
 public class Button
 {
+    // Tracks the previous mouse pressed state to prevent multiple click events
+    private static bool _wasMousePressed;
+    
     private Vector2 _position;
     private int _width;
     private int _height;
     private string _text;
     private SpriteFont _font;
     private bool _isHovered;
-    private bool _wasMousePressed;
     private Action _onClickCallback;
 
     /// <summary>
@@ -36,7 +38,6 @@ public class Button
         _text = text;
         _font = font;
         _isHovered = false;
-        _wasMousePressed = false;
         _onClickCallback = onClickCallback;
     }
 
