@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿﻿using Microsoft.Xna.Framework;
 using EchoReborn.UI.Components;
 using EchoReborn.UI;
 using EchoReborn.Tests;
@@ -24,6 +24,7 @@ public class TestSelectionScreen : IScreen
         RegisterTestScene("Battle Test", () => new BattleTestScene());
         RegisterTestScene("UI Test", () => new UITestScene());
         RegisterTestScene("Graphics Test", () => new GraphicsTestScene());
+        RegisterTestScene("Wanderer Animation", () => new WandererAnimationTestScene());
         
         // Create back button
         _backButton = new Button(
