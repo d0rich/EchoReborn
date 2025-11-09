@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using EchoReborn.Screens;
 using EchoReborn.UI;
@@ -10,12 +10,10 @@ namespace EchoReborn.Tests;
 /// </summary>
 public class UITestScene : IScreen
 {
-    private DrawingContext _drawingContext;
     private GameFonts _fonts;
     
-    public UITestScene(DrawingContext drawingContext, GameFonts fonts)
+    public UITestScene(GameFonts fonts)
     {
-        _drawingContext = drawingContext;
         _fonts = fonts;
     }
     
@@ -26,8 +24,8 @@ public class UITestScene : IScreen
     
     public void Draw(GameTime gameTime)
     {
-        var graphicsDevice = _drawingContext.GraphicsDevice;
-        var spriteBatch = _drawingContext.SpriteBatch;
+        var graphicsDevice = DrawingContext.GraphicsDevice;
+        var spriteBatch = DrawingContext.SpriteBatch;
         
         graphicsDevice.Clear(Color.DarkGreen);
         

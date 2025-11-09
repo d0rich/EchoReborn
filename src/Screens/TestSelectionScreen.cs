@@ -11,31 +11,28 @@ namespace EchoReborn.Screens;
 /// </summary>
 public class TestSelectionScreen : IScreen
 {
-    private DrawingContext _drawingContext;
     private GameFonts _fonts;
     private List<Button> _testButtons;
     private Button _backButton;
     private List<TestSceneInfo> _testScenes;
 
-    public TestSelectionScreen(DrawingContext drawingContext, GameFonts fonts)
+    public TestSelectionScreen(GameFonts fonts)
     {
-        _drawingContext = drawingContext;
         _fonts = fonts;
         _testButtons = new List<Button>();
         _testScenes = new List<TestSceneInfo>();
         
         // Register test scenes from EchoReborn.Tests namespace
-        RegisterTestScene("Battle Test", () => new BattleTestScene(drawingContext, fonts));
-        RegisterTestScene("UI Test", () => new UITestScene(drawingContext, fonts));
-        RegisterTestScene("Graphics Test", () => new GraphicsTestScene(drawingContext, fonts));
+        RegisterTestScene("Battle Test", () => new BattleTestScene(fonts));
+        RegisterTestScene("UI Test", () => new UITestScene(fonts));
+        RegisterTestScene("Graphics Test", () => new GraphicsTestScene(fonts));
         
         // Create back button
         _backButton = new Button(
-            drawingContext: drawingContext,
             bounds: new Rectangle(10, 10, 200, 60),
             text: "Back",
             font: fonts.ButtonFont,
-            onClickCallback: () => ScreenManager.SwitchScreen(new MainMenuScreen(drawingContext, fonts))
+            onClickCallback: () => ScreenManager.SwitchScreen(new MainMenuScreen(fonts))
         );
     }
 
@@ -65,7 +62,6 @@ public class TestSelectionScreen : IScreen
         {
             int index = i; // Capture index for closure
             Button button = new Button(
-                drawingContext: _drawingContext,
                 bounds: new Rectangle(300, startY + i * buttonSpacing, 200, 60),
                 text: _testScenes[i].Name,
                 font: _fonts.ButtonFont,
@@ -93,8 +89,8 @@ public class TestSelectionScreen : IScreen
 
     public void Draw(GameTime gameTime)
     {
-        var graphicsDevice = _drawingContext.GraphicsDevice;
-        var spriteBatch = _drawingContext.SpriteBatch;
+        var graphicsDevice = DrawingContext.GraphicsDevice;
+        var spriteBatch = DrawingContext.SpriteBatch;
         
         graphicsDevice.Clear(Color.Black);
         spriteBatch.Begin();

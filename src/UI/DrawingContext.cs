@@ -2,23 +2,39 @@
 
 namespace EchoReborn.UI;
 
-public class DrawingContext
+public static class DrawingContext
 {
-    private GraphicsDevice _graphicsDevice;
-    private SpriteBatch _spriteBatch;
+    private static GraphicsDevice _graphicsDevice;
+    private static SpriteBatch _spriteBatch;
+    private static bool _isInitialized = false;
     
-    public DrawingContext(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+    public static void Initialize(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
         _graphicsDevice = graphicsDevice;
         _spriteBatch = spriteBatch;
+        _isInitialized = true;
     }
 
-    public GraphicsDevice GraphicsDevice
+    public static GraphicsDevice GraphicsDevice
     {
-        get { return _graphicsDevice; }
+        get
+        {
+            CheckInitialized();
+            return _graphicsDevice;
+        }
     }
-    public SpriteBatch SpriteBatch 
+    public static SpriteBatch SpriteBatch 
     {
-        get { return _spriteBatch; }
+        get
+        {
+            CheckInitialized();
+            return _spriteBatch;
+        }
+    }
+    
+    private static void CheckInitialized()
+    {
+        if (!_isInitialized)
+            throw new System.InvalidOperationException("DrawingContext is not initialized. Call Initialize() before accessing its properties.");
     }
 }

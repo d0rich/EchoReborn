@@ -10,26 +10,22 @@ namespace EchoReborn.Screens;
 /// </summary>
 public class MainMenuScreen : IScreen
 {
-    private DrawingContext _drawingContext;
     private GameFonts _fonts;
     private Button _testsButton;
     private Button _exitButton;
 
-    public MainMenuScreen(DrawingContext drawingContext, GameFonts fonts)
+    public MainMenuScreen(GameFonts fonts)
     {
         _fonts = fonts;
-        _drawingContext = drawingContext;
         
         _testsButton = new Button(
-            drawingContext: drawingContext,
             bounds: new Rectangle(300, 250, 200, 60),
             text: "Tests",
             font: _fonts.ButtonFont,
-            onClickCallback: () => ScreenManager.SwitchScreen(new TestSelectionScreen(drawingContext, fonts))
+            onClickCallback: () => ScreenManager.SwitchScreen(new TestSelectionScreen(fonts))
         );
 
         _exitButton = new Button(
-            drawingContext: drawingContext,
             bounds: new Rectangle(300, 350, 200, 60),
             text: "Exit",
             font: _fonts.ButtonFont,
@@ -45,8 +41,8 @@ public class MainMenuScreen : IScreen
 
     public void Draw(GameTime gameTime)
     {
-        var graphicsDevice = _drawingContext.GraphicsDevice;
-        var spriteBatch = _drawingContext.SpriteBatch;
+        var graphicsDevice = DrawingContext.GraphicsDevice;
+        var spriteBatch = DrawingContext.SpriteBatch;
         
         graphicsDevice.Clear(Color.Black);
         spriteBatch.Begin();

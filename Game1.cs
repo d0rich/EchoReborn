@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using EchoReborn.UI;
@@ -11,7 +11,6 @@ namespace EchoReborn;
 public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
-    private DrawingContext _drawingContext;
     private GameFonts _fonts;
 
     public Game1()
@@ -31,7 +30,7 @@ public class Game1 : Game
     /// </summary>
     protected override void LoadContent()
     {
-        _drawingContext = new DrawingContext(GraphicsDevice, new SpriteBatch(GraphicsDevice));
+        DrawingContext.Initialize(GraphicsDevice, new SpriteBatch(GraphicsDevice));
 
         // Load fonts for the menu system
         _fonts = new GameFonts(
@@ -40,7 +39,7 @@ public class Game1 : Game
             );
 
         // Initialize screen manager with loaded fonts
-        ScreenManager.Initialize(this, _drawingContext, _fonts);
+        ScreenManager.Initialize(this, _fonts);
     }
 
     /// <summary>
