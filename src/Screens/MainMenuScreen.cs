@@ -38,32 +38,12 @@ public class MainMenuScreen : IScreen
 
     public void Draw(GameTime gameTime)
     {
-        var graphicsDevice = DrawingContext.GraphicsDevice;
         var spriteBatch = DrawingContext.SpriteBatch;
         
-        graphicsDevice.Clear(Color.Black);
+        DrawingContext.GraphicsDevice.Clear(Color.Black);
         spriteBatch.Begin();
 
-        // Draw title
-        if (GameFonts.TitleFont != null)
-        {
-            string title = "ECHO REBORN";
-            Vector2 titleSize = GameFonts.TitleFont.MeasureString(title);
-            Vector2 titlePosition = new Vector2(
-                (graphicsDevice.Viewport.Width - titleSize.X) / 2,
-                80
-            );
-            spriteBatch.DrawString(GameFonts.TitleFont, title, titlePosition, Color.Cyan);
-        }
-        else
-        {
-            // Draw placeholder when fonts not loaded
-            Texture2D pixel = new Texture2D(graphicsDevice, 1, 1);
-            pixel.SetData(new[] { Color.White });
-            spriteBatch.Draw(pixel, new Rectangle((graphicsDevice.Viewport.Width - 300) / 2, 70, 300, 40), Color.DarkSlateBlue);
-        }
-
-        // Draw buttons
+        DrawTitle();
         _testsButton.Draw();
         _exitButton.Draw();
 
@@ -73,6 +53,20 @@ public class MainMenuScreen : IScreen
     public void Destroy()
     {
         // Cleanup resources if needed
+    }
+
+    private void DrawTitle()
+    {
+        var graphicsDevice = DrawingContext.GraphicsDevice;
+        var spriteBatch = DrawingContext.SpriteBatch;
+        
+        string title = "ECHO REBORN";
+        Vector2 titleSize = GameFonts.TitleFont.MeasureString(title);
+        Vector2 titlePosition = new Vector2(
+            (graphicsDevice.Viewport.Width - titleSize.X) / 2,
+            80
+        );
+        spriteBatch.DrawString(GameFonts.TitleFont, title, titlePosition, Color.Cyan);
     }
 }
 

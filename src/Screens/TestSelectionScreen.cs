@@ -1,4 +1,4 @@
-﻿﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using EchoReborn.UI.Components;
 using EchoReborn.UI;
 using EchoReborn.Tests;
@@ -34,21 +34,54 @@ public class TestSelectionScreen : IScreen
         );
     }
 
-    /// <summary>
-    /// Register a test scene with its name and factory callback.
-    /// </summary>
-    public void RegisterTestScene(string testName, System.Func<IScreen> createInstance)
+    public void Update(GameTime gameTime)
     {
-        _testScenes.Add(new TestSceneInfo
+        // Update all test buttons
+        foreach (var button in _testButtons)
         {
-            Name = testName,
-            CreateInstance = createInstance
-        });
+            button.Update();
+        }
         
-        // Recreate buttons to include the new test
-        RegisterTestButtons();
+        // Update back button
+        _backButton.Update();
     }
 
+    public void Draw(GameTime gameTime)
+    {
+        var spriteBatch = DrawingContext.SpriteBatch;
+        
+        DrawingContext.GraphicsDevice.Clear(Color.Black);
+        spriteBatch.Begin();
+
+        DrawTitle();
+        foreach (var button in _testButtons)
+        {
+            button.Draw();
+        }
+        _backButton.Draw();
+
+        spriteBatch.End();
+    }
+
+    public void Destroy()
+    {
+        // Cleanup resources if needed
+    }
+    
+    private void DrawTitle()
+    {
+        var graphicsDevice = DrawingContext.GraphicsDevice;
+        var spriteBatch = DrawingContext.SpriteBatch;
+        
+        string title = "SELECT TEST";
+        Vector2 titleSize = GameFonts.TitleFont.MeasureString(title);
+        Vector2 titlePosition = new Vector2(
+            (graphicsDevice.Viewport.Width - titleSize.X) / 2,
+            50
+        );
+        spriteBatch.DrawString(GameFonts.TitleFont, title, titlePosition, Color.Cyan);
+    }
+    
     private void RegisterTestButtons()
     {
         _testButtons.Clear();
@@ -72,51 +105,20 @@ public class TestSelectionScreen : IScreen
             _testButtons.Add(button);
         }
     }
-
-    public void Update(GameTime gameTime)
+    
+    /// <summary>
+    /// Register a test scene with its name and factory callback.
+    /// </summary>
+    private void RegisterTestScene(string testName, System.Func<IScreen> createInstance)
     {
-        // Update all test buttons
-        foreach (var button in _testButtons)
+        _testScenes.Add(new TestSceneInfo
         {
-            button.Update();
-        }
+            Name = testName,
+            CreateInstance = createInstance
+        });
         
-        // Update back button
-        _backButton.Update();
-    }
-
-    public void Draw(GameTime gameTime)
-    {
-        var graphicsDevice = DrawingContext.GraphicsDevice;
-        var spriteBatch = DrawingContext.SpriteBatch;
-        
-        graphicsDevice.Clear(Color.Black);
-        spriteBatch.Begin();
-
-        // Draw title
-        string title = "SELECT TEST";
-        Vector2 titleSize = GameFonts.TitleFont.MeasureString(title);
-        Vector2 titlePosition = new Vector2(
-            (graphicsDevice.Viewport.Width - titleSize.X) / 2,
-            50
-        );
-        spriteBatch.DrawString(GameFonts.TitleFont, title, titlePosition, Color.Cyan);
-
-        // Draw test buttons
-        foreach (var button in _testButtons)
-        {
-            button.Draw();
-        }
-        
-        // Draw back button
-        _backButton.Draw();
-
-        spriteBatch.End();
-    }
-
-    public void Destroy()
-    {
-        // Cleanup resources if needed
+        // Recreate buttons to include the new test
+        RegisterTestButtons();
     }
 }
 
