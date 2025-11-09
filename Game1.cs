@@ -29,7 +29,7 @@ public class Game1 : Game
     /// </summary>
     protected override void LoadContent()
     {
-        DrawingContext.Initialize(GraphicsDevice, new SpriteBatch(GraphicsDevice));
+        DrawingContext.Initialize(GraphicsDevice, new SpriteBatch(GraphicsDevice), Content);
 
         // Load fonts for the menu system
         GameFonts.Initialize(

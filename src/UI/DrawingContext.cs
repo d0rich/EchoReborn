@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace EchoReborn.UI;
 
@@ -6,12 +7,17 @@ public static class DrawingContext
 {
     private static GraphicsDevice _graphicsDevice;
     private static SpriteBatch _spriteBatch;
+    private static ContentManager _contentManager;
     private static bool _isInitialized = false;
     
-    public static void Initialize(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+    public static void Initialize(
+        GraphicsDevice graphicsDevice, 
+        SpriteBatch spriteBatch, 
+        ContentManager contentManager)
     {
         _graphicsDevice = graphicsDevice;
         _spriteBatch = spriteBatch;
+        _contentManager = contentManager;
         _isInitialized = true;
     }
 
@@ -29,6 +35,15 @@ public static class DrawingContext
         {
             CheckInitialized();
             return _spriteBatch;
+        }
+    }
+
+    public static ContentManager ContentManager
+    {
+        get 
+        {
+            CheckInitialized();
+            return _contentManager;
         }
     }
     
