@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using EchoReborn.Screens;
+using EchoReborn.UI.Components;
 
 namespace EchoReborn.UI;
 
@@ -26,6 +25,9 @@ public static class ScreenManager
 
     public static void Update(GameTime gameTime)
     {
+        // Update global button mouse state once per frame
+        Button.UpdateMouseState();
+        
         _currentScreen.Update(gameTime);
     }
 

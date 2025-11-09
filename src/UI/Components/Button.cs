@@ -10,8 +10,9 @@ namespace EchoReborn.UI.Components;
 /// </summary>
 public class Button
 {
-    // Tracks the previous mouse pressed state to prevent multiple click events
-    private static bool _wasMousePressed;
+    // Tracks the previous mouse pressed state globally to prevent multiple click events
+    private static ButtonState _previousMouseState = ButtonState.Released;
+    private static ButtonState _currentMouseState = ButtonState.Released;
     
     private Vector2 _position;
     private int _width;
@@ -20,6 +21,15 @@ public class Button
     private SpriteFont _font;
     private bool _isHovered;
     private Action _onClickCallback;
+
+    /// <summary>
+    /// Updates the global mouse state. Call this once per frame before updating any buttons.
+    /// </summary>
+    public static void UpdateMouseState()
+    {
+        _previousMouseState = _currentMouseState;
+        _currentMouseState = Mouse.GetState().LeftButton;
+    }
 
     /// <summary>
     /// Creates a new button with the specified parameters.
@@ -62,13 +72,12 @@ public class Button
 
         _isHovered = buttonRect.Contains(mouseState.Position);
 
-        bool isMousePressed = mouseState.LeftButton == ButtonState.Pressed;
-
-        if (_isHovered && isMousePressed && !_wasMousePressed)
+        // Detect click on mouse button release (transition from Pressed to Released)
+        if (_isHovered && 
+            _currentMouseState == ButtonState.Released && 
+            _previousMouseState == ButtonState.Pressed)
         {
-            _wasMousePressed = true;
             _onClickCallback?.Invoke();
-            _wasMousePressed = false;
         }
     }
 
