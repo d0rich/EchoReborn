@@ -14,6 +14,7 @@ public class Button
     private static ButtonState _previousMouseState = ButtonState.Released;
     private static ButtonState _currentMouseState = ButtonState.Released;
     
+    private DrawingContext _drawingContext;
     private Rectangle _bounds;
     private string _text;
     private SpriteFont _font;
@@ -32,12 +33,14 @@ public class Button
     /// <summary>
     /// Creates a new button with the specified parameters.
     /// </summary>
+    /// <param name="drawingContext">The drawing context for rendering.</param>
     /// <param name="bounds">The bounding rectangle defining the button's position and size.</param>
     /// <param name="text">The text to display on the button.</param>
     /// <param name="font">The font to use for the button text.</param>
     /// <param name="onClickCallback">The callback to invoke when the button is clicked.</param>
-    public Button(Rectangle bounds, string text, SpriteFont font, Action onClickCallback = null)
+    public Button(DrawingContext drawingContext, Rectangle bounds, string text, SpriteFont font, Action onClickCallback = null)
     {
+        _drawingContext = drawingContext;
         _bounds = bounds;
         _text = text;
         _font = font;
@@ -68,20 +71,20 @@ public class Button
         }
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public void Draw()
     {
         Color backgroundColor = _isHovered ? Color.Cyan : Color.DarkSlateBlue;
         Color borderColor = _isHovered ? Color.White : Color.LightGray;
-        DrawBackground(spriteBatch, backgroundColor);
-        DrawBorder(spriteBatch, borderColor, 2);
-        DrawText(spriteBatch);
+        DrawBackground(backgroundColor);
+        DrawBorder(borderColor, 2);
+        DrawText();
     }
     
-    private void DrawBackground(SpriteBatch spriteBatch, Color backgroundColor)
+    private void DrawBackground(Color backgroundColor)
     {
-        Texture2D texture = CreateButtonTexture(spriteBatch.GraphicsDevice, backgroundColor);
+        Texture2D texture = CreateButtonTexture(_drawingContext.GraphicsDevice, backgroundColor);
         
-        spriteBatch.Draw(
+        _drawingContext.SpriteBatch.Draw(
             texture,
             _bounds,
             Color.White
@@ -95,11 +98,12 @@ public class Button
         return texture;
     }
 
-    private void DrawBorder(SpriteBatch spriteBatch, Color color, int thickness)
+    private void DrawBorder(Color color, int thickness)
     {
-        Texture2D pixel = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+        Texture2D pixel = new Texture2D(_drawingContext.GraphicsDevice, 1, 1);
         pixel.SetData(new[] { color });
 
+        var spriteBatch = _drawingContext.SpriteBatch;
         // Top line
         spriteBatch.Draw(pixel, new Rectangle(_bounds.X, _bounds.Y, _bounds.Width, thickness), color);
         // Bottom line
@@ -110,7 +114,7 @@ public class Button
         spriteBatch.Draw(pixel, new Rectangle(_bounds.X + _bounds.Width - thickness, _bounds.Y, thickness, _bounds.Height), color);
     }
     
-    private void DrawText(SpriteBatch spriteBatch)
+    private void DrawText()
     {
         if (_font != null)
         {
@@ -121,7 +125,7 @@ public class Button
             );
 
             Color textColor = _isHovered ? Color.Black : Color.White;
-            spriteBatch.DrawString(_font, _text, textPosition, textColor);
+            _drawingContext.SpriteBatch.DrawString(_font, _text, textPosition, textColor);
         }
     }
 }

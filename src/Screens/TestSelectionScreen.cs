@@ -31,6 +31,7 @@ public class TestSelectionScreen : IScreen
         
         // Create back button
         _backButton = new Button(
+            drawingContext: drawingContext,
             bounds: new Rectangle(10, 10, 200, 60),
             text: "Back",
             font: fonts.ButtonFont,
@@ -64,6 +65,7 @@ public class TestSelectionScreen : IScreen
         {
             int index = i; // Capture index for closure
             Button button = new Button(
+                drawingContext: _drawingContext,
                 bounds: new Rectangle(300, startY + i * buttonSpacing, 200, 60),
                 text: _testScenes[i].Name,
                 font: _fonts.ButtonFont,
@@ -109,11 +111,11 @@ public class TestSelectionScreen : IScreen
         // Draw test buttons
         foreach (var button in _testButtons)
         {
-            button.Draw(spriteBatch);
+            button.Draw();
         }
         
         // Draw back button
-        _backButton.Draw(spriteBatch);
+        _backButton.Draw();
 
         spriteBatch.End();
     }

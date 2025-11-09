@@ -1,4 +1,4 @@
-﻿﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using EchoReborn.UI.Components;
 using EchoReborn.UI;
@@ -21,6 +21,7 @@ public class MainMenuScreen : IScreen
         _drawingContext = drawingContext;
         
         _testsButton = new Button(
+            drawingContext: drawingContext,
             bounds: new Rectangle(300, 250, 200, 60),
             text: "Tests",
             font: _fonts.ButtonFont,
@@ -28,6 +29,7 @@ public class MainMenuScreen : IScreen
         );
 
         _exitButton = new Button(
+            drawingContext: drawingContext,
             bounds: new Rectangle(300, 350, 200, 60),
             text: "Exit",
             font: _fonts.ButtonFont,
@@ -69,8 +71,8 @@ public class MainMenuScreen : IScreen
         }
 
         // Draw buttons
-        _testsButton.Draw(spriteBatch);
-        _exitButton.Draw(spriteBatch);
+        _testsButton.Draw();
+        _exitButton.Draw();
 
         spriteBatch.End();
     }
