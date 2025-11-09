@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 namespace EchoReborn.UI.Characters;
 
-/// <summary>
-/// Animation states for the Wanderer Magician character.
-/// </summary>
 public enum WandererAnimationState
 {
     Idle,
@@ -21,9 +18,6 @@ public enum WandererAnimationState
     Dead
 }
 
-/// <summary>
-/// Handles animation playback for the Wanderer Magician character using sprite sheets.
-/// </summary>
 public class WandererMagicianAnimation
 {
     private Dictionary<WandererAnimationState, Texture2D> _spriteSheets;
@@ -32,7 +26,6 @@ public class WandererMagicianAnimation
     private float _frameTime;
     private float _timeElapsed;
     
-    // Animation frame counts for each state
     private readonly Dictionary<WandererAnimationState, int> _frameCount = new()
     {
         { WandererAnimationState.Idle, 8 },
@@ -47,7 +40,6 @@ public class WandererMagicianAnimation
         { WandererAnimationState.Dead, 4 }
     };
     
-    // Animation file name mappings
     private static readonly Dictionary<WandererAnimationState, string> AnimationFileNames = new()
     {
         { WandererAnimationState.Idle, "Idle" },
@@ -62,7 +54,7 @@ public class WandererMagicianAnimation
         { WandererAnimationState.Dead, "Dead" }
     };
     
-    private Vector2 _position;
+    private Vector2 _rawPosition;
     private float _scale;
     private bool _loop;
     private bool _isPlaying;
@@ -82,7 +74,25 @@ public class WandererMagicianAnimation
         }
     }
     
-    public Vector2 Position { get => _position; set => _position = value; }
+    public Vector2 Position
+    {
+        get
+        {
+            return new Vector2(
+                _rawPosition.X + (FrameSize.X * _scale) / 2,
+                _rawPosition.Y + FrameSize.Y * _scale
+            );
+        }
+        set
+        {
+            _rawPosition = new Vector2(
+                value.X - (FrameSize.X * _scale) / 2,
+                value.Y - FrameSize.Y * _scale
+            );
+        }
+    }
+    
+    public Vector2 RawPosition { get => _rawPosition; set => _rawPosition = value; }
     
     public float Scale { get => _scale; set => _scale = value; }
     
@@ -97,7 +107,7 @@ public class WandererMagicianAnimation
         _currentFrame = 0;
         _frameTime = 1f / framesPerSecond;
         _timeElapsed = 0;
-        _position = Vector2.Zero;
+        _rawPosition = Vector2.Zero;
         _scale = 1f;
         _loop = true;
         _isPlaying = true;
@@ -128,7 +138,7 @@ public class WandererMagicianAnimation
         
         spriteBatch.Draw(
             spriteSheet,
-            _position,
+            _rawPosition,
             sourceRectangle,
             Color.White,
             0f,
@@ -141,15 +151,7 @@ public class WandererMagicianAnimation
     
     public void SwitchAnimation(WandererAnimationState state, bool loop = true)
     {
-        // Load sprite sheet if not already loaded
-        if (!_spriteSheets.ContainsKey(state))
-        {
-            string animationName = AnimationFileNames.TryGetValue(state, out var fileName) ? fileName : "Idle";
-            string contentPath = $"Characters/WandererMagician/{animationName}";
-            
-            Texture2D texture = DrawingContext.ContentManager.Load<Texture2D>(contentPath);
-            _spriteSheets[state] = texture;
-        }
+        LoadSpriteSheet(state);
         
         _loop = loop;
         CurrentState = state;
@@ -165,6 +167,33 @@ public class WandererMagicianAnimation
         _currentFrame = 0;
         _timeElapsed = 0;
         _isPlaying = true;
+    }
+    
+    private void LoadSpriteSheet(WandererAnimationState state)
+    {
+        if (_spriteSheets.ContainsKey(state))
+            return;
+            
+        string animationName = AnimationFileNames.TryGetValue(state, out var fileName) ? fileName : "Idle";
+        string contentPath = $"Characters/WandererMagician/{animationName}";
+        
+        Texture2D texture = DrawingContext.ContentManager.Load<Texture2D>(contentPath);
+        _spriteSheets[state] = texture;
+    }
+
+    private Vector2 FrameSize
+    {
+        get
+        {
+            if (!_spriteSheets.ContainsKey(_currentState))
+            {
+                LoadSpriteSheet(_currentState);
+            }
+            Texture2D spriteSheet = _spriteSheets[_currentState];
+            int frameWidth = spriteSheet.Width / _frameCount[_currentState];
+            int frameHeight = spriteSheet.Height;
+            return new Vector2(frameWidth, frameHeight);
+        }
     }
 
     private void DefineCurrentFrame(GameTime gameTime)
