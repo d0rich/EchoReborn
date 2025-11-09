@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using EchoReborn.UI.Components;
 using EchoReborn.UI;
@@ -10,25 +10,22 @@ namespace EchoReborn.Screens;
 /// </summary>
 public class MainMenuScreen : IScreen
 {
-    private GameFonts _fonts;
     private Button _testsButton;
     private Button _exitButton;
 
-    public MainMenuScreen(GameFonts fonts)
+    public MainMenuScreen()
     {
-        _fonts = fonts;
-        
         _testsButton = new Button(
             bounds: new Rectangle(300, 250, 200, 60),
             text: "Tests",
-            font: _fonts.ButtonFont,
-            onClickCallback: () => ScreenManager.SwitchScreen(new TestSelectionScreen(fonts))
+            font: GameFonts.ButtonFont,
+            onClickCallback: () => ScreenManager.SwitchScreen(new TestSelectionScreen())
         );
 
         _exitButton = new Button(
             bounds: new Rectangle(300, 350, 200, 60),
             text: "Exit",
-            font: _fonts.ButtonFont,
+            font: GameFonts.ButtonFont,
             onClickCallback: ScreenManager.QuitGame
         );
     }
@@ -48,15 +45,15 @@ public class MainMenuScreen : IScreen
         spriteBatch.Begin();
 
         // Draw title
-        if (_fonts.TitleFont != null)
+        if (GameFonts.TitleFont != null)
         {
             string title = "ECHO REBORN";
-            Vector2 titleSize = _fonts.TitleFont.MeasureString(title);
+            Vector2 titleSize = GameFonts.TitleFont.MeasureString(title);
             Vector2 titlePosition = new Vector2(
                 (graphicsDevice.Viewport.Width - titleSize.X) / 2,
                 80
             );
-            spriteBatch.DrawString(_fonts.TitleFont, title, titlePosition, Color.Cyan);
+            spriteBatch.DrawString(GameFonts.TitleFont, title, titlePosition, Color.Cyan);
         }
         else
         {

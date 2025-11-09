@@ -1,6 +1,5 @@
-﻿﻿using EchoReborn.Screens;
+﻿using EchoReborn.Screens;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using EchoReborn.UI;
 
 namespace EchoReborn.Tests;
@@ -10,13 +9,6 @@ namespace EchoReborn.Tests;
 /// </summary>
 public class GraphicsTestScene : IScreen
 {
-    private GameFonts _fonts; 
-    
-    public GraphicsTestScene(GameFonts fonts)
-    {
-        _fonts = fonts;
-    }
-    
     public void Update(GameTime gameTime)
     {
         // Add graphics test logic here
@@ -31,10 +23,10 @@ public class GraphicsTestScene : IScreen
         
         spriteBatch.Begin();
         
-        if (_fonts.ButtonFont != null)
+        if (GameFonts.ButtonFont != null)
         {
-            spriteBatch.DrawString(_fonts.ButtonFont, "Graphics Test Scene", new Vector2(300, 200), Color.White);
-            spriteBatch.DrawString(_fonts.ButtonFont, "Press ESC to return", new Vector2(300, 250), Color.LightGray);
+            spriteBatch.DrawString(GameFonts.ButtonFont, "Graphics Test Scene", new Vector2(300, 200), Color.White);
+            spriteBatch.DrawString(GameFonts.ButtonFont, "Press ESC to return", new Vector2(300, 250), Color.LightGray);
         }
         
         spriteBatch.End();

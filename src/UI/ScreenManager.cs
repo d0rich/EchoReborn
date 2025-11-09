@@ -1,4 +1,4 @@
-﻿﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using EchoReborn.Screens;
 using EchoReborn.UI.Components;
 
@@ -16,10 +16,10 @@ public static class ScreenManager
     public static IScreen CurrentScreen => _currentScreen;
     public static bool IsInitialized => _isInitialized;
 
-    public static void Initialize(Game game, GameFonts fonts)
+    public static void Initialize(Game game)
     {
         _game = game;
-        _currentScreen = new MainMenuScreen(fonts);
+        _currentScreen = new MainMenuScreen();
         _isInitialized = true;
     }
 

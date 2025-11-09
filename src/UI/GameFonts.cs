@@ -2,24 +2,42 @@
 
 namespace EchoReborn.UI;
 
-public class GameFonts
+public static class GameFonts
 {
-    SpriteFont _titleFont;
-    SpriteFont _buttonFont;
+    static SpriteFont _titleFont;
+    static SpriteFont _buttonFont;
+    static bool _isInitialized = false;
     
-    public GameFonts(SpriteFont titleFont, SpriteFont buttonFont)
+    public static bool IsInitialized => _isInitialized;
+    
+    public static void Initialize(SpriteFont titleFont, SpriteFont buttonFont)
     {
         _titleFont = titleFont;
         _buttonFont = buttonFont;
+        _isInitialized = true;
     }
     
-    public SpriteFont TitleFont
+    public static SpriteFont TitleFont
     {
-        get { return _titleFont; }
+        get
+        {
+            CheckInitialized();
+            return _titleFont;
+        }
     }
     
-    public SpriteFont ButtonFont
+    public static SpriteFont ButtonFont
     {
-        get { return _buttonFont; }
+        get
+        {
+            CheckInitialized();
+            return _buttonFont;
+        }
+    }
+    
+    private static void CheckInitialized()
+    {
+        if (!_isInitialized)
+            throw new System.InvalidOperationException("GameFonts is not initialized. Call Initialize() before accessing its properties.");
     }
 }

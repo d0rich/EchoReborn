@@ -1,4 +1,4 @@
-﻿﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using EchoReborn.Screens;
 using EchoReborn.UI;
@@ -10,11 +10,8 @@ namespace EchoReborn.Tests;
 /// </summary>
 public class BattleTestScene : IScreen
 {
-    private GameFonts _fonts;
-    
-    public BattleTestScene(GameFonts fonts)
+    public BattleTestScene()
     {
-        _fonts = fonts;
     }
     
     public void Update(GameTime gameTime)
@@ -31,10 +28,10 @@ public class BattleTestScene : IScreen
         
         spriteBatch.Begin();
         
-        if (_fonts.ButtonFont != null)
+        if (GameFonts.ButtonFont != null)
         {
-            spriteBatch.DrawString(_fonts.ButtonFont, "Battle Test Scene", new Vector2(300, 200), Color.White);
-            spriteBatch.DrawString(_fonts.ButtonFont, "Press ESC to return", new Vector2(300, 250), Color.LightGray);
+            spriteBatch.DrawString(GameFonts.ButtonFont, "Battle Test Scene", new Vector2(300, 200), Color.White);
+            spriteBatch.DrawString(GameFonts.ButtonFont, "Press ESC to return", new Vector2(300, 250), Color.LightGray);
         }
         
         spriteBatch.End();

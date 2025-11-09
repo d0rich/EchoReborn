@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿﻿using Microsoft.Xna.Framework;
 using EchoReborn.UI.Components;
 using EchoReborn.UI;
 using EchoReborn.Tests;
@@ -11,28 +11,26 @@ namespace EchoReborn.Screens;
 /// </summary>
 public class TestSelectionScreen : IScreen
 {
-    private GameFonts _fonts;
     private List<Button> _testButtons;
     private Button _backButton;
     private List<TestSceneInfo> _testScenes;
 
-    public TestSelectionScreen(GameFonts fonts)
+    public TestSelectionScreen()
     {
-        _fonts = fonts;
         _testButtons = new List<Button>();
         _testScenes = new List<TestSceneInfo>();
         
         // Register test scenes from EchoReborn.Tests namespace
-        RegisterTestScene("Battle Test", () => new BattleTestScene(fonts));
-        RegisterTestScene("UI Test", () => new UITestScene(fonts));
-        RegisterTestScene("Graphics Test", () => new GraphicsTestScene(fonts));
+        RegisterTestScene("Battle Test", () => new BattleTestScene());
+        RegisterTestScene("UI Test", () => new UITestScene());
+        RegisterTestScene("Graphics Test", () => new GraphicsTestScene());
         
         // Create back button
         _backButton = new Button(
             bounds: new Rectangle(10, 10, 200, 60),
             text: "Back",
-            font: fonts.ButtonFont,
-            onClickCallback: () => ScreenManager.SwitchScreen(new MainMenuScreen(fonts))
+            font: GameFonts.ButtonFont,
+            onClickCallback: () => ScreenManager.SwitchScreen(new MainMenuScreen())
         );
     }
 
@@ -64,7 +62,7 @@ public class TestSelectionScreen : IScreen
             Button button = new Button(
                 bounds: new Rectangle(300, startY + i * buttonSpacing, 200, 60),
                 text: _testScenes[i].Name,
-                font: _fonts.ButtonFont,
+                font: GameFonts.ButtonFont,
                 onClickCallback: () =>
                 {
                     IScreen testScreen = _testScenes[index].CreateInstance();
@@ -97,12 +95,12 @@ public class TestSelectionScreen : IScreen
 
         // Draw title
         string title = "SELECT TEST";
-        Vector2 titleSize = _fonts.TitleFont.MeasureString(title);
+        Vector2 titleSize = GameFonts.TitleFont.MeasureString(title);
         Vector2 titlePosition = new Vector2(
             (graphicsDevice.Viewport.Width - titleSize.X) / 2,
             50
         );
-        spriteBatch.DrawString(_fonts.TitleFont, title, titlePosition, Color.Cyan);
+        spriteBatch.DrawString(GameFonts.TitleFont, title, titlePosition, Color.Cyan);
 
         // Draw test buttons
         foreach (var button in _testButtons)
