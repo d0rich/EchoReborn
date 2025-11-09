@@ -8,19 +8,15 @@ namespace EchoReborn.Tests;
 /// <summary>
 /// Example test scene for demonstrating the battle system.
 /// </summary>
-public class BattleTestScene
+public class BattleTestScene : IScreen
 {
     private DrawingContext _drawingContext;
     private GameFonts _fonts;
-    private GraphicsDevice _graphicsDevice;
-    private SpriteBatch _spriteBatch;
-    private SpriteFont _font;
     
-    public BattleTestScene(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, SpriteFont font = null)
+    public BattleTestScene(DrawingContext drawingContext, GameFonts fonts)
     {
-        _graphicsDevice = graphicsDevice;
-        _spriteBatch = spriteBatch;
-        _font = font;
+        _drawingContext = drawingContext;
+        _fonts = fonts;
     }
     
     public void Update(GameTime gameTime)
@@ -30,17 +26,25 @@ public class BattleTestScene
     
     public void Draw(GameTime gameTime)
     {
-        _graphicsDevice.Clear(Color.DarkRed);
+        var graphicsDevice = _drawingContext.GraphicsDevice;
+        var spriteBatch = _drawingContext.SpriteBatch;
         
-        _spriteBatch.Begin();
+        graphicsDevice.Clear(Color.DarkRed);
         
-        if (_font != null)
+        spriteBatch.Begin();
+        
+        if (_fonts.ButtonFont != null)
         {
-            _spriteBatch.DrawString(_font, "Battle Test Scene", new Vector2(300, 200), Color.White);
-            _spriteBatch.DrawString(_font, "Press ESC to return", new Vector2(300, 250), Color.LightGray);
+            spriteBatch.DrawString(_fonts.ButtonFont, "Battle Test Scene", new Vector2(300, 200), Color.White);
+            spriteBatch.DrawString(_fonts.ButtonFont, "Press ESC to return", new Vector2(300, 250), Color.LightGray);
         }
         
-        _spriteBatch.End();
+        spriteBatch.End();
+    }
+    
+    public void Destroy()
+    {
+        // Clean up resources if needed
     }
 }
 

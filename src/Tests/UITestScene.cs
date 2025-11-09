@@ -1,22 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using EchoReborn.Screens;
+using EchoReborn.UI;
 
 namespace EchoReborn.Tests;
 
 /// <summary>
 /// Example test scene for UI component testing.
 /// </summary>
-public class UITestScene
+public class UITestScene : IScreen
 {
-    private GraphicsDevice _graphicsDevice;
-    private SpriteBatch _spriteBatch;
-    private SpriteFont _font;
+    private DrawingContext _drawingContext;
+    private GameFonts _fonts;
     
-    public UITestScene(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, SpriteFont font = null)
+    public UITestScene(DrawingContext drawingContext, GameFonts fonts)
     {
-        _graphicsDevice = graphicsDevice;
-        _spriteBatch = spriteBatch;
-        _font = font;
+        _drawingContext = drawingContext;
+        _fonts = fonts;
     }
     
     public void Update(GameTime gameTime)
@@ -24,19 +24,27 @@ public class UITestScene
         // Add UI test logic here
     }
     
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
-        _graphicsDevice.Clear(Color.DarkGreen);
+        var graphicsDevice = _drawingContext.GraphicsDevice;
+        var spriteBatch = _drawingContext.SpriteBatch;
         
-        _spriteBatch.Begin();
+        graphicsDevice.Clear(Color.DarkGreen);
         
-        if (_font != null)
+        spriteBatch.Begin();
+        
+        if (_fonts.ButtonFont != null)
         {
-            _spriteBatch.DrawString(_font, "UI Test Scene", new Vector2(300, 200), Color.White);
-            _spriteBatch.DrawString(_font, "Press ESC to return", new Vector2(300, 250), Color.LightGray);
+            spriteBatch.DrawString(_fonts.ButtonFont, "UI Test Scene", new Vector2(300, 200), Color.White);
+            spriteBatch.DrawString(_fonts.ButtonFont, "Press ESC to return", new Vector2(300, 250), Color.LightGray);
         }
         
-        _spriteBatch.End();
+        spriteBatch.End();
+    }
+    
+    public void Destroy()
+    {
+        // Clean up resources if needed
     }
 }
 

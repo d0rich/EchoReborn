@@ -8,65 +8,41 @@ namespace EchoReborn.UI;
 /// <summary>
 /// Manages screen transitions between main menu and test selection.
 /// </summary>
-public class ScreenManager
+public static class ScreenManager
 {
-    private MainMenuScreen _mainMenuScreen;
-    private TestSelectionScreen _testSelectionScreen;
-    private string _currentScreen;
+    private static Game _game;
+    private static IScreen _currentScreen;
+    private static bool _isInitialized = false;
 
-    public string CurrentScreen => _currentScreen;
-    public string SelectedTest => _testSelectionScreen?.SelectedTest;
+    public static IScreen CurrentScreen => _currentScreen;
+    public static bool IsInitialized => _isInitialized;
 
-    public ScreenManager(DrawingContext drawingContext, GameFonts fonts)
+    public static void Initialize(Game game, DrawingContext drawingContext, GameFonts fonts)
     {
-        _mainMenuScreen = new MainMenuScreen(drawingContext, fonts);
-        _testSelectionScreen = new TestSelectionScreen(drawingContext, fonts);
-        _currentScreen = "MainMenu";
+        _game = game;
+        _currentScreen = new MainMenuScreen(drawingContext, fonts);
+        _isInitialized = true;
     }
 
-    /// <summary>
-    /// Register a test scene with its name and class type.
-    /// </summary>
-    public void RegisterTestScene(string testName, System.Type sceneClass)
+    public static void Update(GameTime gameTime)
     {
-        _testSelectionScreen.RegisterTestScene(testName, sceneClass);
+        _currentScreen.Update(gameTime);
     }
 
-    public void Update(GameTime gameTime)
+    public static void Draw(GameTime gameTime)
     {
-        if (_currentScreen == "MainMenu")
-        {
-            _mainMenuScreen.Update(gameTime);
-            if (_mainMenuScreen.CurrentScreen != "MainMenu")
-            {
-                _currentScreen = _mainMenuScreen.CurrentScreen;
-            }
-        }
-        else if (_currentScreen == "TestSelection")
-        {
-            _testSelectionScreen.Update(gameTime);
-            if (_testSelectionScreen.CurrentScreen != "TestSelection")
-            {
-                _currentScreen = _testSelectionScreen.CurrentScreen;
-            }
-        }
+        _currentScreen.Draw(gameTime);
+    }
+    
+    public static void SwitchScreen(IScreen newScreen)
+    {
+        _currentScreen.Destroy();
+        _currentScreen = newScreen;
     }
 
-    public void Draw(GameTime gameTime)
+    public static void QuitGame()
     {
-        if (_currentScreen == "MainMenu")
-        {
-            _mainMenuScreen.Draw(gameTime);
-        }
-        else if (_currentScreen == "TestSelection")
-        {
-            _testSelectionScreen.Draw(gameTime);
-        }
-    }
-
-    public bool ShouldExit()
-    {
-        return _currentScreen == "Exit";
+        _game.Exit();
     }
 }
 

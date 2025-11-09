@@ -1,6 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using EchoReborn.UI.Components;
 using EchoReborn.UI;
 using EchoReborn.Tests;
@@ -18,9 +16,6 @@ public class TestSelectionScreen : IScreen
     private List<Button> _testButtons;
     private Button _backButton;
     private List<TestSceneInfo> _testScenes;
-    
-    public string CurrentScreen { get; set; } = "TestSelection";
-    public string SelectedTest { get; private set; } = null;
 
     public TestSelectionScreen(DrawingContext drawingContext, GameFonts fonts)
     {
@@ -30,37 +25,37 @@ public class TestSelectionScreen : IScreen
         _testScenes = new List<TestSceneInfo>();
         
         // Register test scenes from EchoReborn.Tests namespace
-        RegisterTestScene("Battle Test", typeof(BattleTestScene));
-        RegisterTestScene("UI Test", typeof(UITestScene));
-        RegisterTestScene("Graphics Test", typeof(GraphicsTestScene));
+        RegisterTestScene("Battle Test", () => new BattleTestScene(drawingContext, fonts));
+        RegisterTestScene("UI Test", () => new UITestScene(drawingContext, fonts));
+        RegisterTestScene("Graphics Test", () => new GraphicsTestScene(drawingContext, fonts));
         
         // Create back button
         _backButton = new Button(
-            position: new Vector2(300, 500),
+            position: new Vector2(10, 10),
             width: 200,
             height: 60,
             text: "Back",
             font: fonts.ButtonFont,
-            onClickCallback: () => CurrentScreen = "MainMenu"
+            onClickCallback: () => ScreenManager.SwitchScreen(new MainMenuScreen(drawingContext, fonts))
         );
     }
 
     /// <summary>
-    /// Register a test scene with its name and class type.
+    /// Register a test scene with its name and factory callback.
     /// </summary>
-    public void RegisterTestScene(string testName, System.Type sceneClass)
+    public void RegisterTestScene(string testName, System.Func<IScreen> createInstance)
     {
         _testScenes.Add(new TestSceneInfo
         {
             Name = testName,
-            SceneClass = sceneClass
+            CreateInstance = createInstance
         });
         
         // Recreate buttons to include the new test
-        CreateTestButtons();
+        RegisterTestButtons();
     }
 
-    private void CreateTestButtons()
+    private void RegisterTestButtons()
     {
         _testButtons.Clear();
         
@@ -78,8 +73,8 @@ public class TestSelectionScreen : IScreen
                 font: _fonts.ButtonFont,
                 onClickCallback: () =>
                 {
-                    SelectedTest = _testScenes[index].Name;
-                    CurrentScreen = "TestScene";
+                    IScreen testScreen = _testScenes[index].CreateInstance();
+                    ScreenManager.SwitchScreen(testScreen);
                 }
             );
             _testButtons.Add(button);
@@ -107,23 +102,13 @@ public class TestSelectionScreen : IScreen
         spriteBatch.Begin();
 
         // Draw title
-        if (_fonts.TitleFont != null)
-        {
-            string title = "SELECT TEST";
-            Vector2 titleSize = _fonts.TitleFont.MeasureString(title);
-            Vector2 titlePosition = new Vector2(
-                (graphicsDevice.Viewport.Width - titleSize.X) / 2,
-                50
-            );
-            spriteBatch.DrawString(_fonts.TitleFont, title, titlePosition, Color.Cyan);
-        }
-        else
-        {
-            // Draw placeholder when fonts not loaded
-            Texture2D pixel = new Texture2D(graphicsDevice, 1, 1);
-            pixel.SetData(new[] { Color.White });
-            spriteBatch.Draw(pixel, new Rectangle((graphicsDevice.Viewport.Width - 300) / 2, 40, 300, 40), Color.DarkSlateBlue);
-        }
+        string title = "SELECT TEST";
+        Vector2 titleSize = _fonts.TitleFont.MeasureString(title);
+        Vector2 titlePosition = new Vector2(
+            (graphicsDevice.Viewport.Width - titleSize.X) / 2,
+            50
+        );
+        spriteBatch.DrawString(_fonts.TitleFont, title, titlePosition, Color.Cyan);
 
         // Draw test buttons
         foreach (var button in _testButtons)
@@ -149,5 +134,5 @@ public class TestSelectionScreen : IScreen
 public class TestSceneInfo
 {
     public string Name { get; set; }
-    public System.Type SceneClass { get; set; }
+    public System.Func<IScreen> CreateInstance { get; set; }
 }

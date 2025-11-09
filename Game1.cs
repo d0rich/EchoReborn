@@ -13,7 +13,6 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private DrawingContext _drawingContext;
     private GameFonts _fonts;
-    private ScreenManager _screenManager;
 
     public Game1()
     {
@@ -41,7 +40,7 @@ public class Game1 : Game
             );
 
         // Initialize screen manager with loaded fonts
-        _screenManager = new ScreenManager(_drawingContext, _fonts);
+        ScreenManager.Initialize(this, _drawingContext, _fonts);
     }
 
     /// <summary>
@@ -54,7 +53,7 @@ public class Game1 : Game
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
         
-        _screenManager.Update(gameTime);
+        ScreenManager.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -66,9 +65,9 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         // Draw the current screen from screen manager
-        if (_screenManager != null)
+        if (ScreenManager.IsInitialized)
         {
-            _screenManager.Draw(gameTime);
+            ScreenManager.Draw(gameTime);
         }
         else
         {

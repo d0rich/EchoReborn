@@ -66,10 +66,10 @@ public class Button
 
         if (_isHovered && isMousePressed && !_wasMousePressed)
         {
+            _wasMousePressed = true;
             _onClickCallback?.Invoke();
+            _wasMousePressed = false;
         }
-
-        _wasMousePressed = isMousePressed;
     }
 
     public void Draw(SpriteBatch spriteBatch)

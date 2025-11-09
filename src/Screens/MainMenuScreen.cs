@@ -15,9 +15,6 @@ public class MainMenuScreen : IScreen
     private GameFonts _fonts;
     private Button _testsButton;
     private Button _exitButton;
-    
-    public string CurrentScreen { get; set; } = "MainMenu";
-    public int SelectedTestScene { get; set; } = 0;
 
     public MainMenuScreen(DrawingContext drawingContext, GameFonts fonts)
     {
@@ -30,7 +27,7 @@ public class MainMenuScreen : IScreen
             height: 60,
             text: "Tests",
             font: _fonts.ButtonFont,
-            onClickCallback: () => CurrentScreen = "TestSelection"
+            onClickCallback: () => ScreenManager.SwitchScreen(new TestSelectionScreen(drawingContext, fonts))
         );
 
         _exitButton = new Button(
@@ -39,7 +36,7 @@ public class MainMenuScreen : IScreen
             height: 60,
             text: "Exit",
             font: _fonts.ButtonFont,
-            onClickCallback: () => CurrentScreen = "Exit"
+            onClickCallback: ScreenManager.QuitGame
         );
     }
 
