@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using EchoReborn.UI.Components;
 using EchoReborn.UI;
@@ -21,18 +21,14 @@ public class MainMenuScreen : IScreen
         _drawingContext = drawingContext;
         
         _testsButton = new Button(
-            position: new Vector2(300, 250),
-            width: 200,
-            height: 60,
+            bounds: new Rectangle(300, 250, 200, 60),
             text: "Tests",
             font: _fonts.ButtonFont,
             onClickCallback: () => ScreenManager.SwitchScreen(new TestSelectionScreen(drawingContext, fonts))
         );
 
         _exitButton = new Button(
-            position: new Vector2(300, 350),
-            width: 200,
-            height: 60,
+            bounds: new Rectangle(300, 350, 200, 60),
             text: "Exit",
             font: _fonts.ButtonFont,
             onClickCallback: ScreenManager.QuitGame
