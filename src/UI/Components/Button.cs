@@ -50,8 +50,9 @@ public class Button
         _onClickCallback = callback;
     }
 
-    public void Update(MouseState mouseState)
+    public void Update()
     {
+        MouseState mouseState = Mouse.GetState();
         Rectangle buttonRect = new Rectangle(
             (int)_position.X,
             (int)_position.Y,

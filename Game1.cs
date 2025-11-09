@@ -11,10 +11,9 @@ namespace EchoReborn;
 public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
+    private DrawingContext _drawingContext;
+    private GameFonts _fonts;
     private ScreenManager _screenManager;
-    private SpriteFont _titleFont;
-    private SpriteFont _buttonFont;
 
     public Game1()
     {
@@ -33,14 +32,16 @@ public class Game1 : Game
     /// </summary>
     protected override void LoadContent()
     {
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
+        _drawingContext = new DrawingContext(GraphicsDevice, new SpriteBatch(GraphicsDevice));
 
         // Load fonts for the menu system
-        _titleFont = Content.Load<SpriteFont>("Fonts/TitleFont");
-        _buttonFont = Content.Load<SpriteFont>("Fonts/ButtonFont");
+        _fonts = new GameFonts(
+            Content.Load<SpriteFont>("Fonts/TitleFont"),
+            Content.Load<SpriteFont>("Fonts/ButtonFont")
+            );
 
         // Initialize screen manager with loaded fonts
-        _screenManager = new ScreenManager(_titleFont, _buttonFont);
+        _screenManager = new ScreenManager(_drawingContext, _fonts);
     }
 
     /// <summary>
@@ -52,11 +53,8 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
-        // Update the screen manager
-        MouseState mouseState = Mouse.GetState();
-        KeyboardState keyboardState = Keyboard.GetState();
-        _screenManager.Update(mouseState, keyboardState);
+        
+        _screenManager.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -70,11 +68,11 @@ public class Game1 : Game
         // Draw the current screen from screen manager
         if (_screenManager != null)
         {
-            _screenManager.Draw(_spriteBatch, GraphicsDevice);
+            _screenManager.Draw(gameTime);
         }
         else
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
         }
 
         base.Draw(gameTime);

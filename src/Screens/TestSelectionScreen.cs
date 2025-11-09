@@ -1,7 +1,8 @@
-﻿﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using EchoReborn.UI.Components;
+using EchoReborn.UI;
 using EchoReborn.Tests;
 using System.Collections.Generic;
 
@@ -10,10 +11,10 @@ namespace EchoReborn.Screens;
 /// <summary>
 /// Test selection screen displaying a list of available test scenes.
 /// </summary>
-public class TestSelectionScreen
+public class TestSelectionScreen : IScreen
 {
-    private SpriteFont _titleFont;
-    private SpriteFont _buttonFont;
+    private DrawingContext _drawingContext;
+    private GameFonts _fonts;
     private List<Button> _testButtons;
     private Button _backButton;
     private List<TestSceneInfo> _testScenes;
@@ -21,10 +22,10 @@ public class TestSelectionScreen
     public string CurrentScreen { get; set; } = "TestSelection";
     public string SelectedTest { get; private set; } = null;
 
-    public TestSelectionScreen(SpriteFont titleFont, SpriteFont buttonFont)
+    public TestSelectionScreen(DrawingContext drawingContext, GameFonts fonts)
     {
-        _titleFont = titleFont;
-        _buttonFont = buttonFont;
+        _drawingContext = drawingContext;
+        _fonts = fonts;
         _testButtons = new List<Button>();
         _testScenes = new List<TestSceneInfo>();
         
@@ -39,7 +40,7 @@ public class TestSelectionScreen
             width: 200,
             height: 60,
             text: "Back",
-            font: buttonFont,
+            font: fonts.ButtonFont,
             onClickCallback: () => CurrentScreen = "MainMenu"
         );
     }
@@ -74,7 +75,7 @@ public class TestSelectionScreen
                 width: 200,
                 height: 60,
                 text: _testScenes[i].Name,
-                font: _buttonFont,
+                font: _fonts.ButtonFont,
                 onClickCallback: () =>
                 {
                     SelectedTest = _testScenes[index].Name;
@@ -85,34 +86,36 @@ public class TestSelectionScreen
         }
     }
 
-    public void Update(MouseState mouseState)
+    public void Update(GameTime gameTime)
     {
         // Update all test buttons
         foreach (var button in _testButtons)
         {
-            button.Update(mouseState);
+            button.Update();
         }
         
         // Update back button
-        _backButton.Update(mouseState);
+        _backButton.Update();
     }
 
-    public void Draw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice)
+    public void Draw(GameTime gameTime)
     {
+        var graphicsDevice = _drawingContext.GraphicsDevice;
+        var spriteBatch = _drawingContext.SpriteBatch;
+        
         graphicsDevice.Clear(Color.Black);
-
         spriteBatch.Begin();
 
         // Draw title
-        if (_titleFont != null)
+        if (_fonts.TitleFont != null)
         {
             string title = "SELECT TEST";
-            Vector2 titleSize = _titleFont.MeasureString(title);
+            Vector2 titleSize = _fonts.TitleFont.MeasureString(title);
             Vector2 titlePosition = new Vector2(
                 (graphicsDevice.Viewport.Width - titleSize.X) / 2,
                 50
             );
-            spriteBatch.DrawString(_titleFont, title, titlePosition, Color.Cyan);
+            spriteBatch.DrawString(_fonts.TitleFont, title, titlePosition, Color.Cyan);
         }
         else
         {
@@ -132,6 +135,11 @@ public class TestSelectionScreen
         _backButton.Draw(spriteBatch);
 
         spriteBatch.End();
+    }
+
+    public void Destroy()
+    {
+        // Cleanup resources if needed
     }
 }
 

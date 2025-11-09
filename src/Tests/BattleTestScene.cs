@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using EchoReborn.Screens;
+using EchoReborn.UI;
 
 namespace EchoReborn.Tests;
 
@@ -8,6 +10,8 @@ namespace EchoReborn.Tests;
 /// </summary>
 public class BattleTestScene
 {
+    private DrawingContext _drawingContext;
+    private GameFonts _fonts;
     private GraphicsDevice _graphicsDevice;
     private SpriteBatch _spriteBatch;
     private SpriteFont _font;
@@ -24,7 +28,7 @@ public class BattleTestScene
         // Add battle test logic here
     }
     
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
         _graphicsDevice.Clear(Color.DarkRed);
         

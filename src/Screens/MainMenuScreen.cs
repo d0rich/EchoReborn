@@ -2,33 +2,34 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using EchoReborn.UI.Components;
+using EchoReborn.UI;
 
 namespace EchoReborn.Screens;
 
 /// <summary>
 /// Main menu screen displaying the game title and navigation buttons.
 /// </summary>
-public class MainMenuScreen
+public class MainMenuScreen : IScreen
 {
-    private SpriteFont _titleFont;
-    private SpriteFont _buttonFont;
+    private DrawingContext _drawingContext;
+    private GameFonts _fonts;
     private Button _testsButton;
     private Button _exitButton;
     
     public string CurrentScreen { get; set; } = "MainMenu";
     public int SelectedTestScene { get; set; } = 0;
 
-    public MainMenuScreen(SpriteFont titleFont, SpriteFont buttonFont)
+    public MainMenuScreen(DrawingContext drawingContext, GameFonts fonts)
     {
-        _titleFont = titleFont;
-        _buttonFont = buttonFont;
+        _fonts = fonts;
+        _drawingContext = drawingContext;
         
         _testsButton = new Button(
             position: new Vector2(300, 250),
             width: 200,
             height: 60,
             text: "Tests",
-            font: buttonFont,
+            font: _fonts.ButtonFont,
             onClickCallback: () => CurrentScreen = "TestSelection"
         );
 
@@ -37,33 +38,35 @@ public class MainMenuScreen
             width: 200,
             height: 60,
             text: "Exit",
-            font: buttonFont,
+            font: _fonts.ButtonFont,
             onClickCallback: () => CurrentScreen = "Exit"
         );
     }
 
-    public void Update(MouseState mouseState)
+    public void Update(GameTime gameTime)
     {
-        _testsButton.Update(mouseState);
-        _exitButton.Update(mouseState);
+        _testsButton.Update();
+        _exitButton.Update();
     }
 
-    public void Draw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice)
+    public void Draw(GameTime gameTime)
     {
+        var graphicsDevice = _drawingContext.GraphicsDevice;
+        var spriteBatch = _drawingContext.SpriteBatch;
+        
         graphicsDevice.Clear(Color.Black);
-
         spriteBatch.Begin();
 
         // Draw title
-        if (_titleFont != null)
+        if (_fonts.TitleFont != null)
         {
             string title = "ECHO REBORN";
-            Vector2 titleSize = _titleFont.MeasureString(title);
+            Vector2 titleSize = _fonts.TitleFont.MeasureString(title);
             Vector2 titlePosition = new Vector2(
                 (graphicsDevice.Viewport.Width - titleSize.X) / 2,
                 80
             );
-            spriteBatch.DrawString(_titleFont, title, titlePosition, Color.Cyan);
+            spriteBatch.DrawString(_fonts.TitleFont, title, titlePosition, Color.Cyan);
         }
         else
         {
@@ -78,6 +81,11 @@ public class MainMenuScreen
         _exitButton.Draw(spriteBatch);
 
         spriteBatch.End();
+    }
+    
+    public void Destroy()
+    {
+        // Cleanup resources if needed
     }
 }
 

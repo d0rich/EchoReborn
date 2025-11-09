@@ -1,4 +1,4 @@
-﻿﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using EchoReborn.Screens;
@@ -17,10 +17,10 @@ public class ScreenManager
     public string CurrentScreen => _currentScreen;
     public string SelectedTest => _testSelectionScreen?.SelectedTest;
 
-    public ScreenManager(SpriteFont titleFont, SpriteFont buttonFont)
+    public ScreenManager(DrawingContext drawingContext, GameFonts fonts)
     {
-        _mainMenuScreen = new MainMenuScreen(titleFont, buttonFont);
-        _testSelectionScreen = new TestSelectionScreen(titleFont, buttonFont);
+        _mainMenuScreen = new MainMenuScreen(drawingContext, fonts);
+        _testSelectionScreen = new TestSelectionScreen(drawingContext, fonts);
         _currentScreen = "MainMenu";
     }
 
@@ -32,11 +32,11 @@ public class ScreenManager
         _testSelectionScreen.RegisterTestScene(testName, sceneClass);
     }
 
-    public void Update(MouseState mouseState, KeyboardState keyboardState)
+    public void Update(GameTime gameTime)
     {
         if (_currentScreen == "MainMenu")
         {
-            _mainMenuScreen.Update(mouseState);
+            _mainMenuScreen.Update(gameTime);
             if (_mainMenuScreen.CurrentScreen != "MainMenu")
             {
                 _currentScreen = _mainMenuScreen.CurrentScreen;
@@ -44,7 +44,7 @@ public class ScreenManager
         }
         else if (_currentScreen == "TestSelection")
         {
-            _testSelectionScreen.Update(mouseState);
+            _testSelectionScreen.Update(gameTime);
             if (_testSelectionScreen.CurrentScreen != "TestSelection")
             {
                 _currentScreen = _testSelectionScreen.CurrentScreen;
@@ -52,15 +52,15 @@ public class ScreenManager
         }
     }
 
-    public void Draw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice)
+    public void Draw(GameTime gameTime)
     {
         if (_currentScreen == "MainMenu")
         {
-            _mainMenuScreen.Draw(spriteBatch, graphicsDevice);
+            _mainMenuScreen.Draw(gameTime);
         }
         else if (_currentScreen == "TestSelection")
         {
-            _testSelectionScreen.Draw(spriteBatch, graphicsDevice);
+            _testSelectionScreen.Draw(gameTime);
         }
     }
 
