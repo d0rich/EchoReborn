@@ -1,4 +1,3 @@
-
 #----------------------------- Global Properties ----------------------------#
 
 /outputDir:bin/$(Platform)
@@ -12,4 +11,83 @@
 
 
 #---------------------------------- Content ---------------------------------#
+
+#begin Fonts/TitleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/TitleFont.spritefont
+
+#begin Fonts/ButtonFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/ButtonFont.spritefont
+
+#============================================================================#
+#                    WandererMagician Character Sprites                      #
+#============================================================================#
+
+#begin Characters/WandererMagician/Idle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Idle.png
+
+#begin Characters/WandererMagician/Walk.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Walk.png
+
+#begin Characters/WandererMagician/Run.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Run.png
+
+#begin Characters/WandererMagician/Jump.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Jump.png
+
+#begin Characters/WandererMagician/Attack_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Attack_1.png
+
+#begin Characters/WandererMagician/Attack_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Attack_2.png
+
+#begin Characters/WandererMagician/Charge_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Charge_1.png
+
+#begin Characters/WandererMagician/Charge_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Charge_2.png
+
+#begin Characters/WandererMagician/Magic_sphere.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Magic_sphere.png
+
+#begin Characters/WandererMagician/Magic_arrow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Magic_arrow.png
+
+#begin Characters/WandererMagician/Hurt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Hurt.png
+
+#begin Characters/WandererMagician/Dead.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Characters/WandererMagician/Dead.png
+#============================================================================#
 
