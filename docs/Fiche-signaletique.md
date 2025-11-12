@@ -91,17 +91,50 @@ Fonctionnalités minimales à livrer pour une version jouable :
 
 ### Écran principal
 
+Premier écran au lancement du jeu. Affiche le titre "Echo Reborn" en grand et propose trois options principales :
+- **Start** : commencer une nouvelle partie ou continuer
+- **Tests** : accéder au menu de sélection des scènes de test (développement)
+- **Exit** : quitter le jeu
+
 ![Main Menu](./Screens/Main%20Menu.png)
 
 ### La Carte du monde
+
+Vue d'ensemble du monde avec 5 locations reliées entre elles par des chemins. Les locations sont disposées en réseau (Location 1 → Location 2 ↔ Location 3 ↔ Location 4 ↔ Location 5). Le joueur peut :
+- Naviguer entre les lieux accessibles
+- Voir sa progression à travers le monde
+- Chaque location contient des ennemis et un boss final détenant une partie du corps
 
 ![World Map](./Screens/Map.png)
 
 ### Écran de combat
 
+Interface de combat au tour par tour divisée en deux zones :
+- **Zone supérieure** : visualisation du Character (gauche) et de l'Enemy (droite) avec leurs sprites animés
+- **Zone inférieure (HUD)** : 
+  - **Gauche** : Character avec indicateur de Level, barres de HP (rouge), Energy (orange), XP (bleu) avec valeurs actuelles/max
+  - **Centre** : panneau Skills avec liste de compétences disponibles (Attack, Heal, Mega Attack, etc.) et coûts en Energy. Navigation par pagination (triangles haut/bas)
+  - **Droite** : Enemy avec barre de HP
+
+**Note** : Pour chaque location, 5 ennemis différents. Le dernier est le boss.
+
 ![Battle Screen](./Screens/Battle.png)
 
+### Écran de victoire
+
+Écran affiché après avoir remporté un combat. Affiche "Victory" en grand et montre :
+- **Gauche** : Character (bonhomme bâton) avec badge "?" indiquant récompense/drop
+- **Centre** : barres de statistiques remplies (HP: 105/105, Energy: 105/105, XP: 5/200)
+- **Droite** : panneau Skills mis à jour avec les compétences disponibles (Heal 5en, Mega Attack, Mega Heal 20en) et navigation
+- **Bas** : bouton "Go to Map" pour retourner à la carte du monde
+
 ![Victory Screen](./Screens/Victory.png)
+
+### Écran de défaite
+
+Écran affiché en cas de défaite au combat. Affiche "Defeat" en grand et propose deux options :
+- **Retry** : recommencer le combat
+- **Go to Map** : retourner à la carte du monde (avec perte de progression du combat)
 
 ![Defeat Screen](./Screens/Defeat.png)
 
