@@ -62,20 +62,18 @@ Le protagoniste a été fragmenté : il part à la recherche de ses parties du c
 
 Fonctionnalités minimales à livrer pour une version jouable :
 
-- Gestion des personnages : création / personnalisation basique, statistiques (PV, PM, Attaque, Défense, Vitesse), progression (niveaux, expérience), inventaire.
 - Système de combat : combats au tour par tour, actions de base (Attaquer, Défendre, Utiliser objet, Fuir), compétences/compétences simples, calculs de dégâts/soins, conditions victoire/défaite.
-- Monde et progression : 2–3 lieux, 3–5 types d'ennemis, transitions entre lieux, points de sauvegarde.
+- Monde et progression : 5 lieux, 3–5 types d'ennemis, transitions entre lieux, points de sauvegarde.
 - UI minimale : menu principal, menu pause, interface de combat, menu inventaire, affichage des statistiques.
-- Contenu : 5–10 objets (potions, armes), histoire basique (début + fin simple).
 - Mécanique de progression liée au pitch : dans chaque location un boss principal détient une partie du corps de la protagoniste ; la victoire donne la partie récupérée et débloque une compétence spéciale associée.
 - Assets graphiques (MVP) : utilisation de sprites gratuits image par image (frame-by-frame) provenant de CraftPix — https://craftpix.net/freebies/filter/sprites/ — à utiliser comme ressources/placeholder pour le prototype (prévoir vérification de la licence d'utilisation pour le contexte pédagogique).
 
 (Source : `docs/README.md`)
 
-## Système de combat (points saillants)
+## Système de combat
 
 - Tour par tour avec alternance joueur / IA.
-- Actions disponibles : Attaque, Défendre, Utiliser objet, Fuir.
+- Actions disponibles : Attaque, Défendre, etc.
 - Tour : détermination de l'ordre, sélection d'action, exécution, vérification des conditions de fin (victoire, défaite, fuite), distribution des récompenses.
 - Architecture suggérée : `BattleSystem`, `Character` (Player/Enemy), `Action`, `Inventory`, `ActionAnimation`, `AnimationController`.
 
@@ -85,13 +83,31 @@ Fonctionnalités minimales à livrer pour une version jouable :
 
 - Format de sauvegarde attendu : XML (spécifié dans la doc).
 - Entités principales sauvegardées : GameState (date, version, temps de jeu), Player (stats, position, inventaire, skills), World (locations, NPCs, objets), Quests, InventoryItem, Skills.
-- Conventions : GUID pour identifiants, DateTime ISO 8601, TimeSpan en format ISO 8601, coordonnées en float, dispositions d'NPC -100..100.
+- Conventions : Int pour identifiants, DateTime ISO 8601, TimeSpan en format ISO 8601.
 
 (Source : `docs/Persistent.md`)
 
+## Écrans
+
+### Écran principal
+
+![Main Menu](./Screens/Main%20Menu.png)
+
+### La Carte du monde
+
+![World Map](./Screens/Map.png)
+
+### Écran de combat
+
+![Battle Screen](./Screens/Battle.png)
+
+![Victory Screen](./Screens/Victory.png)
+
+![Defeat Screen](./Screens/Defeat.png)
+
 ## Structure technique & contraintes observées
 
-- Projet .NET 8.0 (répertoires `bin/Debug/net8.0`, `obj/.../net8.0`).
+- Projet .NET 8.0.
 - Usage attendu de MonoGame (moteur graphique 2D/3D léger ciblant C#).
 - Pipeline de contenu présent (`Content/`, `Content.mgcb`).
 - Implications multi-plateforme : prévoir validation des builds sur macOS et Linux, gestion des différences d'input/chemins de fichiers et packaging (exécutables, bundles, permissions). Mettre en place des procédures de test et, si possible, une CI multi-plateforme.
