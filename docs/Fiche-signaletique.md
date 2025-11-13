@@ -158,9 +158,8 @@ classDiagram
 
     class UI {
         +MainMenu()
-        +PauseMenu()
+        +MapUI()
         +CombatUI()
-        +InventoryUI()
     }
 
     class ContentPipeline {
