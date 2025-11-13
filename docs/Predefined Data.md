@@ -121,13 +121,37 @@ classDiagram
         +String AnimationClass
         +Int RewardXP
     }
-    
-    class Character {
-        +Int BaseMaxHP
-        +Int BaseMaxMana
-        +Int BaseMaxXP
-        +List~Guid~ StartingSkillIds
+
+    class GameState {
+        +DateTime SaveDate
+        +String GameVersion
+        +TimeSpan PlayTime
+        +Player Player
+        +World World
     }
+
+    class Character {
+        +Int Level
+        +Int Experience
+        +Int CurrentHealth
+        +Int MaxHealth
+        +Int CurrentMana
+        +Int MaxMana
+        +List~Guid~ SkillsIds
+    }
+
+    class World {
+        +Guid LatestClearedLocationId
+    }
+
+    GameSave "1" *-- "1" GameState : save.xml
+    GameState "1" *-- "1" Character
+    GameState "1" *-- "1" World
+    
+    InititalState *-- "1" Skills : skills.xml
+    InititalState *-- "1" Locations : monde.xml
+    InititalState *-- "1" Enemies : enemies.xml
+    InititalState *-- "1" Character : character.xml
     
     Skills "1" *-- "*" BasicSkill
     Skills "1" *-- "*" ComplexSkill
