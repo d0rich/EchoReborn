@@ -71,6 +71,10 @@ Defines the player character's base stats and starting configuration.
 
 ```mermaid
 classDiagram
+    class EchoReborn {
+        
+    }
+    
     class Skills {
         +List~BasicSkill~ BasicSkills
         +List~ComplexSkill~ ComplexSkills
@@ -143,8 +147,10 @@ classDiagram
     class World {
         +Guid LatestClearedLocationId
     }
+    
+    EchoReborn "1" *-- "1" InititalState : data/
+    EchoReborn "1" *-- "1" GameState : save.xml
 
-    GameSave "1" *-- "1" GameState : save.xml
     GameState "1" *-- "1" Character
     GameState "1" *-- "1" World
     
