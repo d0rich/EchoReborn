@@ -1,0 +1,103 @@
+@startuml
+class EchoReborn {
++initialState:InitialState
++gameState:GameState
+}
+
+class InitialState {
++location:Locations
++enmies:Enemies
++caracter:Character
+}
+class Skill{
++Id: Guid
++Name: String
++Description: String
+}
+
+class Skills {
+    +skills: Skills
+    
+}
+
+class BasicSkill {
+    +ManaCost: Int
+    +HealthCost: Int
+    +Damage: Int
+    +Heal: Int
+    +AnimationClass: String
+    +TargetType: TargetType
+}
+
+class ComplexSkill {
+    +SkillClass: String
+}
+
+class Locations {
+    +LocationList: List<Location>
+}
+
+class Location {
+    +Id: Guid
+    +Name: String
+    +Difficulty: Int
+    +ConnectedLocationIds: List<Guid>
+    +EnemyEncounterIds: List<Guid>
+    +IsStartLocation: Boolean
+    +IsFinalLocation: Boolean
+}
+
+class Enemies {
+    +EnemyList: List<Enemy>
+}
+
+class Enemy {
+    +Id: Guid
+    +Name: String
+    +MaxHP: Int
+    +SkillIds: List<Guid>
+    +AnimationClass: String
+    +RewardXP: Int
+}
+
+class GameState {
+    +SaveDate: DateTime
+    +GameVersion: String
+    +PlayTime: TimeSpan
+    +Player: Player
+    +World: World
+}
+
+class Character {
+    +Level: Int
+    +Experience: Int
+    +CurrentHealth: Int
+    +MaxHealth: Int
+    +CurrentMana: Int
+    +MaxMana: Int
+    +SkillsIds: List<Guid>
+}
+
+class World {
+    +LatestClearedLocationId: Guid
+}
+
+EchoReborn *-- "1" InitialState : initialState
+EchoReborn *-- "1" GameState : gameState
+GameState "1" *-- "1" Character
+GameState "1" *-- "1" World
+
+InitialState *-- "1" Skills : skills
+InitialState *-- "1" Locations : location
+InitialState *-- "1" Enemies : enemies
+InitialState *-- "1" Character : character
+
+Skill <|--  BasicSkill
+Skill  <|-- ComplexSkill
+Locations "1" *-- "*" Location
+Enemies "1" *-- "1..*" Enemy:EnemyList
+Enemy "1..*" --> "1" Skills : uses
+Skills  *-- "1..*" Skill 
+Character "1" --> "*" Skills : starts with
+Location "0..*" --> "1" Enemies : encounters
+@enduml
