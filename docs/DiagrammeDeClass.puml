@@ -6,11 +6,11 @@ class EchoReborn {
 
 class InitialState {
 +location:Locations
-+enmies:Enemies
++enemies:Enemies
 +caracter:Character
 }
 class Skill{
-+Id: Guid
++Id: Int
 +Name: String
 +Description: String
 }
@@ -38,11 +38,11 @@ class Locations {
 }
 
 class Location {
-    +Id: Guid
+    +Id: Int
     +Name: String
     +Difficulty: Int
-    +ConnectedLocationIds: List<Guid>
-    +EnemyEncounterIds: List<Guid>
+    +ConnectedLocationIds: List<Int>
+    +EnemyEncounterIds: List<Int>
     +IsStartLocation: Boolean
     +IsFinalLocation: Boolean
 }
@@ -52,10 +52,10 @@ class Enemies {
 }
 
 class Enemy {
-    +Id: Guid
+    +Id: Int
     +Name: String
     +MaxHP: Int
-    +SkillIds: List<Guid>
+    +SkillIds: List<Int>
     +AnimationClass: String
     +RewardXP: Int
 }
@@ -64,7 +64,7 @@ class GameState {
     +SaveDate: DateTime
     +GameVersion: String
     +PlayTime: TimeSpan
-    +Player: Player
+    +Player: Character
     +World: World
 }
 
@@ -75,11 +75,11 @@ class Character {
     +MaxHealth: Int
     +CurrentMana: Int
     +MaxMana: Int
-    +SkillsIds: List<Guid>
+    +SkillsIds: List<Int>
 }
 
 class World {
-    +LatestClearedLocationId: Guid
+    +LatestClearedLocationId: Int
 }
 
 EchoReborn *-- "1" InitialState : initialState
@@ -99,5 +99,5 @@ Enemies "1" *-- "1..*" Enemy:EnemyList
 Enemy "1..*" --> "1" Skills : uses
 Skills  *-- "1..*" Skill 
 Character "1" --> "*" Skills : starts with
-Location "0..*" --> "1" Enemies : encounters
+Location "0..*" --> "5" Enemy : encounters
 @enduml
