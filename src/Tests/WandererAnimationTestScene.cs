@@ -35,7 +35,7 @@ public class WandererAnimationTestScene : IScreen
         _currentAnimationIndex = 0;
         
         // Initialize the wanderer animation
-        _wanderer = new WandererMagicianAnimation(10f);
+        _wanderer = new WandererMagicianAnimation();
         _wanderer.Position = new Vector2(400, 200);
         _wanderer.Scale = 2f;
         
