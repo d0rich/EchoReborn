@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace EchoReborn.UI;
@@ -36,6 +37,14 @@ public static class DrawingContext
             CheckInitialized();
             return _spriteBatch;
         }
+    }
+
+    public static Texture2D CreateTexture(Color color)
+    {
+        CheckInitialized();
+        Texture2D texture = new Texture2D(GraphicsDevice, 1, 1);
+        texture.SetData(new[] { color });
+        return texture;
     }
 
     public static ContentManager ContentManager
