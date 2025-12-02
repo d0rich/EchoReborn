@@ -17,8 +17,8 @@ public class Game1 : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        _graphics.PreferredBackBufferWidth=1500;
-        _graphics.PreferredBackBufferHeight=1500;
+        _graphics.PreferredBackBufferWidth=1280;
+        _graphics.PreferredBackBufferHeight=720;
     }
 
     protected override void Initialize()
