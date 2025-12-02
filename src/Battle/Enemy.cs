@@ -20,8 +20,25 @@ class Enemy
 
     public Action ChooseAction()
     {
-        Console.WriteLine($"{Name} attacks!");
-        return new Action("Claw", 15);
+        Random rand = new Random();
+        int
+            num = rand.Next(
+                2); // générer un numéro aléatoire qui va définir la prochaine action de l'ennemi ,on peut fait autant qu'on veut bien sur
+
+        switch (num)
+        {
+            case 0:
+                return new Action("kick", 20);
+            case 1:
+                return new Action("punch", 50);
+            default:
+                return new Action("kick", 20); // normalement ça ne doit jamais passer ça 
+                break;
+
+
+
+
+        }
     }
 
     public void TakeDamage(int dmg)
