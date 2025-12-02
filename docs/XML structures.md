@@ -17,6 +17,7 @@ classDiagram
         +Id: Int
         +Name: String
         +Description: String
+        +TargetType: TargetType
     }
 
     class SkillRef {
@@ -37,7 +38,6 @@ classDiagram
         +Damage: Int
         +Heal: Int
         +AnimationClass: String
-        +TargetType: TargetType
     }
 
     class ComplexSkill {
@@ -103,6 +103,15 @@ classDiagram
         +LatestClearedLocation: LocationRef
     }
 
+    class TargetType {
+        <<Enum>>
+        ALLIES
+        ENEMIES
+        ALL
+    }
+
+    Skill *-- TargetType
+
     EchoReborn *-- InitialState : initialState
     EchoReborn *-- GameState : gameState
     GameState *-- Character
@@ -132,4 +141,5 @@ classDiagram
     Character *-- SkillRefs : starts with
     Location *-- EnemyRefs : encounters
 
+  
 ```
