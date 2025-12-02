@@ -20,16 +20,12 @@ classDiagram
         +TargetType: TargetType
     }
 
-    class SkillRef {
-        +Id: Int
-    }
-
     class Skills {
         +Skills: Skills
     }
 
     class SkillRefs {
-        +SkillRefs: List<SkillRef>
+        +SkillRefs: List~Int~
     }
 
     class BasicSkill {
@@ -45,25 +41,21 @@ classDiagram
     }
 
     class Locations {
-        +LocationList: List<Location>
-    }
-
-    class LocationRef {
-        +Id: Int
+        +LocationList: List~Location~
     }
 
     class Location {
         +Id: Int
         +Name: String
         +Difficulty: Int
-        +NextLocation: LocationRef
+        +NextLocationId: Int
         +EnemyEncounter: EnemyRefs
         +IsStartLocation: Boolean
         +IsFinalLocation: Boolean
     }
 
     class Enemies {
-        +EnemyList: List<Enemy>
+        +EnemyList: List~Enemy~
     }
 
     class Enemy {
@@ -74,11 +66,9 @@ classDiagram
         +AnimationClass: String
         +RewardXP: Int
     }
-    class EnemyRef {
-        +Id: Int
-    }
+
     class EnemyRefs {
-        +EnemyRefs: List<EnemyRef>
+        +EnemyRefs: List~Int~
     }
 
     class GameState {
@@ -100,7 +90,7 @@ classDiagram
     }
 
     class World {
-        +LatestClearedLocation: LocationRef
+        +LatestClearedLocationId: Int
     }
 
     class TargetType {
@@ -116,7 +106,6 @@ classDiagram
     EchoReborn *-- GameState : gameState
     GameState *-- Character
     GameState *-- World
-    World *-- LocationRef
 
     InitialState *-- Skills : skills
     InitialState *-- Locations : location
@@ -126,15 +115,11 @@ classDiagram
     Skill <|-- BasicSkill
     Skill <|-- ComplexSkill
 
-    EnemyRefs *-- EnemyRef
-    SkillRefs *-- SkillRef
-
-    LocationRef ..> Location
-    EnemyRef ..> Enemy
-    SkillRef ..> Skill
+    World ..> Location
+    EnemyRefs "1" ..> "*" Enemy
+    SkillRefs "1" ..> "*" Skill
 
     Locations *-- Location
-    Location *-- LocationRef
     Enemies *-- Enemy : EnemyList
     Enemy *-- SkillRefs : uses
     Skills *-- Skill
