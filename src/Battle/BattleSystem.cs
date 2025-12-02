@@ -1,3 +1,7 @@
+using System;
+
+namespace EchoReborn.Battle;
+
 class BattleSystem
 {
     Player player;
@@ -6,7 +10,7 @@ class BattleSystem
 
     public BattleSystem(Player p, Enemy e)
     {
-        player = p
+        player = p;
         enemy = e;
     }
 

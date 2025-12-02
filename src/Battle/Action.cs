@@ -1,3 +1,7 @@
+using System;
+
+namespace EchoReborn.Battle;
+
 class Action
 {
     public string Name { get; }

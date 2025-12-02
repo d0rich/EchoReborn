@@ -40,17 +40,17 @@ public class EnemyUI
         int height = 18;
 
         // Border (black)
-        spriteBatch.Draw(DrawingContext.WhiteTexture, 
+        spriteBatch.Draw(DrawingContext.CreateTexture(Color.White), 
             new Rectangle((int)position.X - 10, (int)position.Y + sprite.Height + 10, width, height), 
             Color.Black);
 
         // Background (grey)
-        spriteBatch.Draw(DrawingContext.WhiteTexture, 
+        spriteBatch.Draw(DrawingContext.CreateTexture(Color.White), 
             new Rectangle((int)position.X - 8, (int)position.Y + sprite.Height + 12, width - 4, height - 4), 
             Color.DarkGray);
 
         // HP Fill
-        spriteBatch.Draw(DrawingContext.WhiteTexture, 
+        spriteBatch.Draw(DrawingContext.CreateTexture(Color.White), 
             new Rectangle((int)position.X - 8, (int)position.Y + sprite.Height + 12, 
                 (int)((width - 4) * hpPercent), height - 4), 
             Color.Red);

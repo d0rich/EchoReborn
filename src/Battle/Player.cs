@@ -1,9 +1,13 @@
-class Enemy
+using System;
+
+namespace EchoReborn.Battle;
+
+class Player
 {
     public string Name { get; }
     public int HP { get; private set; }
 
-    public Enemy(string name, int hp)
+    public Player(string name, int hp)
     {
         Name = name;
         HP = hp;
@@ -11,13 +15,13 @@ class Enemy
 
     public void Initialize()
     {
-        Console.WriteLine($"{Name} appears! ({HP} HP)");
+        Console.WriteLine($"{Name} is ready! ({HP} HP)");
     }
 
     public Action ChooseAction()
     {
-        Console.WriteLine($"{Name} attacks!");
-        return new Action("Claw", 15);
+        Console.WriteLine("Player attacks!");
+        return new Action("Attack", 20);
     }
 
     public void TakeDamage(int dmg)

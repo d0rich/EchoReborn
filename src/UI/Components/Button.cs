@@ -80,20 +80,13 @@ public class Button
     
     private void DrawBackground(Color backgroundColor)
     {
-        Texture2D texture = CreateButtonTexture(DrawingContext.GraphicsDevice, backgroundColor);
+        Texture2D texture = DrawingContext.CreateTexture(backgroundColor);
         
         DrawingContext.SpriteBatch.Draw(
             texture,
             _bounds,
             Color.White
         );
-    }
-
-    private Texture2D CreateButtonTexture(GraphicsDevice graphicsDevice, Color color)
-    {
-        Texture2D texture = new Texture2D(graphicsDevice, 1, 1);
-        texture.SetData(new[] { color });
-        return texture;
     }
 
     private void DrawBorder(Color color, int thickness)
