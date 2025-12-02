@@ -19,8 +19,16 @@ classDiagram
         +Description: String
     }
 
+    class SkillRef {
+        +Id: Int
+    }
+
     class Skills {
-        +skills: Skills
+        +Skills: Skills
+    }
+
+    class SkillRefs {
+        +SkillRefs: List<SkillRef>
     }
 
     class BasicSkill {
@@ -40,12 +48,16 @@ classDiagram
         +LocationList: List<Location>
     }
 
+    class LocationRef {
+        +Id: Int
+    }
+
     class Location {
         +Id: Int
         +Name: String
         +Difficulty: Int
-        +ConnectedLocationIds: List<Int>
-        +EnemyEncounterIds: List<Int>
+        +NextLocation: LocationRef
+        +EnemyEncounter: EnemyRefs
         +IsStartLocation: Boolean
         +IsFinalLocation: Boolean
     }
@@ -58,9 +70,15 @@ classDiagram
         +Id: Int
         +Name: String
         +MaxHP: Int
-        +SkillIds: List<Int>
+        +Skill: SkillRefs
         +AnimationClass: String
         +RewardXP: Int
+    }
+    class EnemyRef {
+        +Id: Int
+    }
+    class EnemyRefs {
+        +EnemyRefs: List<EnemyRef>
     }
 
     class GameState {
@@ -78,17 +96,18 @@ classDiagram
         +MaxHealth: Int
         +CurrentMana: Int
         +MaxMana: Int
-        +SkillsIds: List<Int>
+        +Skills: SkillRefs
     }
 
     class World {
-        +LatestClearedLocationId: Int
+        +LatestClearedLocation: LocationRef
     }
 
     EchoReborn *-- InitialState : initialState
     EchoReborn *-- GameState : gameState
     GameState *-- Character
     GameState *-- World
+    World *-- LocationRef
 
     InitialState *-- Skills : skills
     InitialState *-- Locations : location
@@ -98,11 +117,19 @@ classDiagram
     Skill <|-- BasicSkill
     Skill <|-- ComplexSkill
 
+    EnemyRefs *-- EnemyRef
+    SkillRefs *-- SkillRef
+
+    LocationRef ..> Location
+    EnemyRef ..> Enemy
+    SkillRef ..> Skill
+
     Locations *-- Location
+    Location *-- LocationRef
     Enemies *-- Enemy : EnemyList
-    Enemy --> Skill : uses
+    Enemy *-- SkillRefs : uses
     Skills *-- Skill
-    Character --> Skill : starts with
-    Location --> Enemy : encounters
+    Character *-- SkillRefs : starts with
+    Location *-- EnemyRefs : encounters
 
 ```
