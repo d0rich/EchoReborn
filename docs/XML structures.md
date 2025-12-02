@@ -15,10 +15,36 @@ classDiagram
 
     class Skill {
         +Id: Int
+        +Type: SkillType
         +Name: String
         +Description: String
         +TargetType: TargetType
+
+        +ManaCost: Int
+        +HealthCost: Int
+        +Damage: Int
+        +Heal: Int
+        +AnimationClass: String
+
+        +SkillClass: String
+        
     }
+
+    class TargetType {
+        <<Enum>>
+        ALLIES
+        ENEMIES
+        ALL
+    }
+
+    class SkillType {
+        <<Enum>>
+        BASIC
+        COMPLEX
+    }
+
+    Skill *-- SkillType
+    Skill *-- TargetType
 
     class Skills {
         +Skills: Skills
@@ -26,18 +52,6 @@ classDiagram
 
     class SkillRefs {
         +SkillRefs: List~Int~
-    }
-
-    class BasicSkill {
-        +ManaCost: Int
-        +HealthCost: Int
-        +Damage: Int
-        +Heal: Int
-        +AnimationClass: String
-    }
-
-    class ComplexSkill {
-        +SkillClass: String
     }
 
     class Locations {
@@ -93,15 +107,6 @@ classDiagram
         +LatestClearedLocationId: Int
     }
 
-    class TargetType {
-        <<Enum>>
-        ALLIES
-        ENEMIES
-        ALL
-    }
-
-    Skill *-- TargetType
-
     EchoReborn *-- InitialState : initialState
     EchoReborn *-- GameState : gameState
     GameState *-- Character
@@ -111,9 +116,6 @@ classDiagram
     InitialState *-- Locations : location
     InitialState *-- Enemies : enemies
     InitialState *-- Character : character
-
-    Skill <|-- BasicSkill
-    Skill <|-- ComplexSkill
 
     World ..> Location
     EnemyRefs "1" ..> "*" Enemy
