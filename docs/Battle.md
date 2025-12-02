@@ -1,120 +1,65 @@
 # Battle System Design Document
 
-## Overview
-
-A turn-based battle system for a JRPG game built with MonoGame. Players and enemies take alternating turns to perform actions: attack, use items, defend, or flee.
-
-## Main Entities
-
-- **Player** — the player's character participating in battle
-- **Enemy** — opponent controlled by AI
-- **BattleSystem** — controls battle flow, turn order, and action processing
-- **Action** — abstraction for actions (attack, defend, item usage)
-- **Inventory** — stores items that can be used in battle
-
-## Battle Flow
-
-1. Battle initialization (create participants, set initial parameters)
-2. Determine turn order
-3. Player selects an action
-4. Enemy selects an action (AI)
-5. Execute actions in order
-6. Check battle end conditions (victory, defeat, flee)
-7. End battle, distribute rewards
-
 ## Class Diagram
 
 ```mermaid
 classDiagram
     class BattleSystem {
+        -_playerAction BattleAction
+        -state BattleState
+        
+        +Update(gameTime: GameTime)
         +StartBattle()
-        +Update()
-        +Draw(SpriteBatch spriteBatch)
-        +EndBattle()
+        +DetermineTurnOrder()
+        +AcceptPlayerAction(action: BattleAction)
+        +CheckEndConditions()
+        +EndBattle(result)
     }
-
-    class Character {
-        -string name
-        -int hp
-        -int attack
-        -int defense
-        -CharacterSprite sprite
-        +TakeDamage(int amount)
+    class BattleState {
+        <<Enum>>
+        PENDING_PLAYER
+        PLAYER_ACTION_AXECUTION
+        ENEMY_ACTION_EXECUTION
+        DEFEAT
+        VICTORY
+    }
+    class BattleActor {
+        +Level: int
+        +HP: int
+        +MaxHP: int
+        +Energy: int
+        +MaxEnergy: int
+        +Initialize()
+        +TakeDamage(amount: int)
         +IsAlive() bool
-        +Draw(SpriteBatch spriteBatch)
-        +Update(GameTime gameTime)
     }
-
-    class CharacterSprite {
-        -Texture2D texture
-        -Vector2 position
-        -AnimationController animator
-        +Draw(SpriteBatch spriteBatch, GameTime gameTime)
-        +PlayAnimation(string animName)
+    
+    class Character {
+        +Exp: int
+        +NextLevelExp: int
     }
-
-    class AnimationController {
-        -Dictionary~string, Animation~ animations
-        -Animation currentAnimation
-        -DateTime animationStartTime
-        +PlayAnimation(string name)
-        +GetCurrentFrame(GameTime gameTime) Rectangle
-    }
-
-
-    class Animation {
-        -List~Rectangle~ frames
-        -float frameTime
-        -bool isLooping
-        +GetFrame(int index) Rectangle
-    }
-
-    class Player {
-        -Inventory inventory
-        +ChooseAction() Action
-    }
-
     class Enemy {
-        +ChooseAction() Action
+        +ChooseAction() BattleAction
     }
-
-    class Action {
-        -string name
-        -ActionAnimation animation
-        +Execute(Character actor, Character target)
-        -PlayActorAnimation(Character actor)
-        -PlayTargetAnimation(Character target)
+    class PlayerUI {
+        +UnlockPlayerUI()
     }
-
-    class ActionAnimation {
-        -string actorAnimationName
-        -string targetAnimationName
-        -float actorAnimationDelay
-        -float targetAnimationDelay
-        -bool waitForCompletion
-        +GetActorAnimation() string
-        +GetTargetAnimation() string
+    class BattleAction {
+        +Execute(target)
     }
-
-    class Inventory {
-        -List~Item~ items
-        +UseItem(Item item, Character target)
-    }
-
-    class Item
-
-    BattleSystem *-- Character
-    Character *-- CharacterSprite
-    CharacterSprite *-- AnimationController
-    AnimationController *-- Animation
-    Action *-- ActionAnimation
-    Character <|-- Player
-    Character <|-- Enemy
-    Player *-- Inventory
-    Inventory *-- Item
-
-    Player *--"*" Action
-    Enemy *--"*" Action
+    
+    Character --|> BattleActor
+    Enemy --|> BattleActor
+    BattleSystem *-- BattleState
+    BattleSystem "1" ..> "1" PlayerUI : interacts
+    BattleSystem "1" o-- "1..*" Character : controls
+    BattleSystem "1" o-- "1..*" Enemy : controls
+    BattleSystem "1" ..> "1..*" BattleAction : executes
+    PlayerUI "1" o-- "1" Character : for player
+    Enemy "1" ..> "0..*" BattleAction : chooses
+    PlayerUI "1" ..> "0..*" BattleAction : chooses
+    BattleAction "1" o-- "1" Character : targets
+    BattleAction "1" o-- "1" Enemy : targets
 
 ```
 
@@ -122,7 +67,8 @@ classDiagram
 
 ```mermaid
 sequenceDiagram
-    participant P as Player
+    participant UI as Player UI
+    participant P as Character
     participant BS as BattleSystem
     participant E as Enemy
     participant A as Action
@@ -135,21 +81,19 @@ sequenceDiagram
         BS->>BS: Determine turn order
         
         alt Player's Turn
-            BS->>P: Request action
-            P->>P: ChooseAction()
-            P-->>BS: Return Action
+            BS->>UI: UnlockPlayerUI()
+            UI->>BS: AcceptPlayerAction(Action)
             BS->>A: Execute(Enemy)
             A->>E: TakeDamage()
-            E->>E: IsAlive()
+            BS->>E: IsAlive()
         end
         
         alt Enemy's Turn
-            BS->>E: Request action
-            E->>E: ChooseAction()
-            E-->>BS: Return Action
+            BS->>E: ChooseAction()
+            E-->>BS: Action
             BS->>A: Execute(Player)
             A->>P: TakeDamage()
-            P->>P: IsAlive()
+            BS->>P: IsAlive()
         end
         
         BS->>BS: Check end conditions
@@ -164,23 +108,3 @@ sequenceDiagram
     end
 
 ```
-
-## Available Actions
-
-- Attack: deals damage to enemy
-- Defend: reduces incoming damage
-- Use Item: applies item effect from inventory
-- Flee: attempt to escape from battle
-
-## Victory/Defeat Conditions
-
-- Victory: all enemies defeated
-- Defeat: player HP reaches zero
-- Flee: successful escape attempt
-
-## Future Enhancements
-
-- Multi-enemy battles
-- Status effects (poison, stun)
-- Special abilities and magic
-- More complex AI behavior
