@@ -113,15 +113,14 @@ public class WandererMagicianAnimation
         _isPlaying = true;
     }
     
-    public void Update(GameTime gameTime)
+    public void Draw(GameTime gameTime)
     {
         if (!_isPlaying)
             return;
         DefineCurrentFrame(gameTime);
-    }
-    
-    public void Draw(SpriteBatch spriteBatch)
-    {
+        
+        var spriteBatch = DrawingContext.SpriteBatch;
+        
         if (!_spriteSheets.ContainsKey(_currentState))
             return;
             

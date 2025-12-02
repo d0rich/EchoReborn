@@ -73,7 +73,6 @@ public class WandererAnimationTestScene : IScreen
         }
         
         _previousKeyboardState = keyboardState;
-        _wanderer.Update(gameTime);
     }
     
     public void Draw(GameTime gameTime)
@@ -86,7 +85,7 @@ public class WandererAnimationTestScene : IScreen
         spriteBatch.Begin();
         
         // Draw the wanderer animation
-        _wanderer.Draw(spriteBatch);
+        _wanderer.Draw(gameTime);
         
         // Draw instructions
         if (GameFonts.ButtonFont != null)
