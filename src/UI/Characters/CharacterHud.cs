@@ -1,4 +1,4 @@
-using EchoReborn.Model;
+using EchoReborn.Battle;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,7 +10,7 @@ namespace EchoReborn.UI
     public class CharacterHud
     {
         private readonly Character _character;
-
+        private BattleSystem _battleSystem;
         private readonly Texture2D _pixel;         
         private readonly Texture2D _characterSprite;
         private readonly SpriteFont _font;

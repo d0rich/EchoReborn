@@ -5,33 +5,26 @@ namespace EchoReborn.Battle;
 
 class BattleSystem
 {
-    private Player player;
+    private Character _character;
     private Enemy enemy;
 
     private BattleEtape state = BattleEtape.START;
     private bool battleOver = false;
 
-    private Action pendingPlayerAction;
+    private BattleAction _pendingPlayerBattleAction;
 
-    public BattleSystem(Player p, Enemy e)
+    public BattleSystem(Character p, Enemy e)
     {
-        player = p;
+        _character = p;
         enemy = e;
     }
 
     public void StartBattle()
     {
         
-
-        // Main loop
-        while (!battleOver)
-        {
-            update();
-            
-        }
     }
 
-    public void update()
+    public void Update()
     {
         switch (state)
         {
@@ -40,10 +33,10 @@ class BattleSystem
                 break;
 
             case BattleEtape.PENDING_PLAYER:
-                WaitForPlayerInput();
+                TryExecutePlayerAction();
                 break;
 
-            case BattleEtape.PENDING_ENEMY:
+            case BattleEtape.ENEMY_ACTION_EXECUTION:
                 EnemyTurn();
                 break;
         }
@@ -59,27 +52,24 @@ class BattleSystem
         state = BattleEtape.PENDING_PLAYER;
     }
 
-    private void WaitForPlayerInput()
+    private void TryExecutePlayerAction()
     {
         
-
-        Console.ReadKey(true);// je l'ai mis ici juste pour tester la logique
-
-        pendingPlayerAction = player.ChooseAction();//choisie l'action qu'on veut exécuter 
-        pendingPlayerAction.Execute(enemy);
-
-        if (CheckEnd())
-            return;
-
-        state = BattleEtape.PENDING_ENEMY;
+        if (_pendingPlayerBattleAction != null)
+        {
+            _pendingPlayerBattleAction.Execute(enemy);
+            if (CheckEnd())
+                return;
+            state = BattleEtape.PENDING_ENEMY;
+        }
     }
-
+     // ToDo:déclare la méthode unlockPLayerUi
     private void EnemyTurn()
     {
         
 
-        Action action = enemy.ChooseAction();// ici l'action est aléatoire ,on peut la changer si on veut 
-        action.Execute(player);
+        BattleAction battleAction = enemy.ChooseAction();// ici l'action est aléatoire ,on peut la changer si on veut 
+        battleAction.Execute(_character);
 
         if (CheckEnd())
             return;
@@ -89,13 +79,13 @@ class BattleSystem
 
     private bool CheckEnd()
     {
-        if (!enemy.IsAlive())
+        if (!enemy.IsAlive)
         {
             EndBattle("Victory");
             return true;
         }
 
-        if (!player.IsAlive())
+        if (!_character.IsAlive())
         {
             EndBattle("Defeat");
             return true;

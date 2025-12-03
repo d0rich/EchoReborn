@@ -1,8 +1,9 @@
-﻿﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using EchoReborn.UI.Components;
 using EchoReborn.UI;
-using EchoReborn.Model;       
+using EchoReborn.Battle;
+    
 using EchoReborn.Screens;     
 
 namespace EchoReborn.Screens
@@ -40,20 +41,9 @@ namespace EchoReborn.Screens
 
         private void StartGame()
         {
-            // Crée un personnage 
-            var player = new Character
-            {
-                Level = 1,
-                Experience = 0,
-                ExperienceToNextLevel = 100,
-                CurrentHealth = 100,
-                MaxHealth = 100,
-                CurrentMana = 50,
-                MaxMana = 50
-            };
 
             // Lance l'écran de combat 
-            ScreenManager.SwitchScreen(new BattleScreen(player));
+            ScreenManager.SwitchScreen(new BattleScreen(new Character(1)));
         }
 
         public void Update(GameTime gameTime)

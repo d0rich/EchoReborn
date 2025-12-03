@@ -1,5 +1,6 @@
-using EchoReborn.Model;
+
 using EchoReborn.UI;
+using EchoReborn.Battle;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,13 +10,15 @@ namespace EchoReborn.Screens
 {
     public class BattleScreen : IScreen
     {
-        private readonly Character _player;
+        private Character _player;
         private CharacterHud _hud;
+        private BattleSystem _battleSystem;
 
         private Texture2D _pixel;   
 
         public BattleScreen(Character player)
         {
+            _battleSystem = new BattleSystem(player, new Enemy(1));
             _player = player;
             LoadContent();
         }

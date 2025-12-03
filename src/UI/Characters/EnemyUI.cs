@@ -1,8 +1,8 @@
-using EchoReborn.Models;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using EchoReborn; 
-
+using EchoReborn.Battle;
 namespace EchoReborn.UI.Characters;
 
 public class EnemyUI

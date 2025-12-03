@@ -2,25 +2,23 @@ using System;
 
 namespace EchoReborn.Battle;
 
-class Player
+public class Character : BattleActor
 {
-    public string Name { get; }
-    public int HP { get; private set; }
-
-    public Player(string name, int hp)
+    public int Exp { get; private set; }
+    public int NextLevelExp () =>100;
+    public Character(int level,int exp ): base(level)
     {
-        Name = name;
-        HP = hp;
+        Exp = exp;
     }
 
    
 
-    public Action ChooseAction()
+    public BattleAction ChooseAction()
     {
         // ici on pourra par exemple définir et retourner plusieurs actions(attack,bite,legkick,etc...) ,pas seulemnt un 
         
         
-        return new Action("Attack", 20);
+        return new BattleAction("Attack", 20);
     }
 
     public void TakeDamage(int dmg)
@@ -31,3 +29,4 @@ class Player
 
     public bool IsAlive() => HP > 0;
 }
+// CHANGER POUR TRAVAILLER DANS MONOGAME 

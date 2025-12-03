@@ -8,11 +8,11 @@ namespace EchoReborn
         static void Main(string[] args)
         {
             // Create player and enemy
-            Player player = new Player("Hero", 100);
+            Character character = new Character("Hero", 100);
             Enemy enemy = new Enemy("Goblin", 50);
 
             // Start battle
-            BattleSystem battle = new BattleSystem(player, enemy);
+            BattleSystem battle = new BattleSystem(character, enemy);
             battle.StartBattle();
 
             Console.WriteLine("Press any key to exit...");

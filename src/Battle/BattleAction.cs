@@ -1,19 +1,19 @@
 using System;
-
+// RENOMMER EN BATTLE ACTION
 namespace EchoReborn.Battle;
 
-class Action
+ public class BattleAction
 {
     public string Name { get; }
     public int Damage { get; }
     // on peut définir plusier actions (legkick,bite,headkick,etc...)
-    public Action(string name, int damage)
+    public BattleAction(string name, int damage)
     {
         Name = name;
         Damage = damage;
     }
 
-    public void Execute(Player target)
+    public void Execute(Character target)
     {
         
         target.TakeDamage(Damage);
