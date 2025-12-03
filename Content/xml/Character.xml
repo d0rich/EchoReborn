@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<character xmlns="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn">
+    <level>1</level>
+    <experience>0</experience>
+
+    <currentHealth>100</currentHealth>
+    <maxHealth>100</maxHealth>
+
+    <currentMana>30</currentMana>
+    <maxMana>30</maxMana>
+
+    <skills>
+        <SkillRefs>1</SkillRefs>
+        <SkillRefs>4</SkillRefs>
+    </skills>
+</character>
