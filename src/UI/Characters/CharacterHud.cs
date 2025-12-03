@@ -85,11 +85,11 @@ namespace EchoReborn.UI
 
         private void DrawHpBar(SpriteBatch spriteBatch)
         {
-            float ratio = _character.HealthRatio;
+            float ratio = _character.HP / (float)_character.MaxHP;
 
             DrawBar(spriteBatch, _hpBarRect, ratio, Color.Red);
 
-            string text = $"{_character.CurrentHealth}/{_character.MaxHealth}";
+            string text = $"{_character.HP}/{_character.MaxHP}";
             DrawCenteredText(spriteBatch, text, _hpBarRect);
 
             spriteBatch.DrawString(
@@ -101,11 +101,11 @@ namespace EchoReborn.UI
 
         private void DrawEnergyBar(SpriteBatch spriteBatch)
         {
-            float ratio = _character.ManaRatio;
+            float ratio = _character.Energy / (float)_character.MaxEnergy;
 
             DrawBar(spriteBatch, _energyBarRect, ratio, Color.Gold);
 
-            string text = $"{_character.CurrentMana}/{_character.MaxMana}";
+            string text = $"{_character.Energy}/{_character.MaxEnergy}";
             DrawCenteredText(spriteBatch, text, _energyBarRect);
 
             spriteBatch.DrawString(
@@ -117,11 +117,11 @@ namespace EchoReborn.UI
 
         private void DrawXpBar(SpriteBatch spriteBatch)
         {
-            float ratio = _character.ExperienceRatio;
+            float ratio = _character.Exp / (float)_character.NextLevelExp;
 
             DrawBar(spriteBatch, _xpBarRect, ratio, Color.CornflowerBlue);
 
-            string text = $"{_character.Experience}/{_character.ExperienceToNextLevel}";
+            string text = $"{_character.Exp}/{_character.NextLevelExp}";
             DrawCenteredText(spriteBatch, text, _xpBarRect);
 
             spriteBatch.DrawString(

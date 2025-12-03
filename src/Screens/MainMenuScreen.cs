@@ -43,7 +43,7 @@ namespace EchoReborn.Screens
         {
 
             // Lance l'écran de combat 
-            ScreenManager.SwitchScreen(new BattleScreen(new Character(1)));
+            ScreenManager.SwitchScreen(new BattleScreen(new Character(1, 0)));
         }
 
         public void Update(GameTime gameTime)

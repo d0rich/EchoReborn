@@ -60,7 +60,7 @@ class BattleSystem
             _pendingPlayerBattleAction.Execute(enemy);
             if (CheckEnd())
                 return;
-            state = BattleEtape.PENDING_ENEMY;
+            state = BattleEtape.PLAYER_ACTION_EXECUTION;
         }
     }
      // ToDo:déclare la méthode unlockPLayerUi

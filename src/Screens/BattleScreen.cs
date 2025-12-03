@@ -41,12 +41,7 @@ namespace EchoReborn.Screens
 
         public void Update(GameTime gameTime)
         {
-            // Juste un test 
-            var k = Keyboard.GetState();
-            if (k.IsKeyDown(Keys.H))
-            {
-                _player.CurrentHealth = Math.Max(0, _player.CurrentHealth - 1);
-            }
+            
         }
 
         public void Draw(GameTime gameTime)
