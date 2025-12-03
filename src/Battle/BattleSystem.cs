@@ -9,9 +9,8 @@ class BattleSystem
     private Enemy enemy;
 
     private BattleEtape state = BattleEtape.START;
-    private bool battleOver = false;
 
-    private BattleAction _pendingPlayerBattleAction;
+    private BattleAction _pendingPlayerBattleAction = null;
 
     public BattleSystem(Character p, Enemy e)
     {
@@ -42,6 +41,16 @@ class BattleSystem
         }
     }
 
+    public void AcceptPlayerAction(BattleAction action)
+    {
+        if (state != BattleEtape.PENDING_PLAYER)
+        {
+            return;
+        }
+
+        _pendingPlayerBattleAction = action;
+    }
+
     private void StartPlayerTurn()
     {
         
@@ -63,7 +72,6 @@ class BattleSystem
             state = BattleEtape.PLAYER_ACTION_EXECUTION;
         }
     }
-     // ToDo:déclare la méthode unlockPLayerUi
     private void EnemyTurn()
     {
         
@@ -81,22 +89,16 @@ class BattleSystem
     {
         if (!enemy.IsAlive)
         {
-            EndBattle("Victory");
+            state = BattleEtape.VICTORY;
             return true;
         }
 
-        if (!_character.IsAlive())
+        if (!_character.IsAlive)
         {
-            EndBattle("Defeat");
+            state = BattleEtape.DEFEAT;
             return true;
         }
 
         return false;
-    }
-
-    private void EndBattle(string result)
-    {
-        battleOver = true;
-        Console.WriteLine($"\n=== {result}! ===");
     }
 }

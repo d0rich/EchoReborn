@@ -29,11 +29,6 @@ public BattleAction ChooseAction()
             return new BattleAction("punch", 50);
         default:
             return new BattleAction("kick", 20); // normalement ça ne doit jamais passer ça 
-            break;
-
-
-
-
     }
 }
 

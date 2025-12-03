@@ -10,23 +10,5 @@ public class Character : BattleActor
     {
         Exp = exp;
     }
-
-   
-
-    public BattleAction ChooseAction()
-    {
-        // ici on pourra par exemple définir et retourner plusieurs actions(attack,bite,legkick,etc...) ,pas seulemnt un 
-        
-        
-        return new BattleAction("Attack", 20);
-    }
-
-    public void TakeDamage(int dmg)
-    {
-        HP -= dmg;
-        
-    }
-
-    public bool IsAlive() => HP > 0;
 }
 // CHANGER POUR TRAVAILLER DANS MONOGAME 

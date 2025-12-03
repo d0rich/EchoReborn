@@ -29,6 +29,7 @@ namespace EchoReborn.UI
             Vector2 position)
         {
             _character = character;
+            _battleSystem = new BattleSystem(character, new Enemy(1));
             _pixel = pixel;
             _characterSprite = characterSprite;
             _font = font;
