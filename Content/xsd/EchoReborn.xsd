@@ -8,9 +8,15 @@
     <!-- Element racine -->
     <xs:element name="echoReborn" type="er:EchoReborn"/>
     <!-- Element racine pour InitialState -->
-    <xs:element name="InitialState" type="er:InitialState"/>
+    <xs:element name="initialState" type="er:InitialState"/>
     <!-- Element racine pour GameState -->
-    <xs:element name="GameState" type="er:GameState"/>
+    <xs:element name="gameState" type="er:GameState"/>
+    <!-- Element racine pour enemies-->
+    <xs:element name="enemies" type="er:Enemies"/>
+    <!-- Element racine pour Character -->
+    <xs:element name="character" type="er:Character"/>
+    <!-- Element racine pour Character -->
+    <xs:element name="skills" type="er:Skills"/>
     
     <!-- 2 elements : initialState, gameState -->
     <xs:complexType name="EchoReborn">
@@ -45,7 +51,7 @@
             <xs:element name="isStartLocation" type="xs:boolean"/>
             <xs:element name="isFinalLocation" type="xs:boolean"/>
             <xs:element name="connectedLocationId" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="enemyEncounterId" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="enemyEncounterId" type="er:EnemyRefs"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:int" use="required"/>
     </xs:complexType>
@@ -65,43 +71,37 @@
             <xs:element name="maxHP" type="xs:int"/>
             <xs:element name="animationClass" type="xs:string"/>
             <xs:element name="rewardXP" type="xs:int"/>
-            <xs:element name="skillsId" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="skills" type="er:SkillRefs"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:int" use="required"/>
     </xs:complexType>
     
+    <!-- Collection des refEnemys -->
+    <xs:complexType name="EnemyRefs">
+        <xs:sequence>
+            <xs:element name="enemyRefs" type="xs:int" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
     <!-- Collection des Skills -->
     <xs:complexType name="Skills">
         <xs:sequence>
-            <xs:element name="skillsList" type="er:Skill" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="skill" type="er:Skill" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- Collection des Skills -->
+    <xs:complexType name="SkillRefs">
+        <xs:sequence>
+            <xs:element name="SkillRefs" type="xs:int" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     
-    <!-- +Id: Int
-
-+Type: SkillType
-
-+Name: String
-
-+Description: String
-
-+TargetType: TargetType
-
-+ManaCost: Int
-
-+HealthCost: Int
-
-+Damage: Int
-
-+Heal: Int
-
-+AnimationClass: String
-
-+SkillClass: String -->
+    <!-- Id , Type Name , Description , TargetType , ManaCost , HealthCost , Damage ,Heal , AnimationClass , SkillClass -->
     <xs:complexType name="Skill">
         <xs:sequence>
+            <xs:element name="type" type="er:SkillType"/>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="description" type="xs:string"/>
+            <xs:element name="TargetType" type="er:TargetType"/>
             <xs:element name="ManaCost" type="xs:int"/>
             <xs:element name="HealthCost" type="xs:int"/>
             <xs:element name="Damage" type="xs:int"/>
@@ -114,7 +114,7 @@
     </xs:complexType>
     
     <!--  Type énuméré pour le targetType  -->
-    <xs:simpleType name="TargetTypa">
+    <xs:simpleType name="TargetType">
         <xs:restriction base="xs:string">
             <!--      ALLIER     -->
             <xs:enumeration value="ALLIER"/>
@@ -122,6 +122,15 @@
             <xs:enumeration value="ENEMIES"/>
             <!--      ALL      -->
             <xs:enumeration value="ALL"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!--  Type énuméré pour le SkillType  -->
+    <xs:simpleType name="SkillType">
+        <xs:restriction base="xs:string">
+            <!--      BASIC    -->
+            <xs:enumeration value="BASIC"/>
+            <!--      COMPLEX      -->
+            <xs:enumeration value="COMPLEX "/>
         </xs:restriction>
     </xs:simpleType>
     
@@ -134,7 +143,7 @@
             <xs:element name="maxHealth" type="xs:int"/>
             <xs:element name="currentMana" type="xs:int"/>
             <xs:element name="maxMana" type="xs:int"/>
-            <xs:element name="skillsId" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="skills" type="er:SkillRefs"/>
         </xs:sequence>
     </xs:complexType>
     

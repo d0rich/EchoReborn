@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skills xmlns="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn">
+    
+    <skill id="1">
+        <type>BASIC</type>
+        <name>Basic Attack</name>
+        <description>Une attaque simple.</description>
+        <TargetType>ENEMIES</TargetType>
+        <ManaCost>0</ManaCost>
+        <HealthCost>0</HealthCost>
+        <Damage>10</Damage>
+        <Heal>0</Heal>
+        <AnimationClass>anim.BasicAttack</AnimationClass>
+        <SkillClass>skills.BasicAttack</SkillClass>
+    </skill>
+    
+    <skill id="2">
+        <type>BASIC</type>
+        <name>Small Heal</name>
+        <description>Soigne un allié.</description>
+        <TargetType>ALLIES</TargetType>
+        <ManaCost>5</ManaCost>
+        <HealthCost>0</HealthCost>
+        <Damage>0</Damage>
+        <Heal>15</Heal>
+        <AnimationClass>anim.SmallHeal</AnimationClass>
+        <SkillClass>skills.SmallHeal</SkillClass>
+    </skill>
+    
+    <skill id="2">
+        <type>BASIC</type>
+        <name>Attaque puissante</name>
+        <description>Soigne un allié.</description>
+        <TargetType>ENEMIES</TargetType>
+        <ManaCost>5</ManaCost>
+        <HealthCost>10</HealthCost>
+        <Damage>40</Damage>
+        <Heal>0</Heal>
+        <AnimationClass>anim.AttaquePuissante</AnimationClass>
+        <SkillClass>skills.AttaquePuissante</SkillClass>
+    </skill>
+    
+</skills>
