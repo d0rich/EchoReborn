@@ -18,6 +18,7 @@ namespace EchoReborn.UI
         private readonly HpBar _hpBar;
         private readonly EnergyBar _energyBar;
         private readonly XpBar _xpBar;
+        private readonly Rectangle _frameRect = new Rectangle(0, 530, 1280, 300);
 
         public CharacterHud(Character character)
         {
@@ -37,6 +38,11 @@ namespace EchoReborn.UI
         public void Draw()
         {
             SpriteBatch spriteBatch = DrawingContext.SpriteBatch;
+
+            spriteBatch.Draw(
+                DrawingContext.CreateTexture(Color.LightGray * 0.5f),
+                _frameRect,
+                Color.Wheat);
 
 
             //  Niveau 
