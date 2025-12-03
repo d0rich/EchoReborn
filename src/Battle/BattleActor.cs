@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace EchoReborn.Battle;
 
 public abstract  class BattleActor
@@ -24,14 +26,17 @@ public abstract  class BattleActor
 
     public bool IsDead => HP <= 0;
     public bool IsAlive => HP > 0;
-    public BattleActor( int level)
+
+    private List<BattleAction> _skills;
+
+    public List<BattleAction> Skills => new List<BattleAction>(_skills);
+
+    public BattleActor(int level, List<BattleAction> skills)
     {
         Level = level;
         HP = MaxHP;
         Energy = MaxEnergy;
-        
-
-
+        _skills = skills;
     }
 
     public void SpendEnergy(int amount)

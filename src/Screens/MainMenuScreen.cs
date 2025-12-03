@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using EchoReborn.UI.Components;
 using EchoReborn.UI;
-using EchoReborn.Battle;
     
 using EchoReborn.Screens;     
 
@@ -43,7 +42,7 @@ namespace EchoReborn.Screens
         {
 
             // Lance l'écran de combat 
-            ScreenManager.SwitchScreen(new BattleScreen(new Character(1, 0)));
+            ScreenManager.SwitchScreen(new BattleScreen());
         }
 
         public void Update(GameTime gameTime)

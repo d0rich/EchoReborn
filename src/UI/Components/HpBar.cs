@@ -5,16 +5,16 @@ namespace EchoReborn.UI.Components;
 
 public class HpBar : RessourceBar
 {
-    private Character _character;
-    public HpBar(Vector2 position, Character character)
+    private BattleActor _actor;
+    public HpBar(Vector2 position, BattleActor actor)
         : base(position)
     {
-        _character = character;
+        _actor = actor;
     }
 
-    protected override int CurrentValue => _character.HP;
+    protected override int CurrentValue => _actor.HP;
 
-    protected override int MaxValue => _character.MaxHP;
+    protected override int MaxValue => _actor.MaxHP;
 
     protected override string Label => "HP";
 

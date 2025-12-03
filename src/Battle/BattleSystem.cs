@@ -3,8 +3,9 @@ using EchoReborn;
 
 namespace EchoReborn.Battle;
 
-class BattleSystem
+public class BattleSystem
 {
+    public BattleEtape State => state;
     private Character _character;
     private Enemy enemy;
 
@@ -66,7 +67,10 @@ class BattleSystem
         
         if (_pendingPlayerBattleAction != null)
         {
-            _pendingPlayerBattleAction.Execute(enemy);
+            if (_pendingPlayerBattleAction.Target == BattleAction.TargetType.Enemy)
+                _pendingPlayerBattleAction.Execute(_character, enemy);
+            else
+                _pendingPlayerBattleAction.Execute(_character, _character);
             if (CheckEnd())
                 return;
             state = BattleEtape.PLAYER_ACTION_EXECUTION;
@@ -77,7 +81,10 @@ class BattleSystem
         
 
         BattleAction battleAction = enemy.ChooseAction();// ici l'action est aléatoire ,on peut la changer si on veut 
-        battleAction.Execute(_character);
+        if (battleAction.Target == BattleAction.TargetType.Enemy)
+            battleAction.Execute(enemy, _character);
+        else
+            battleAction.Execute(enemy, enemy);
 
         if (CheckEnd())
             return;

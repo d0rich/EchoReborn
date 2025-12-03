@@ -5,16 +5,16 @@ namespace EchoReborn.UI.Components;
 
 public class EnergyBar : RessourceBar
 {
-    private Character _character;
-    public EnergyBar(Vector2 position, Character character)
+    private BattleActor _actor;
+    public EnergyBar(Vector2 position, BattleActor actor)
         : base(position)
     {
-        _character = character;
+        _actor = actor;
     }
 
-    protected override int CurrentValue => _character.Energy;
+    protected override int CurrentValue => _actor.Energy;
 
-    protected override int MaxValue => _character.MaxEnergy;
+    protected override int MaxValue => _actor.MaxEnergy;
 
     protected override string Label => "Energy";
 
