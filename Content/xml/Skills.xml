@@ -18,7 +18,7 @@
         <type>BASIC</type>
         <name>Small Heal</name>
         <description>Soigne un allié.</description>
-        <TargetType>ALLIES</TargetType>
+        <TargetType>ALLIER</TargetType>
         <ManaCost>5</ManaCost>
         <HealthCost>0</HealthCost>
         <Damage>0</Damage>
