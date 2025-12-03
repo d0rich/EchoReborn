@@ -14,7 +14,6 @@ namespace EchoReborn.Screens
         private CharacterHud _hud;
         private BattleSystem _battleSystem;
 
-        private Texture2D _pixel;   
 
         public BattleScreen(Character player)
         {
@@ -25,18 +24,9 @@ namespace EchoReborn.Screens
 
         private void LoadContent()
         {
-            // On crée une simple texture 1x1 blanche
-            _pixel = new Texture2D(DrawingContext.GraphicsDevice, 1, 1);
-            _pixel.SetData(new[] { Color.White });
 
             
-            _hud = new CharacterHud(
-                _player,
-                _pixel,             
-                _pixel,              
-                GameFonts.ButtonFont,
-                new Vector2(100, 100)
-            );
+            _hud = new CharacterHud( _player );
         }
 
         public void Update(GameTime gameTime)
@@ -51,14 +41,14 @@ namespace EchoReborn.Screens
             SpriteBatch sb = DrawingContext.SpriteBatch;
             sb.Begin();
 
-            _hud.Draw(sb);
+            _hud.Draw();
 
             sb.End();
         }
 
         public void Destroy()
         {
-            _pixel?.Dispose();
+            
         }
     }
 }
