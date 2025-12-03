@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InitialState xmlns="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn">
+
+   
+    <locations>
+        <location id="1">
+            <name>Village</name>
+            <difficulty>1</difficulty>
+            <isStartLocation>true</isStartLocation>
+            <isFinalLocation>false</isFinalLocation>
+
+          
+            <connectedLocationId>2,3,4</connectedLocationId>
+
+           
+            <enemyEncounterId>1</enemyEncounterId>
+        </location>
+
+        <location id="2">
+            <name>Forest</name>
+            <difficulty>2</difficulty>
+            <isStartLocation>false</isStartLocation>
+            <isFinalLocation>false</isFinalLocation>
+
+            <connectedLocationId>1</connectedLocationId>
+            <connectedLocationId>3</connectedLocationId>
+
+            <enemyEncounterId>2</enemyEncounterId>
+        </location>
+
+        <location id="3">
+            <name>Ancient Ruins</name>
+            <difficulty>4</difficulty>
+            <isStartLocation>false</isStartLocation>
+            <isFinalLocation>true</isFinalLocation>
+
+            <connectedLocationId>2</connectedLocationId>
+            <enemyEncounterId>3</enemyEncounterId>
+        </location>
+    </locations>
+
+  
+    <enemies>
+        <enemy id="1">
+            <name>Slime</name>
+            <difficulty>1</difficulty>
+            <maxHP>15</maxHP>
+            <animationClass>SlimeAnim</animationClass>
+            <rewardXP>3</rewardXP>
+
+            <!-- Skill references -->
+            <skillsId>1</skillsId>
+        </enemy>
+
+        <enemy id="2">
+            <name>Wolf</name>
+            <difficulty>2</difficulty>
+            <maxHP>40</maxHP>
+            <animationClass>WolfAnim</animationClass>
+            <rewardXP>8</rewardXP>
+
+            <skillsId>1</skillsId>
+            <skillsId>2</skillsId>
+        </enemy>
+
+        <enemy id="3">
+            <name>Skeleton Knight</name>
+            <difficulty>4</difficulty>
+            <maxHP>90</maxHP>
+            <animationClass>SkeletonAnim</animationClass>
+            <rewardXP>20</rewardXP>
+
+            <skillsId>3</skillsId>
+        </enemy>
+    </enemies>
+
+    
+    <character>
+        <level>1</level>
+        <experience>0</experience>
+        <currentHealth>30</currentHealth>
+        <maxHealth>30</maxHealth>
+        <currentMana>10</currentMana>
+        <maxMana>10</maxMana>
+
+        <skillsId>1</skillsId>
+    </character>
+
+    
+    <skills>
+        <skillsList id="1">
+            <name>Strike</name>
+            <description>Basic physical hit</description>
+            <ManaCost>0</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>5</Damage>
+            <Heal>0</Heal>
+            <AnimationClass>StrikeAnim</AnimationClass>
+            <SkillClass>BasicSkill</SkillClass>
+        </skillsList>
+
+        <skillsList id="2">
+            <name>Bite</name>
+            <description>Wolf bite attack</description>
+            <ManaCost>0</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>7</Damage>
+            <Heal>0</Heal>
+            <AnimationClass>BiteAnim</AnimationClass>
+            <SkillClass>BasicSkill</SkillClass>
+        </skillsList>
+
+        <skillsList id="3">
+            <name>Dark Slash</name>
+            <description>A cursed attack from the undead knight</description>
+            <ManaCost>5</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>15</Damage>
+            <Heal>0</Heal>
+            <AnimationClass>DarkSlashAnim</AnimationClass>
+            <SkillClass>ComplexSkill</SkillClass>
+        </skillsList>
+    </skills>
+
+</InitialState>
