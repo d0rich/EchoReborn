@@ -9,7 +9,7 @@ public class BattleSystem
     private Character _character;
     private Enemy enemy;
 
-    private BattleEtape state = BattleEtape.START;
+    private BattleEtape state;
 
     private BattleAction _pendingPlayerBattleAction = null;
 
@@ -17,11 +17,12 @@ public class BattleSystem
     {
         _character = p;
         enemy = e;
+        StartBattle();
     }
 
     public void StartBattle()
     {
-        
+        state = BattleEtape.START;
     }
 
     public void Update()
@@ -71,9 +72,10 @@ public class BattleSystem
                 _pendingPlayerBattleAction.Execute(_character, enemy);
             else
                 _pendingPlayerBattleAction.Execute(_character, _character);
+            _pendingPlayerBattleAction = null;
             if (CheckEnd())
                 return;
-            state = BattleEtape.PLAYER_ACTION_EXECUTION;
+            state = BattleEtape.ENEMY_ACTION_EXECUTION;
         }
     }
     private void EnemyTurn()
@@ -89,7 +91,7 @@ public class BattleSystem
         if (CheckEnd())
             return;
 
-        state = BattleEtape.START;
+        state = BattleEtape.PENDING_PLAYER;
     }
 
     private bool CheckEnd()

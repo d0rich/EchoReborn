@@ -22,8 +22,8 @@ public class SkillsList
         _skills = new List<BattleAction>(skills);
         _skillButtons = new List<Button>();
 
-        int ButtonHeight = 28;
-        int ButtonWidth = 200;
+        int ButtonHeight = 30;
+        int ButtonWidth = 250;
 
         // Create buttons for each skill
         for (int i = 0; i < _skills.Count; i++)
@@ -40,6 +40,14 @@ public class SkillsList
                 () => onSkillButtonClicked(skill));
 
             _skillButtons.Add(skillButton);
+        }
+    }
+
+    public void Update()
+    {
+        foreach (var button in _skillButtons)
+        {
+            button.Update();
         }
     }
 

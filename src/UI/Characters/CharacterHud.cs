@@ -42,8 +42,14 @@ public class CharacterHud
             skills: character.Skills,
             onSkillButtonClicked: (skill) =>
             {
-                _battleSystem.AcceptPlayerAction(skill);
+                if (_battleSystem.State == BattleEtape.PENDING_PLAYER)
+                    _battleSystem.AcceptPlayerAction(skill);
             });
+    }
+
+    public void Update()
+    {
+        _skillsList.Update();
     }
 
     public void Draw()
@@ -85,5 +91,30 @@ public class CharacterHud
             //  Compétences
             _skillsList.Draw();
         }
+
+        if (_battleSystem.State == BattleEtape.DEFEAT)
+        {
+            DrawFinalLabel("DEFEAT");
+        }
+        else if (_battleSystem.State == BattleEtape.VICTORY)
+        {
+            DrawFinalLabel("VICTORY");
+        }
+    }
+
+    private void DrawFinalLabel(string label)
+    {
+        var font = GameFonts.TitleFont;
+        SpriteBatch spriteBatch = DrawingContext.SpriteBatch;
+        Vector2 size = font.MeasureString(label);
+        Vector2 position = new Vector2(
+            (1280 - size.X) / 2,
+            (720 - size.Y) / 2);
+
+        spriteBatch.DrawString(
+            font,
+            label,
+            position,
+            Color.Red);
     }
 }

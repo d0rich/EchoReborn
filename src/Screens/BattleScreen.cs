@@ -57,7 +57,8 @@ namespace EchoReborn.Screens
 
         public void Update(GameTime gameTime)
         {
-            
+            _hud.Update();
+            _battleSystem.Update();
         }
 
         public void Draw(GameTime gameTime)
