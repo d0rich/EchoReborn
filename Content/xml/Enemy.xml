@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<enemies xmlns="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn">
+
+    <enemy id="1">
+        <name>Slime Vert</name>
+        <difficulty>1</difficulty>
+        <maxHP>50</maxHP>
+        <animationClass>EchoReborn.Animations.SlimeIdle</animationClass>
+        <rewardXP>10</rewardXP>
+        <skills>
+            <SkillRefs>1</SkillRefs>
+            <SkillRefs>2</SkillRefs>
+        </skills>
+    </enemy>
+
+    <enemy id="2">
+        <name>Gobelin</name>
+        <difficulty>2</difficulty>
+        <maxHP>120</maxHP>
+        <animationClass>EchoReborn.Animations.GoblinIdle</animationClass>
+        <rewardXP>25</rewardXP>
+        <skills>
+            <SkillRefs>3</SkillRefs>
+        </skills>
+    </enemy>
+
+</enemies>
