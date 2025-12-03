@@ -18,7 +18,7 @@ public abstract  class BattleActor
     public int Level { get; }
     public int MaxHP => 100;
     public int HP { get; protected set; }
-    public int Energy { get; }
+    public int Energy { get; protected set; }
     public int MaxEnergy => 100;
     
 
@@ -34,13 +34,30 @@ public abstract  class BattleActor
 
     }
 
+    public void SpendEnergy(int amount)
+    {
+        Energy -= amount;
+        if (Energy < 0) Energy = 0;
+    }
+
+    public void RestoreEnergy(int amount)
+    {
+        Energy += amount;
+        if (Energy > MaxEnergy) Energy = MaxEnergy;
+    }
+
+    public void SpendHealth(int amount)
+    {
+        TakeDamage(amount);
+    }
+
     public void TakeDamage(int damage)
     {
         HP -= damage;
         if (HP < 0) HP = 0;
     }
 
-    public void Heal(int amount)
+    public void GetHeal(int amount)
     {
         HP += amount;
         if (HP > MaxHP) HP = MaxHP;
