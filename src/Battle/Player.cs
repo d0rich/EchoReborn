@@ -13,21 +13,20 @@ class Player
         HP = hp;
     }
 
-    public void Initialize()
-    {
-        Console.WriteLine($"{Name} is ready! ({HP} HP)");
-    }
+   
 
     public Action ChooseAction()
     {
-        Console.WriteLine("Player attacks!");
+        // ici on pourra par exemple définir et retourner plusieurs actions(attack,bite,legkick,etc...) ,pas seulemnt un 
+        
+        
         return new Action("Attack", 20);
     }
 
     public void TakeDamage(int dmg)
     {
         HP -= dmg;
-        Console.WriteLine($"{Name} takes {dmg} damage! ({HP} HP left)");
+        
     }
 
     public bool IsAlive() => HP > 0;

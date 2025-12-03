@@ -6,7 +6,7 @@ class Action
 {
     public string Name { get; }
     public int Damage { get; }
-
+    // on peut définir plusier actions (legkick,bite,headkick,etc...)
     public Action(string name, int damage)
     {
         Name = name;
@@ -15,13 +15,13 @@ class Action
 
     public void Execute(Player target)
     {
-        Console.WriteLine($"Action {Name} hits player!");
+        
         target.TakeDamage(Damage);
     }
 
     public void Execute(Enemy target)
     {
-        Console.WriteLine($"Action {Name} hits enemy!");
+        
         target.TakeDamage(Damage);
     }
 }

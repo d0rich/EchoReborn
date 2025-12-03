@@ -1,12 +1,17 @@
 using System;
+using EchoReborn;
 
 namespace EchoReborn.Battle;
 
 class BattleSystem
 {
-    Player player;
-    Enemy enemy;
-    bool battleOver = false;
+    private Player player;
+    private Enemy enemy;
+
+    private BattleEtape state = BattleEtape.START;
+    private bool battleOver = false;
+
+    private Action pendingPlayerAction;
 
     public BattleSystem(Player p, Enemy e)
     {
@@ -16,45 +21,73 @@ class BattleSystem
 
     public void StartBattle()
     {
-        Console.WriteLine("=== Battle Started ===");
+        
 
-        player.Initialize();
-        enemy.Initialize();
-
+        // Main loop
         while (!battleOver)
         {
-            DetermineTurnOrder();
-
-            PlayerTurn();
-            if (CheckEnd()) break;
-
-            EnemyTurn();
-            if (CheckEnd()) break;
+            update();
+            
         }
     }
 
-    void DetermineTurnOrder()
+    public void update()
     {
-        Console.WriteLine("\n--- New Turn ---");
+        switch (state)
+        {
+            case BattleEtape.START:
+                StartPlayerTurn();
+                break;
+
+            case BattleEtape.PENDING_PLAYER:
+                WaitForPlayerInput();
+                break;
+
+            case BattleEtape.PENDING_ENEMY:
+                EnemyTurn();
+                break;
+        }
     }
 
-    void PlayerTurn()
+    private void StartPlayerTurn()
     {
-        Console.WriteLine("Player's Turn");
+        
 
-        Action action = player.ChooseAction();
-        action.Execute(enemy);
+        // le vraie debut de jeu 
+
+        
+        state = BattleEtape.PENDING_PLAYER;
     }
 
-    void EnemyTurn()
+    private void WaitForPlayerInput()
     {
-        Console.WriteLine("Enemy's Turn");
+        
 
-        Action action = enemy.ChooseAction();
+        Console.ReadKey(true);// je l'ai mis ici juste pour tester la logique
+
+        pendingPlayerAction = player.ChooseAction();//choisie l'action qu'on veut exécuter 
+        pendingPlayerAction.Execute(enemy);
+
+        if (CheckEnd())
+            return;
+
+        state = BattleEtape.PENDING_ENEMY;
+    }
+
+    private void EnemyTurn()
+    {
+        
+
+        Action action = enemy.ChooseAction();// ici l'action est aléatoire ,on peut la changer si on veut 
         action.Execute(player);
+
+        if (CheckEnd())
+            return;
+
+        state = BattleEtape.START;
     }
 
-    bool CheckEnd()
+    private bool CheckEnd()
     {
         if (!enemy.IsAlive())
         {
@@ -71,7 +104,7 @@ class BattleSystem
         return false;
     }
 
-    void EndBattle(string result)
+    private void EndBattle(string result)
     {
         battleOver = true;
         Console.WriteLine($"\n=== {result}! ===");
