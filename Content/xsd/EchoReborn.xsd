@@ -77,11 +77,38 @@
         </xs:sequence>
     </xs:complexType>
     
-    <!-- 3 elements : id, name, description -->
+    <!-- +Id: Int
+
++Type: SkillType
+
++Name: String
+
++Description: String
+
++TargetType: TargetType
+
++ManaCost: Int
+
++HealthCost: Int
+
++Damage: Int
+
++Heal: Int
+
++AnimationClass: String
+
++SkillClass: String -->
     <xs:complexType name="Skill">
         <xs:sequence>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="description" type="xs:string"/>
+            <xs:element name="ManaCost" type="xs:int"/>
+            <xs:element name="HealthCost" type="xs:int"/>
+            <xs:element name="Damage" type="xs:int"/>
+            <xs:element name="Heal" type="xs:int"/>
+            <xs:element name="AnimationClass" type="xs:string"/>
+            <xs:element name="SkillClass" type="xs:string"/>
+
         </xs:sequence>
         <xs:attribute name="id" type="xs:int" use="required"/>
     </xs:complexType>

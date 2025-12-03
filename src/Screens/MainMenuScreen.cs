@@ -39,22 +39,31 @@ namespace EchoReborn.Screens
         }
 
         private void StartGame()
-        {
-            // Crée un personnage 
-            var player = new Character
-            {
-                Level = 1,
-                Experience = 0,
-                ExperienceToNextLevel = 100,
-                CurrentHealth = 100,
-                MaxHealth = 100,
-                CurrentMana = 50,
-                MaxMana = 50
-            };
+{
+    var player = new Character
+    {
+        Level = 1,
+        Experience = 0,
+        ExperienceToNextLevel = 100,
+        CurrentHealth = 100,
+        MaxHealth = 100,
+        CurrentMana = 50,
+        MaxMana = 50
+    };
 
-            // Lance l'écran de combat 
-            ScreenManager.SwitchScreen(new BattleScreen(player));
-        }
+    // ⇩⇩⇩ AJOUT : ennemi de base pour le test
+    var enemy = new Enemy
+    {
+        Name = "Enemy",
+        Difficulty = 1,
+        MaxHP = 100,
+        CurrentHP = 100   // propriété non-XSD, utile pour le combat
+    };
+
+    // et maintenant on passe player + enemy
+    ScreenManager.SwitchScreen(new BattleScreen(player, enemy));
+}
+
 
         public void Update(GameTime gameTime)
         {

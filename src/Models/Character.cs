@@ -4,10 +4,6 @@ using System.Xml.Serialization;
 
 namespace EchoReborn.Model
 {
-    /// <summary>
-    /// Représente le personnage tel que défini dans le XSD.
-    /// Utilisé dans InitialState / GameState.
-    /// </summary>
     [Serializable]
     [XmlType("Character", Namespace = "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
     public class Character
@@ -47,8 +43,7 @@ namespace EchoReborn.Model
 
         /// <summary>
         /// XP nécessaire pour passer au niveau suivant.
-        /// Tu peux la calculer à partir du niveau si tu veux
-        /// ou la mettre à jour en chargeant le GameState.
+        /// Tu peux la calculer à partir du niveau 
         /// </summary>
         [XmlIgnore]
         public int ExperienceToNextLevel { get; set; }

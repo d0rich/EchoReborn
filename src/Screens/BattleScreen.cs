@@ -9,52 +9,48 @@ namespace EchoReborn.Screens
 {
     public class BattleScreen : IScreen
     {
-        private readonly Character _player;
-        private CharacterHud _hud;
+        private Character _player;
+        private Enemy _enemy;
 
-        private Texture2D _pixel;   
+        private CharacterHud _playerHud;
+        private EnemyHud _enemyHud;
 
-        public BattleScreen(Character player)
+        private Texture2D _pixel;
+        private Texture2D _playerSprite;
+        private Texture2D _enemySprite;
+
+        public BattleScreen(Character player, Enemy enemy)
         {
             _player = player;
+            _enemy = enemy;
             LoadContent();
         }
 
         private void LoadContent()
         {
-            // On crée une simple texture 1x1 blanche
             _pixel = new Texture2D(DrawingContext.GraphicsDevice, 1, 1);
             _pixel.SetData(new[] { Color.White });
 
-            
-            _hud = new CharacterHud(
-                _player,
-                _pixel,             
-                _pixel,              
-                GameFonts.ButtonFont,
-                new Vector2(100, 100)
-            );
+            _playerSprite = _pixel; // placeholder
+            _enemySprite = _pixel;  // placeholder
+
+            _playerHud = new CharacterHud(_player, _pixel, _playerSprite, GameFonts.ButtonFont, new Vector2(80, 350));
+            _enemyHud = new EnemyHud(_enemy, _pixel, _enemySprite, GameFonts.ButtonFont, new Vector2(1000, 200));
         }
 
         public void Update(GameTime gameTime)
         {
-            // Juste un test 
-            var k = Keyboard.GetState();
-            if (k.IsKeyDown(Keys.H))
-            {
-                _player.CurrentHealth = Math.Max(0, _player.CurrentHealth - 1);
-            }
+            // ici tu peux faire bouger les HP pour tester
         }
 
         public void Draw(GameTime gameTime)
         {
             DrawingContext.GraphicsDevice.Clear(Color.Cornsilk);
+            var sb = DrawingContext.SpriteBatch;
 
-            SpriteBatch sb = DrawingContext.SpriteBatch;
             sb.Begin();
-
-            _hud.Draw(sb);
-
+            _playerHud.Draw(sb);
+            _enemyHud.Draw(sb);
             sb.End();
         }
 
