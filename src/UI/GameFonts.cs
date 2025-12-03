@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace EchoReborn.UI.bla;
+namespace EchoReborn.UI;
 
 public static class GameFonts
 {
