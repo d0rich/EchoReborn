@@ -23,7 +23,7 @@ public class LevelDiamond
     {
         SpriteBatch spriteBatch = DrawingContext.SpriteBatch;
         // On dessine un carré
-        Vector2 center = _position + new Vector2(60, 20);
+        Vector2 center = _position;
         int size = 32;
 
         Rectangle dest = new Rectangle(
@@ -39,7 +39,7 @@ public class LevelDiamond
             sourceRectangle: null,
             color: Color.White,
             rotation: MathHelper.ToRadians(45),
-            origin: new Vector2(0, 0),
+            origin: new Vector2(size/2, size/2),
             effects: SpriteEffects.None,
             layerDepth: 0f);
 

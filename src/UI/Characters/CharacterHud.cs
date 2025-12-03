@@ -27,10 +27,11 @@ namespace EchoReborn.UI
             // Layout
             int barSpacing = 8;
 
-            _levelDiamond = new LevelDiamond(new Vector2(60, 20), character.Level);
-            _hpBar = new HpBar(new Vector2(140, 60), character);
-            _energyBar = new EnergyBar(new Vector2(140, 60 + RessourceBar.Size.Y + barSpacing), character);
-            _xpBar = new XpBar(new Vector2(140, 60 + 2 * (RessourceBar.Size.Y + barSpacing)), character);
+            _levelDiamond = new LevelDiamond(new Vector2(60, 580), character.Level);
+            Vector2 barsPsn = new Vector2(160, 580);
+            _hpBar = new HpBar(barsPsn, character);
+            _energyBar = new EnergyBar(barsPsn + new Vector2(0, RessourceBar.Size.Y + barSpacing), character);
+            _xpBar = new XpBar(barsPsn + new Vector2(0, 2 * (RessourceBar.Size.Y + barSpacing)), character);
         }
 
         public void Draw()
@@ -50,7 +51,7 @@ namespace EchoReborn.UI
             spriteBatch.DrawString(
                 GameFonts.ButtonFont,
                 "Character",
-                new Vector2(20, 120),
+                new Vector2(20, 680),
                 Color.Black);
         }
     }
