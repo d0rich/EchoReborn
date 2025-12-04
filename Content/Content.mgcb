@@ -91,3 +91,64 @@
 /build:Characters/WandererMagician/Dead.png
 #============================================================================#
 
+#============================================================================#
+#                         Plant Enemy Sprites                                #
+#============================================================================#
+
+#begin Enemies/Plant/Idle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Idle.png
+
+#begin Enemies/Plant/Walk.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Walk.png
+
+#begin Enemies/Plant/Attack_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Attack_1.png
+
+#begin Enemies/Plant/Attack_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Attack_2.png
+
+#begin Enemies/Plant/Attack_3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Attack_3.png
+
+#begin Enemies/Plant/Attack_Disquise.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Attack_Disquise.png
+
+#begin Enemies/Plant/Disguise.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Disguise.png
+
+#begin Enemies/Plant/Poison.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Poison.png
+
+#begin Enemies/Plant/Cloud_posion.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Cloud_posion.png
+
+#begin Enemies/Plant/Hurt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Hurt.png
+
+#begin Enemies/Plant/Dead.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/Plant/Dead.png
+#============================================================================#
+
+

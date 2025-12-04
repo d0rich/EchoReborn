@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using EchoReborn.Data;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace EchoReborn.Battle;
 
@@ -31,13 +34,21 @@ public abstract  class BattleActor
 
     public List<BattleAction> Skills => new List<BattleAction>(_skills);
 
-    public BattleActor(int level, List<BattleAction> skills)
+    protected BattleActor(int level, List<BattleAction> skills)
     {
         Level = level;
         HP = MaxHP;
         Energy = MaxEnergy;
         _skills = skills;
     }
+
+    protected BattleActor(int level, Collection<int> skillRefs) : this(
+        level, 
+        DataManager
+            .LoadSkillsByIds(skillRefs)
+            .Select(s => new BattleAction(s))
+            .ToList()
+        ) { }
 
     public void SpendEnergy(int amount)
     {

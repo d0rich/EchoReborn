@@ -1,6 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using EchoReborn.Battle;
 
 namespace EchoReborn.UI.Characters;
 
@@ -18,7 +17,7 @@ public enum WandererAnimationState
     Dead
 }
 
-public class WandererMagicianAnimation: CharacterAnimationBase<WandererAnimationState>
+public class WandererMagicianAnimation: CharacterAnimationBase<WandererAnimationState>, IBattleActorAnimations
 {
     private static readonly Dictionary<WandererAnimationState, int> FrameCount = new()
     {
@@ -54,7 +53,42 @@ public class WandererMagicianAnimation: CharacterAnimationBase<WandererAnimation
             WandererAnimationState.Idle, 
             FrameCount, 
             AnimationFileNames
-            )
-    {}
+    ) {}
+
+    public void FaceRight()
+  {
+    FacingDirection = Direction.Right;
+  }
+
+  public void FaceLeft()
+  {
+    FacingDirection = Direction.Left;
+  }
+
+  public void PlayIdle()
+  {
+    PlayLoop(WandererAnimationState.Idle);
+  }
+
+  public void PlayRun()
+  {
+    PlayLoop(WandererAnimationState.Run);
+  }
+
+  public void PlayAttack()
+  {
+    PlayOnce(WandererAnimationState.Attack1);
+  }
+
+  public void PlayHurt()
+  {
+    PlayOnce(WandererAnimationState.Hurt);
+  }
+
+  public void PlayDeath()
+  {
+    PlayAndFreeze(WandererAnimationState.Dead);
+  }
+
 }
 

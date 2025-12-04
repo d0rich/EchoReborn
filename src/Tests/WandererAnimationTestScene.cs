@@ -63,15 +63,6 @@ public class WandererAnimationTestScene : IScreen
             _wanderer.SwitchAnimation(_animationStates[_currentAnimationIndex]);
         }
         
-        // Press Space to toggle play/stop
-        if (keyboardState.IsKeyDown(Keys.Space) && _previousKeyboardState.IsKeyUp(Keys.Space))
-        {
-            if (_wanderer.IsPlaying)
-                _wanderer.Stop();
-            else
-                _wanderer.Reset();
-        }
-        
         _previousKeyboardState = keyboardState;
     }
     

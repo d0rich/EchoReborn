@@ -1,4 +1,5 @@
 using System;
+
 using System.Xml.Serialization;
 
 namespace EchoReborn.Data.Models;
@@ -38,5 +39,7 @@ public class Character
         CurrentMana = 0;
         MaxMana = 0;
         Skills = new SkillRefs();
+
+
     }
 }

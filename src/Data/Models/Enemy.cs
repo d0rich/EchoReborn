@@ -1,3 +1,4 @@
+
 using System;
 using System.Xml.Serialization;
 
@@ -35,5 +36,6 @@ namespace EchoReborn.Data.Models
         {
             Skills = new SkillRefs();
         }
+
     }
 }
