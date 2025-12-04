@@ -66,6 +66,12 @@ classDiagram
         +EnemyEncounter: EnemyRefs
         +IsStartLocation: Boolean
         +IsFinalLocation: Boolean
+        +fragment: Fragment
+    }
+    class Fragment {
+        +Id: Int
+        +Name: String
+        +Image: String
     }
 
     class Enemies {
@@ -127,6 +133,7 @@ classDiagram
     Skills *-- Skill
     Character *-- SkillRefs : starts with
     Location *-- EnemyRefs : encounters
+    Location *-- "1" Fragment : fragment
 
   
 ```
