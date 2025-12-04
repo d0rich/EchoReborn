@@ -26,14 +26,16 @@ public class CharacterHud
         if (character.Animations == null)
         {
             character.Animations = new UI.Characters.WandererMagicianAnimation();
-            character.Animations.Position = new Vector2(200, 400);
+            character.Animations.Position = new Vector2(200, 200);
+            character.Animations.Scale = 3;
         }
 
         if (enemy.Animations == null)
         {
             enemy.Animations = new UI.Characters.PlantAnimation();
             enemy.Animations.FaceLeft();
-            enemy.Animations.Position = new Vector2(900, 400);
+            enemy.Animations.Position = new Vector2(900, 200);
+            enemy.Animations.Scale = 3;
         }
 
         _character = character;
@@ -106,9 +108,9 @@ public class CharacterHud
         }
 
         _character.Animations?.Draw(gameTime);
-        _character.Animations?.DrawCopy(new Vector2(100, 680));
+        // _character.Animations?.DrawCopy(new Vector2(100, 680));
         _enemy.Animations?.Draw(gameTime);
-        _enemy.Animations?.DrawCopy(new Vector2(1000, 680));
+        // _enemy.Animations?.DrawCopy(new Vector2(1000, 680));
 
         if (_battleSystem.State == BattleEtape.DEFEAT)
         {
