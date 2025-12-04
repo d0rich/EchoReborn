@@ -52,6 +52,16 @@
             <xs:element name="isFinalLocation" type="xs:boolean"/>
             <xs:element name="connectedLocationId" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="enemyEncounterId" type="er:EnemyRefs"/>
+            <xs:element name="fragment" type="er:Fragment"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:int" use="required"/>
+    </xs:complexType>
+    
+    <!-- Fragment -->
+    <xs:complexType name="Fragment">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="image" type="xs:string"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:int" use="required"/>
     </xs:complexType>
@@ -158,7 +168,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <!-- 1 element : latestClearedLocationId -->
+    
     <xs:complexType name="World">
         <xs:sequence>
             <xs:element name="latestClearedLocationId" type="xs:int"/>

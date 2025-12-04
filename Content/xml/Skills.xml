@@ -27,7 +27,7 @@
         <SkillClass>skills.SmallHeal</SkillClass>
     </skill>
     
-    <skill id="2">
+    <skill id="3">
         <type>BASIC</type>
         <name>Attaque puissante</name>
         <description>Soigne un allié.</description>
