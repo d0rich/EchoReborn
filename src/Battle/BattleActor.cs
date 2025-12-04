@@ -25,6 +25,8 @@ public abstract  class BattleActor
     public int HP { get; protected set; }
     public int Energy { get; protected set; }
     public int MaxEnergy => 100;
+
+    public IBattleActorAnimations Animations { get; set; }
     
 
     public bool IsDead => HP <= 0;

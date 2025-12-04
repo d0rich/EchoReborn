@@ -44,6 +44,7 @@ public class BattleAction
 
     public void Execute(BattleActor caster, BattleActor target)
     {
+        caster.Animations?.PlayAttack();
         if (EnergyCost > 0) {
             caster.SpendEnergy(EnergyCost);
         }
@@ -52,6 +53,7 @@ public class BattleAction
         }
         if (Damage > 0) {
             target.TakeDamage(Damage);
+            target.Animations?.PlayHurt();
         }
         if (HealAmount > 0) {
             target.GetHeal(HealAmount);

@@ -1,10 +1,11 @@
 using System;
-using EchoReborn;
+using Microsoft.Xna.Framework;
 
 namespace EchoReborn.Battle;
 
 public class BattleSystem
 {
+    public static readonly TimeSpan TURN_DELAY = TimeSpan.FromSeconds(2);
     public BattleEtape State => state;
     private Character _character;
     private Enemy enemy;
@@ -12,6 +13,7 @@ public class BattleSystem
     private BattleEtape state;
 
     private BattleAction _pendingPlayerBattleAction = null;
+    private TimeSpan _turnTimer = TimeSpan.Zero;
 
     public BattleSystem(Character p, Enemy e)
     {
@@ -25,8 +27,25 @@ public class BattleSystem
         state = BattleEtape.START;
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
+        _turnTimer += gameTime.ElapsedGameTime;
+        if (_turnTimer > TURN_DELAY)
+        {
+            switch (state)
+            {
+                case BattleEtape.ENEMY_ACTION_EXECUTION:
+                    if (CheckEnd())
+                        return;
+                    state = BattleEtape.PENDING_PLAYER;
+                    break;
+                case BattleEtape.PLAYER_ACTION_EXECUTION:
+                    if (CheckEnd())
+                        return;
+                    state = BattleEtape.PENDING_ENEMY;
+                    break;
+            }
+        }
         switch (state)
         {
             case BattleEtape.START:
@@ -37,7 +56,7 @@ public class BattleSystem
                 TryExecutePlayerAction();
                 break;
 
-            case BattleEtape.ENEMY_ACTION_EXECUTION:
+            case BattleEtape.PENDING_ENEMY:
                 EnemyTurn();
                 break;
         }
@@ -55,55 +74,45 @@ public class BattleSystem
 
     private void StartPlayerTurn()
     {
-        
-
-        // le vraie debut de jeu 
-
-        
         state = BattleEtape.PENDING_PLAYER;
     }
 
     private void TryExecutePlayerAction()
     {
-        
-        if (_pendingPlayerBattleAction != null)
-        {
-            if (_pendingPlayerBattleAction.Target == BattleAction.TargetType.Enemy)
-                _pendingPlayerBattleAction.Execute(_character, enemy);
-            else
-                _pendingPlayerBattleAction.Execute(_character, _character);
-            _pendingPlayerBattleAction = null;
-            if (CheckEnd())
-                return;
-            state = BattleEtape.ENEMY_ACTION_EXECUTION;
-        }
+        if (_pendingPlayerBattleAction == null) return;
+
+        if (_pendingPlayerBattleAction.Target == BattleAction.TargetType.Enemy)
+            _pendingPlayerBattleAction.Execute(_character, enemy);
+        else
+            _pendingPlayerBattleAction.Execute(_character, _character);
+        _pendingPlayerBattleAction = null;
+         _turnTimer = TimeSpan.Zero;
+        state = BattleEtape.PLAYER_ACTION_EXECUTION;
     }
     private void EnemyTurn()
     {
-        
-
         BattleAction battleAction = enemy.ChooseAction();// ici l'action est aléatoire ,on peut la changer si on veut 
         if (battleAction.Target == BattleAction.TargetType.Enemy)
             battleAction.Execute(enemy, _character);
         else
             battleAction.Execute(enemy, enemy);
 
-        if (CheckEnd())
-            return;
-
-        state = BattleEtape.PENDING_PLAYER;
+        _turnTimer = TimeSpan.Zero;
+        state = BattleEtape.ENEMY_ACTION_EXECUTION;
     }
 
     private bool CheckEnd()
     {
         if (!enemy.IsAlive)
         {
+            enemy.Animations?.PlayDeath();
             state = BattleEtape.VICTORY;
             return true;
         }
 
         if (!_character.IsAlive)
         {
+            _character.Animations?.PlayDeath();
             state = BattleEtape.DEFEAT;
             return true;
         }

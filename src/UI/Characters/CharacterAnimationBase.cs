@@ -50,20 +50,8 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
     
     public Vector2 Position
     {
-        get
-        {
-            return new Vector2(
-                _rawPosition.X + (FrameSize.X * _scale) / 2,
-                _rawPosition.Y + FrameSize.Y * _scale
-            );
-        }
-        set
-        {
-            _rawPosition = new Vector2(
-                value.X - (FrameSize.X * _scale) / 2,
-                value.Y - FrameSize.Y * _scale
-            );
-        }
+        get => RawToLogicalPosition(_rawPosition);
+        set => _rawPosition = LogicalToRawPosition(value);
     }
     
     public Vector2 RawPosition { get => _rawPosition; set => _rawPosition = value; }
@@ -96,9 +84,18 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
         _isPlaying = true;
         _toSwitchBackToDefault = false;
     }
-    
-    public void Draw(GameTime gameTime)
+
+    public void DrawCopy(Vector2 position)
     {
+        Draw(new GameTime(), position);
+    }
+    
+    public void Draw(GameTime gameTime, Vector2? position = null)
+    {
+        if (!position.HasValue)
+        {
+            position = RawToLogicalPosition(RawPosition);
+        }
         if (!_isPlaying)
             return;
         DefineCurrentFrame(gameTime);
@@ -121,13 +118,13 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
         
         spriteBatch.Draw(
             spriteSheet,
-            _rawPosition,
+            LogicalToRawPosition(position.Value),
             sourceRectangle,
             Color.White,
             0f,
             Vector2.Zero,
-            new Vector2(_scale * (FacingDirection == Direction.Right ? 1 : -1), _scale),
-            SpriteEffects.None,
+            _scale,
+            FacingDirection == Direction.Right ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
             0f
         );
     }
@@ -167,6 +164,22 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
         _currentFrame = 0;
         _timeElapsed = 0;
         _isPlaying = true;
+    }
+
+    private Vector2 RawToLogicalPosition(Vector2 rawPosition)
+    {
+        return new Vector2(
+            rawPosition.X + (FrameSize.X * _scale) / 2,
+            rawPosition.Y + FrameSize.Y * _scale
+        );
+    }
+
+    private Vector2 LogicalToRawPosition(Vector2 logicalPosition)
+    {
+        return new Vector2(
+            logicalPosition.X - (FrameSize.X * _scale) / 2,
+            logicalPosition.Y - FrameSize.Y * _scale
+        );
     }
     
     private void LoadSpriteSheet(T state)

@@ -31,7 +31,7 @@ namespace EchoReborn.Screens
         public void Update(GameTime gameTime)
         {
             _hud.Update();
-            _battleSystem.Update();
+            _battleSystem.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime)
@@ -41,7 +41,7 @@ namespace EchoReborn.Screens
             SpriteBatch sb = DrawingContext.SpriteBatch;
             sb.Begin();
 
-            _hud.Draw();
+            _hud.Draw(gameTime);
 
             sb.End();
         }
