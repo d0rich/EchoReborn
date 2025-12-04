@@ -10,7 +10,8 @@
     <maxMana>30</maxMana>
 
     <skills>
-        <SkillRefs>1</SkillRefs>
-        <SkillRefs>4</SkillRefs>
+        <skillRef>1</skillRef>
+        <skillRef>2</skillRef>
+        <skillRef>3</skillRef>
     </skills>
 </character>

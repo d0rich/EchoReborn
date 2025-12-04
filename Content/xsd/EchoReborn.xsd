@@ -91,7 +91,7 @@
     <!-- Collection des Skills -->
     <xs:complexType name="SkillRefs">
         <xs:sequence>
-            <xs:element name="SkillRefs" type="xs:int" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="skillRef" type="xs:int" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     

@@ -4,6 +4,9 @@ using System.IO;
 using Microsoft.Xna.Framework.Content;
 
 using EchoReborn.Data.Models.Generated;
+using System.Collections.Generic;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace EchoReborn.Data;
 
@@ -28,16 +31,39 @@ public static class DataManager
         return DeserializeData<Character>(_characterFilePath);
     }
 
-    public static Enemies LoadEnemies()
+    public static List<Enemy> LoadAllEnemies()
     {
         CheckInitialized();
-        return DeserializeData<Enemies>(_enemiesFilePath);
+        return DeserializeData<Enemies>(_enemiesFilePath).Enemy.ToList();
     }
 
-    public static Skills LoadSkills()
+    public static List<Skill> LoadAllSkills()
     {
         CheckInitialized();
-        return DeserializeData<Skills>(_skillsFilePath);
+        return DeserializeData<Skills>(_skillsFilePath).Skill.ToList();
+    }
+
+    public static List<Skill> LoadSkillsByIds(SkillRefs skillRefs)
+    {
+        return LoadSkillsByIds(skillRefs.SkillRef);
+    }
+
+    public static List<Skill> LoadSkillsByIds(Collection<int> skillIds)
+    {
+        CheckInitialized();
+        var allSkills = LoadAllSkills();
+        List<Skill> selectedSkills = new List<Skill>();
+
+        foreach (int id in skillIds)
+        {
+            Skill skill = allSkills.Find(s => s.Id == id);
+            if (skill != null)
+            {
+                selectedSkills.Add(skill);
+            }
+        }
+
+        return selectedSkills;
     }
 
     private static T DeserializeData<T>(string relativePath)

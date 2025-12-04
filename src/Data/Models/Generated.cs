@@ -329,7 +329,7 @@ namespace EchoReborn.Data.Models.Generated
         
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlArrayAttribute("skills")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("SkillRefs", Namespace="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("skillRef", Namespace="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
         public System.Collections.ObjectModel.Collection<int> Skills
         {
             get
@@ -364,19 +364,19 @@ namespace EchoReborn.Data.Models.Generated
     {
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        private System.Collections.ObjectModel.Collection<int> _skillRefsProperty;
+        private System.Collections.ObjectModel.Collection<int> _skillRef;
         
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("SkillRefs")]
-        public System.Collections.ObjectModel.Collection<int> SkillRefsProperty
+        [System.Xml.Serialization.XmlElementAttribute("skillRef")]
+        public System.Collections.ObjectModel.Collection<int> SkillRef
         {
             get
             {
-                return _skillRefsProperty;
+                return _skillRef;
             }
             private set
             {
-                _skillRefsProperty = value;
+                _skillRef = value;
             }
         }
         
@@ -385,7 +385,7 @@ namespace EchoReborn.Data.Models.Generated
         /// </summary>
         public SkillRefs()
         {
-            this._skillRefsProperty = new System.Collections.ObjectModel.Collection<int>();
+            this._skillRef = new System.Collections.ObjectModel.Collection<int>();
         }
     }
     
@@ -427,7 +427,7 @@ namespace EchoReborn.Data.Models.Generated
         
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlArrayAttribute("skills")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("SkillRefs", Namespace="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("skillRef", Namespace="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
         public System.Collections.ObjectModel.Collection<int> Skills
         {
             get

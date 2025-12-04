@@ -22,9 +22,8 @@ namespace EchoReborn.Screens
 
         public BattleScreen()
         {
-            var demoSkills = DataManager.LoadSkills().Skill.Select(s => new BattleAction(s)).ToList();
-            _player = new Character(1, 0, demoSkills);
-            _enemy = new Enemy(1, demoSkills);
+            _player = new Character(DataManager.LoadBaseCharacter());
+            _enemy = new Enemy(1, DataManager.LoadAllEnemies().First());
             _battleSystem = new BattleSystem(_player, _enemy);
             _hud = new CharacterHud( _player, _enemy, _battleSystem );
         }

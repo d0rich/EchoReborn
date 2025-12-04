@@ -8,8 +8,8 @@
         <animationClass>EchoReborn.Animations.SlimeIdle</animationClass>
         <rewardXP>10</rewardXP>
         <skills>
-            <SkillRefs>1</SkillRefs>
-            <SkillRefs>2</SkillRefs>
+            <skillRef>1</skillRef>
+            <skillRef>2</skillRef>
         </skills>
     </enemy>
 
@@ -20,7 +20,7 @@
         <animationClass>EchoReborn.Animations.GoblinIdle</animationClass>
         <rewardXP>25</rewardXP>
         <skills>
-            <SkillRefs>3</SkillRefs>
+            <skillRef>3</skillRef>
         </skills>
     </enemy>
 
