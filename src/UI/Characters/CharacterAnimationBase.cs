@@ -96,9 +96,7 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
         {
             position = RawToLogicalPosition(RawPosition);
         }
-        if (!_isPlaying)
-            return;
-        DefineCurrentFrame(gameTime);
+        if (_isPlaying) DefineCurrentFrame(gameTime);
         
         var spriteBatch = DrawingContext.SpriteBatch;
         

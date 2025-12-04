@@ -5,7 +5,7 @@ namespace EchoReborn.Battle;
 
 public class BattleSystem
 {
-    public static readonly TimeSpan TURN_DELAY = TimeSpan.FromSeconds(2);
+    public static readonly TimeSpan TURN_DELAY = TimeSpan.FromSeconds(1.5);
     public BattleEtape State => state;
     private Character _character;
     private Enemy enemy;
