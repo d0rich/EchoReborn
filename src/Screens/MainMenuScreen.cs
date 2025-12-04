@@ -17,21 +17,21 @@ namespace EchoReborn.Screens
         {
             // bouton Start Game
             _startGameButton = new Button(
-                bounds: new Rectangle(300, 150, 200, 60),
+                bounds: new Rectangle(540, 200, 200, 60),
                 text: "Start Game",
                 font: GameFonts.ButtonFont,
                 onClickCallback: StartGame
             );
 
             _testsButton = new Button(
-                bounds: new Rectangle(300, 250, 200, 60),
+                bounds: new Rectangle(540, 300, 200, 60),
                 text: "Tests",
                 font: GameFonts.ButtonFont,
                 onClickCallback: () => ScreenManager.SwitchScreen(new TestSelectionScreen())
             );
 
             _exitButton = new Button(
-                bounds: new Rectangle(300, 350, 200, 60),
+                bounds: new Rectangle(540, 400, 200, 60),
                 text: "Exit",
                 font: GameFonts.ButtonFont,
                 onClickCallback: ScreenManager.QuitGame
