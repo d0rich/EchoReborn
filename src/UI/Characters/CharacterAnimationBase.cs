@@ -6,8 +6,15 @@ namespace EchoReborn.UI.Characters;
 
 public abstract class CharacterAnimationBase<T> where T : System.Enum
 {
+    public enum Direction
+    {
+        Left,
+        Right
+    }
+
     private Dictionary<T, Texture2D> _spriteSheets;
     private T _currentState;
+    private readonly T _defaultState;
     private int _currentFrame;
     private float _frameTime;
     private float _timeElapsed;
@@ -22,6 +29,9 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
     private float _scale;
     private bool _loop;
     private bool _isPlaying;
+    private bool _toSwitchBackToDefault;
+
+    public Direction FacingDirection { get; protected set; } = Direction.Right;
     
     public T CurrentState
     {
@@ -76,6 +86,7 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
         _spritesFolder = spritesFolder;
         _spriteSheets = new Dictionary<T, Texture2D>();
         _currentState = defaultState;
+        _defaultState = defaultState;
         _currentFrame = 0;
         _frameTime = 1f / 10f;
         _timeElapsed = 0;
@@ -83,6 +94,7 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
         _scale = 1f;
         _loop = true;
         _isPlaying = true;
+        _toSwitchBackToDefault = false;
     }
     
     public void Draw(GameTime gameTime)
@@ -114,26 +126,43 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
             Color.White,
             0f,
             Vector2.Zero,
-            _scale,
+            new Vector2(_scale * (FacingDirection == Direction.Right ? 1 : -1), _scale),
             SpriteEffects.None,
             0f
         );
     }
     
-    public void SwitchAnimation(T state, bool loop = true)
+    public void SwitchAnimation(T state, bool loop = true, bool playOnce = false)
     {
         LoadSpriteSheet(state);
         
+        Reset();
         _loop = loop;
+        _toSwitchBackToDefault = playOnce;
         CurrentState = state;
     }
+
+    protected void PlayLoop(T state)
+    {
+        SwitchAnimation(state, true, false);
+    }
+
+    protected void PlayOnce(T state)
+    {
+        SwitchAnimation(state, false, true);
+    }
+
+    protected void PlayAndFreeze(T state)
+    {
+        SwitchAnimation(state, false, false);
+    }
     
-    public void Stop()
+    protected void Stop()
     {
         _isPlaying = false;
     }
     
-    public void Reset()
+    protected void Reset()
     {
         _currentFrame = 0;
         _timeElapsed = 0;
@@ -183,6 +212,10 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
                 if (_loop)
                 {
                     _currentFrame = 0;
+                }
+                else if (_toSwitchBackToDefault)
+                {
+                    SwitchAnimation(_defaultState, true, false);
                 }
                 else
                 {
