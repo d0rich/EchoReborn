@@ -130,7 +130,7 @@
             <!--      BASIC    -->
             <xs:enumeration value="BASIC"/>
             <!--      COMPLEX      -->
-            <xs:enumeration value="COMPLEX "/>
+            <xs:enumeration value="COMPLEX"/>
         </xs:restriction>
     </xs:simpleType>
     
