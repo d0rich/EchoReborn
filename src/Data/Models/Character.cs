@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace EchoReborn.Model
+namespace EchoReborn.Data.Models
 {
     [Serializable]
     [XmlType("Character", Namespace = "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]

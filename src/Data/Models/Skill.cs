@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace EchoReborn.Models
+namespace EchoReborn.Data.Models
 {
     [Serializable]
     [XmlRoot("skill", Namespace = "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]

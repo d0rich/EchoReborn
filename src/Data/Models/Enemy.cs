@@ -1,4 +1,4 @@
-namespace EchoReborn.Model
+namespace EchoReborn.Data.Models
 {
     public class Enemy
     {
