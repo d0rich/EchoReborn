@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using EchoReborn.UI;
+using EchoReborn.Data;
 
 namespace EchoReborn;
 
@@ -32,6 +33,7 @@ public class EchoRebornGame : Game
     protected override void LoadContent()
     {
         DrawingContext.Initialize(GraphicsDevice, new SpriteBatch(GraphicsDevice), Content);
+        DataManager.Initialize(Content);
 
         // Load fonts for the menu system
         GameFonts.Initialize(

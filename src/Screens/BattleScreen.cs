@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using EchoReborn.Data;
+using ModelMesh = EchoReborn.Data.Models.Generated;
+using System.Linq;
 
 namespace EchoReborn.Screens
 {
@@ -19,36 +22,7 @@ namespace EchoReborn.Screens
 
         public BattleScreen()
         {
-            var demoSkills = new List<BattleAction>
-            {
-                new BattleAction(
-                    name: "Basic Attack",
-                    description: "Une attaque simple.",
-                    target: BattleAction.TargetType.Enemy,
-                    energyCost: 0,
-                    healthCost: 0,
-                    damage: 10,
-                    healAmount: 0
-                ),
-                new BattleAction(
-                    name: "Small Heal",
-                    description: "Soigne un allié.",
-                    target: BattleAction.TargetType.Ally,
-                    energyCost: 5,
-                    healthCost: 0,
-                    damage: 0,
-                    healAmount: 15
-                ),
-                new BattleAction(
-                    name: "Attaque puissante",
-                    description: "Une attaque puissante qui coûte de la santé.",
-                    target: BattleAction.TargetType.Enemy,
-                    energyCost: 5,
-                    healthCost: 10,
-                    damage: 35,
-                    healAmount: 0
-                )
-            };
+            var demoSkills = DataManager.LoadSkills().Skill.Select(s => new BattleAction(s)).ToList();
             _player = new Character(1, 0, demoSkills);
             _enemy = new Enemy(1, demoSkills);
             _battleSystem = new BattleSystem(_player, _enemy);
