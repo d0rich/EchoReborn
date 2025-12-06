@@ -68,7 +68,7 @@
 
     <skill id="666">
         <type>BASIC</type>
-        <name>Sepoku</name>
+        <name>Hara-kiri</name>
         <description>Kill Yourself</description>
         <TargetType>ALLIER</TargetType>
         <ManaCost>0</ManaCost>
