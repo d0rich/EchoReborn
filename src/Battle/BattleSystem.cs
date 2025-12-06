@@ -7,6 +7,7 @@ public class BattleSystem
 {
     public static readonly TimeSpan TURN_DELAY = TimeSpan.FromSeconds(1.5);
     public BattleEtape State => state;
+    public bool IsOver => state == BattleEtape.VICTORY || state == BattleEtape.DEFEAT;
     private Character _character;
     private Enemy enemy;
 

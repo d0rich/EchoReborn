@@ -32,9 +32,48 @@
         <name>Attaque puissante</name>
         <description>Soigne un allié.</description>
         <TargetType>ENEMIES</TargetType>
-        <ManaCost>5</ManaCost>
+        <ManaCost>0</ManaCost>
         <HealthCost>10</HealthCost>
         <Damage>40</Damage>
+        <Heal>0</Heal>
+        <AnimationClass>anim.AttaquePuissante</AnimationClass>
+        <SkillClass>skills.AttaquePuissante</SkillClass>
+    </skill>
+
+    <skill id="69">
+        <type>BASIC</type>
+        <name>Cheating Heal</name>
+        <description>Restore all HP for free.</description>
+        <TargetType>ALLIER</TargetType>
+        <ManaCost>0</ManaCost>
+        <HealthCost>0</HealthCost>
+        <Damage>0</Damage>
+        <Heal>9999999</Heal>
+        <AnimationClass>anim.AttaquePuissante</AnimationClass>
+        <SkillClass>skills.AttaquePuissante</SkillClass>
+    </skill>
+
+    <skill id="420">
+        <type>BASIC</type>
+        <name>Cheating Attack</name>
+        <description>Kill Enemy</description>
+        <TargetType>ENEMIES</TargetType>
+        <ManaCost>0</ManaCost>
+        <HealthCost>0</HealthCost>
+        <Damage>9999999</Damage>
+        <Heal>0</Heal>
+        <AnimationClass>anim.AttaquePuissante</AnimationClass>
+        <SkillClass>skills.AttaquePuissante</SkillClass>
+    </skill>
+
+    <skill id="666">
+        <type>BASIC</type>
+        <name>Sepoku</name>
+        <description>Kill Yourself</description>
+        <TargetType>ALLIER</TargetType>
+        <ManaCost>0</ManaCost>
+        <HealthCost>0</HealthCost>
+        <Damage>9999999</Damage>
         <Heal>0</Heal>
         <AnimationClass>anim.AttaquePuissante</AnimationClass>
         <SkillClass>skills.AttaquePuissante</SkillClass>

@@ -12,12 +12,15 @@ public class BattleUI
         CharacterEnteringBattle,
         EnemyEnteringBattle,
         Battle,
+        OutroAnimationStarted,
+        OutroAnimationDone,
         Victory,
         Defeat
     }
-    private static TimeSpan ENTERING_DURATION = TimeSpan.FromSeconds(2);
+    private static TimeSpan ANIMATION_DURATION = TimeSpan.FromSeconds(2);
     
     public UiState State { get; private set; } = UiState.CharacterEnteringBattle;
+    private bool _IsOver => State == UiState.Victory || State == UiState.Defeat;
     public bool IsLastBattle {get; private set;} = false;
     private readonly Character _character;
     private Enemy _enemy;
@@ -70,9 +73,9 @@ public class BattleUI
 
     public void NewBattle(Enemy enemy, BattleSystem battleSystem, bool isLastBattle = false)
     {
-        IsLastBattle = isLastBattle;
         if (!CanInitiateNewBattle)
             throw new InvalidOperationException("Cannot initiate a new battle at this time.");
+        IsLastBattle = isLastBattle;
         _enemy = enemy;
         _battleSystem = battleSystem;
         
@@ -93,7 +96,7 @@ public class BattleUI
     {
         _enteringTimer += gameTime.ElapsedGameTime;
         _skillsList.Update();
-        if (_enteringTimer > ENTERING_DURATION)
+        if (_enteringTimer > ANIMATION_DURATION)
         {
             switch (State)
             {
@@ -103,17 +106,30 @@ public class BattleUI
                 case UiState.EnemyEnteringBattle:
                     FinalizeEnemyEnteringAnimation();
                     break;
+                case UiState.OutroAnimationStarted:
+                    FinalizeOutroAnimation();
+                    break;
             }
         }
 
-        switch (_battleSystem?.State)
+        if (_battleSystem != null)
         {
-            case BattleEtape.DEFEAT:
-                State = UiState.Defeat;
-                break;
-            case BattleEtape.VICTORY:
-                State = UiState.Victory;
-                break;
+            if (_battleSystem.IsOver && State == UiState.Battle)
+            {
+                PlayOutroAnimation();
+            }
+            if (State == UiState.OutroAnimationDone)
+            {
+                switch (_battleSystem.State)
+                {
+                    case BattleEtape.DEFEAT:
+                        State = UiState.Defeat;
+                        break;
+                    case BattleEtape.VICTORY:
+                        State = UiState.Victory;
+                        break;
+                }
+            }
         }
     }
 
@@ -159,7 +175,7 @@ public class BattleUI
 
         if (State == UiState.CharacterEnteringBattle)
         {
-            float progress = (float)(_enteringTimer.TotalSeconds / ENTERING_DURATION.TotalSeconds);
+            float progress = (float)(_enteringTimer.TotalSeconds / ANIMATION_DURATION.TotalSeconds);
             _character.Animations?.Draw(gameTime, _character.Animations.Position + new Vector2(-300, 0) * (1 - progress));
         }
         else
@@ -168,7 +184,7 @@ public class BattleUI
         }
         if (State == UiState.EnemyEnteringBattle)
         {
-            float progress = (float)(_enteringTimer.TotalSeconds / ENTERING_DURATION.TotalSeconds);
+            float progress = (float)(_enteringTimer.TotalSeconds / ANIMATION_DURATION.TotalSeconds);
             _enemy.Animations?.Draw(gameTime, _enemy.Animations.Position + new Vector2(300, 0) * (1 - progress));
         }
         else
@@ -184,6 +200,17 @@ public class BattleUI
         {
             DrawFinalLabel("VICTORY");
         }
+    }
+    
+    private void PlayOutroAnimation()
+    {
+        _enteringTimer = TimeSpan.Zero;
+        State = UiState.OutroAnimationStarted;
+    }
+    
+    private void FinalizeOutroAnimation()
+    {
+        State = UiState.OutroAnimationDone;
     }
     
     private void PlayCharacterEnteringAnimation()

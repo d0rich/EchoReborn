@@ -41,7 +41,7 @@ namespace EchoReborn.Screens
             {
                 var enemy = _enemyQueue.Dequeue();
                 _battleSystem = new BattleSystem(_player, enemy);
-                _hud.NewBattle(enemy, _battleSystem);
+                _hud.NewBattle(enemy, _battleSystem, _enemyQueue.Count == 0);
             }
         }
 
