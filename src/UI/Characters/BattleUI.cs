@@ -18,6 +18,7 @@ public class BattleUI
     private static TimeSpan ENTERING_DURATION = TimeSpan.FromSeconds(2);
     
     public UiState State { get; private set; } = UiState.CharacterEnteringBattle;
+    public bool IsLastBattle {get; private set;} = false;
     private readonly Character _character;
     private Enemy _enemy;
     private BattleSystem _battleSystem;
@@ -65,10 +66,11 @@ public class BattleUI
         PlayCharacterEnteringAnimation();
     }
 
-    public bool CanInitiateNewBattle => State == UiState.Victory || (State == UiState.Battle && _enemy == null);
+    public bool CanInitiateNewBattle => !IsLastBattle && (State == UiState.Victory || (State == UiState.Battle && _enemy == null));
 
-    public void NewBattle(Enemy enemy, BattleSystem battleSystem)
+    public void NewBattle(Enemy enemy, BattleSystem battleSystem, bool isLastBattle = false)
     {
+        IsLastBattle = isLastBattle;
         if (!CanInitiateNewBattle)
             throw new InvalidOperationException("Cannot initiate a new battle at this time.");
         _enemy = enemy;
@@ -102,6 +104,16 @@ public class BattleUI
                     FinalizeEnemyEnteringAnimation();
                     break;
             }
+        }
+
+        switch (_battleSystem?.State)
+        {
+            case BattleEtape.DEFEAT:
+                State = UiState.Defeat;
+                break;
+            case BattleEtape.VICTORY:
+                State = UiState.Victory;
+                break;
         }
     }
 
@@ -164,11 +176,11 @@ public class BattleUI
             _enemy?.Animations?.Draw(gameTime);
         }
 
-        if (_battleSystem?.State == BattleEtape.DEFEAT)
+        if (State == UiState.Defeat)
         {
             DrawFinalLabel("DEFEAT");
         }
-        else if (_battleSystem?.State == BattleEtape.VICTORY)
+        else if (State == UiState.Victory && IsLastBattle)
         {
             DrawFinalLabel("VICTORY");
         }

@@ -37,7 +37,7 @@ namespace EchoReborn.Screens
             
             if (!_battleInitialized && _hud.CanInitiateNewBattle)
             {
-                _hud.NewBattle(_enemy, _battleSystem);
+                _hud.NewBattle(_enemy, _battleSystem, true);
             }
         }
 

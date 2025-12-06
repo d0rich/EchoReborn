@@ -15,29 +15,33 @@ namespace EchoReborn.Screens
     public class BattleSequenceScreen : IScreen
     {
         private Character _player;
-        private Enemy _enemy;
         private BattleUI _hud;
         private BattleSystem _battleSystem;
         
-        private bool _battleInitialized = false;
+        private Queue<Enemy> _enemyQueue = new Queue<Enemy>();
 
 
         public BattleSequenceScreen()
         {
             _player = new Character(DataManager.LoadBaseCharacter());
-            _enemy = new Enemy(1, DataManager.LoadAllEnemies().First());
-            _battleSystem = new BattleSystem(_player, _enemy);
             _hud = new BattleUI( _player );
+            for (int i = 0; i < 5; i++)
+            {
+                var enemyData = new Enemy(1, DataManager.LoadAllEnemies().First());
+                _enemyQueue.Enqueue(enemyData);
+            }
         }
 
         public void Update(GameTime gameTime)
         {
             _hud.Update(gameTime);
-            _battleSystem.Update(gameTime);
+            _battleSystem?.Update(gameTime);
             
-            if (!_battleInitialized && _hud.CanInitiateNewBattle)
+            if (_hud.CanInitiateNewBattle && _enemyQueue.Count > 0)
             {
-                _hud.NewBattle(_enemy, _battleSystem);
+                var enemy = _enemyQueue.Dequeue();
+                _battleSystem = new BattleSystem(_player, enemy);
+                _hud.NewBattle(enemy, _battleSystem);
             }
         }
 
