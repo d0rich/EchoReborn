@@ -20,7 +20,7 @@ namespace EchoReborn.Screens
                 bounds: new Rectangle(540, 200, 200, 60),
                 text: "Start Game",
                 font: GameFonts.ButtonFont,
-                onClickCallback: StartGame
+                onClickCallback: () => ScreenManager.SwitchScreen(new BattleSequenceScreen())
             );
 
             _testsButton = new Button(
@@ -36,13 +36,6 @@ namespace EchoReborn.Screens
                 font: GameFonts.ButtonFont,
                 onClickCallback: ScreenManager.QuitGame
             );
-        }
-
-        private void StartGame()
-        {
-
-            // Lance l'écran de combat 
-            ScreenManager.SwitchScreen(new BattleScreen());
         }
 
         public void Update(GameTime gameTime)
