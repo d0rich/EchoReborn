@@ -14,6 +14,8 @@ public abstract class RessourceBar
     private Vector2 _size = Size; 
     private Rectangle _bounds => new Rectangle((int)_position.X, (int)_position.Y, (int)_size.X, (int)_size.Y);
 
+    public Vector2 Position => _position;
+
     public RessourceBar(Vector2 position)
     {
         _pixel = DrawingContext.CreateTexture(Color.White);

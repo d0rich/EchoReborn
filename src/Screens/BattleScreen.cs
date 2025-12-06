@@ -16,8 +16,10 @@ namespace EchoReborn.Screens
     {
         private Character _player;
         private Enemy _enemy;
-        private CharacterHud _hud;
+        private BattleUI _hud;
         private BattleSystem _battleSystem;
+        
+        private bool _battleInitialized = false;
 
 
         public BattleScreen()
@@ -25,13 +27,18 @@ namespace EchoReborn.Screens
             _player = new Character(DataManager.LoadBaseCharacter());
             _enemy = new Enemy(1, DataManager.LoadAllEnemies().First());
             _battleSystem = new BattleSystem(_player, _enemy);
-            _hud = new CharacterHud( _player, _enemy, _battleSystem );
+            _hud = new BattleUI( _player );
         }
 
         public void Update(GameTime gameTime)
         {
-            _hud.Update();
+            _hud.Update(gameTime);
             _battleSystem.Update(gameTime);
+            
+            if (!_battleInitialized && _hud.CanInitiateNewBattle)
+            {
+                _hud.NewBattle(_enemy, _battleSystem);
+            }
         }
 
         public void Draw(GameTime gameTime)
