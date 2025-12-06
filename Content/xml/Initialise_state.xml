@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<initialState xmlns="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn">
+
+    <locations>
+        <location id="1">
+            <name>Forest Entrance</name>
+            <difficulty>1</difficulty>
+            <isStartLocation>true</isStartLocation>
+            <isFinalLocation>false</isFinalLocation>
+            <connectedLocationId>2</connectedLocationId>
+            <enemyEncounterId>
+                <enemyRefs>1</enemyRefs>
+                <enemyRefs>2</enemyRefs>
+            </enemyEncounterId>
+            <fragment id="10">
+                <name>Broken Statue Fragment</name>
+                <image>assets/fragments/statue.png</image>
+            </fragment>
+        </location>
+        <location id="2">
+            <name>Deep Forest</name>
+            <difficulty>3</difficulty>
+            <isStartLocation>false</isStartLocation>
+            <isFinalLocation>false</isFinalLocation>
+            <connectedLocationId>3</connectedLocationId>
+            <enemyEncounterId>
+                <enemyRefs>3</enemyRefs>
+            </enemyEncounterId>
+            <fragment id="11">
+                <name>Mysterious Rune</name>
+                <image>assets/fragments/rune.png</image>
+            </fragment>
+        </location>
+        <location id="3">
+            <name>Ancient Tree</name>
+            <difficulty>5</difficulty>
+            <isStartLocation>false</isStartLocation>
+            <isFinalLocation>true</isFinalLocation>
+            <connectedLocationId>2</connectedLocationId>
+            <enemyEncounterId>
+                <enemyRefs>4</enemyRefs>
+            </enemyEncounterId>
+            <fragment id="12">
+                <name>Ancient Bark</name>
+                <image>assets/fragments/bark.png</image>
+            </fragment>
+        </location>
+    </locations>
+    <enemies>
+        <enemy id="1">
+            <name>Wolf</name>
+            <difficulty>1</difficulty>
+            <maxHP>50</maxHP>
+            <animationClass>WolfAnim</animationClass>
+            <rewardXP>10</rewardXP>
+            <skills>
+                <skillRef>1</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="2">
+            <name>Forest Spirit</name>
+            <difficulty>2</difficulty>
+            <maxHP>80</maxHP>
+            <animationClass>SpiritAnim</animationClass>
+            <rewardXP>20</rewardXP>
+            <skills>
+                <skillRef>2</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="3">
+            <name>Dark Ent</name>
+            <difficulty>3</difficulty>
+            <maxHP>120</maxHP>
+            <animationClass>EntAnim</animationClass>
+            <rewardXP>40</rewardXP>
+            <skills>
+                <skillRef>1</skillRef>
+                <skillRef>3</skillRef>
+            </skills>
+        </enemy>
+
+        <enemy id="4">
+            <name>Ancient Guardian</name>
+            <difficulty>5</difficulty>
+            <maxHP>200</maxHP>
+            <animationClass>GuardianAnim</animationClass>
+            <rewardXP>100</rewardXP>
+            <skills>
+                <skillRef>4</skillRef>
+            </skills>
+        </enemy>
+    </enemies>
+    <character>
+        <level>1</level>
+        <experience>0</experience>
+        <currentHealth>100</currentHealth>
+        <maxHealth>100</maxHealth>
+        <currentMana>50</currentMana>
+        <maxMana>50</maxMana>
+
+        <skills>
+            <skillRef>1</skillRef>
+            <skillRef>2</skillRef>
+        </skills>
+    </character>
+    <skills>
+        <skill id="1">
+            <type>BASIC</type>
+            <name>Slash</name>
+            <description>Basic physical attack</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>0</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>15</Damage>
+            <Heal>0</Heal>
+            <AnimationClass>SlashAnim</AnimationClass>
+            <SkillClass>BasicSkill</SkillClass>
+        </skill>
+        <skill id="2">
+            <type>BASIC</type>
+            <name>Fireball</name>
+            <description>Small magic fire attack</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>10</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>25</Damage>
+            <Heal>0</Heal>
+            <AnimationClass>FireballAnim</AnimationClass>
+            <SkillClass>BasicSkill</SkillClass>
+        </skill>
+        <skill id="3">
+            <type>COMPLEX</type>
+            <name>Root Bind</name>
+            <description>Immobilizes the enemy</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>15</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>5</Damage>
+            <Heal>0</Heal>
+            <AnimationClass>RootAnim</AnimationClass>
+            <SkillClass>ComplexSkill</SkillClass>
+        </skill>
+        <skill id="4">
+            <type>COMPLEX</type>
+            <name>Nature's Wrath</name>
+            <description>Massive AoE nature attack</description>
+            <TargetType>ALL</TargetType>
+            <ManaCost>30</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>60</Damage>
+            <Heal>0</Heal>
+            <AnimationClass>WrathAnim</AnimationClass>
+            <SkillClass>ComplexSkill</SkillClass>
+        </skill>
+    </skills>
+
+</initialState>
