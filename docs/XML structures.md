@@ -67,6 +67,7 @@ classDiagram
         +IsStartLocation: Boolean
         +IsFinalLocation: Boolean
         +fragment: Fragment
+        +background: String
     }
     class Fragment {
         +Id: Int

@@ -15,7 +15,7 @@
     <xs:element name="enemies" type="er:Enemies"/>
     <!-- Element racine pour Character -->
     <xs:element name="character" type="er:Character"/>
-    <!-- Element racine pour Character -->
+    <!-- Element racine pour skills -->
     <xs:element name="skills" type="er:Skills"/>
     
     <!-- 2 elements : initialState, gameState -->
