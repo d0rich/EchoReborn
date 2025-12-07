@@ -32,7 +32,7 @@ public class DomUtiles
         statsXml.AppendChild(xmlDeclaration);
 
         
-        string ns ="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn"; // your namespace
+        string ns ="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn"; 
         XmlElement root = statsXml.CreateElement("Statistiques");
        
         statsXml.AppendChild(root);
