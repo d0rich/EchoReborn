@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Statistiques xmlns="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn">
-  <statistiqueSkills xmlns="">
+<Statistiques>
+  <statistiqueSkills>
     <nombreskills>4</nombreskills>
     <maxdamageskill>Nature's Wrath</maxdamageskill>
   </statistiqueSkills>
-  <enemyStatistics xmlns="">
+  <enemyStatistics>
     <nombreEnemies>4</nombreEnemies>
   </enemyStatistics>
-  <locationStatistics xmlns="">
+  <locationStatistics>
     <nombreLocations>3</nombreLocations>
   </locationStatistics>
 </Statistiques>
