@@ -16,6 +16,7 @@ public static class DataManager
     private static readonly string _characterFilePath = "xml/Character.xml";
     private static readonly string _enemiesFilePath = "xml/Enemies.xml";
     private static readonly string _skillsFilePath = "xml/Skills.xml";
+    private static readonly string _statistiquesFilePath = "xml/Statistiques.xml";
 
     public static bool IsInitialized { get; private set; } = false;
 
@@ -65,6 +66,15 @@ public static class DataManager
 
         return selectedSkills;
     }
+    // code de ahcene
+    public static void GenerateStatistiques(string inputXmlPath, string outputXmlPath)
+    {
+        CheckInitialized();
+
+        DomUtiles dom = new DomUtiles(inputXmlPath);
+        dom.CreationStatistiques(outputXmlPath);
+    }
+    // code de ahcene
 
     private static T DeserializeData<T>(string relativePath)
     {
