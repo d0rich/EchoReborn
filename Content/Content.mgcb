@@ -185,6 +185,10 @@
 /processor:TextureProcessor
 /build:Enemies/orcs/orc1/orc1_run.png
 
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Enemies/orcs/orc1/orc1_idle.png
+
 #============================================================================#
 #============================================================================#
 #                         orc2 Enemy Sprites                                #
