@@ -663,10 +663,6 @@
 
 /importer:TextureImporter
 /processor:TextureProcessor
-/build:Enemies/Skeleton/Skeleton_Archer/Protect.png
-
-/importer:TextureImporter
-/processor:TextureProcessor
 /build:Enemies/Skeleton/Skeleton_Archer/Hurt.png
 
 /importer:TextureImporter
