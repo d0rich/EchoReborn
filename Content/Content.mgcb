@@ -179,7 +179,7 @@
 #begin 
 /importer:TextureImporter
 /processor:TextureProcessor
-/build:Enemies/orcs/orc1/orc1_original.png
+/build:Enemies/orcs/orc1/orc1_walk.png
 
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -213,7 +213,7 @@
 #begin 
 /importer:TextureImporter
 /processor:TextureProcessor
-/build:Enemies/orcs/orc2/orc2_original.png
+/build:Enemies/orcs/orc2/orc2_idle.png
 
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -252,7 +252,7 @@
 #begin 
 /importer:TextureImporter
 /processor:TextureProcessor
-/build:Enemies/orcs/orc3/orc3_original.png
+/build:Enemies/orcs/orc3/orc3_idle.png
 
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -663,11 +663,11 @@
 
 /importer:TextureImporter
 /processor:TextureProcessor
-/build:Enemies/Skeleton/Skeleton_Archer/Protect.png
+/build:Enemies/Skeleton/Skeleton_Spearman/Protect.png
 
 /importer:TextureImporter
 /processor:TextureProcessor
-/build:Enemies/Skeleton/Skeleton_Archer/Hurt.png
+/build:Enemies/Skeleton/Skeleton_Spearman/Hurt.png
 
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -683,7 +683,7 @@
 
 /importer:TextureImporter
 /processor:TextureProcessor
-/build:Enemies/Skeleton/Skeleton_Archer/Walk.png
+/build:Enemies/Skeleton/Skeleton_Spearman/Walk.png
 
 
 
