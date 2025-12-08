@@ -1,7 +1,7 @@
 using System.Xml;
 using System;
 
-namespace EchoReborn;
+namespace EchoReborn.Data;
 
 public class DomUtiles
 {
@@ -18,7 +18,7 @@ public class DomUtiles
 
     }
     // compteur le nombre de fois que le paramétre instnaceName: string à été déclaré 
-    public int CompteurInstances(string instanceName)
+    private int CompteurInstances(string instanceName)
     {
         
         return doc.GetElementsByTagName(instanceName).Count;
@@ -40,12 +40,12 @@ public class DomUtiles
         root.AppendChild(this.CreerSkillStats(statsXml));
         root.AppendChild(this.CreerEnemyStats(statsXml));
         root.AppendChild(this.CreerLocationStats(statsXml));
-        statsXml.Save("/home/ahcene/EchoReborn/Content/xml/Statistiques.xml");
+        statsXml.Save(filename);
 
 
     }
 
-    public XmlNode CreerSkillStats(XmlDocument document)
+    private XmlNode CreerSkillStats(XmlDocument document)
     {
         
         XmlNode skillStats = document.CreateElement("statistiqueSkills");
@@ -98,7 +98,7 @@ public class DomUtiles
         return skillStats;
     }
 
-    public XmlNode CreerEnemyStats(XmlDocument document)
+    private XmlNode CreerEnemyStats(XmlDocument document)
     {
         XmlNode enemyStats = document.CreateElement("enemyStatistics");
 
@@ -111,7 +111,7 @@ public class DomUtiles
         return enemyStats;
     }
 
-    public XmlNode CreerLocationStats(XmlDocument document)
+    private XmlNode CreerLocationStats(XmlDocument document)
     {
         XmlNode locationStats = document.CreateElement("locationStatistics");
 
