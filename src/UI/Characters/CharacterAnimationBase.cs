@@ -12,6 +12,8 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
         Right
     }
 
+    private readonly int TargetHeight = 128;
+
     private Dictionary<T, Texture2D> _spriteSheets;
     private T _currentState;
     private readonly T _defaultState;
@@ -26,7 +28,6 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
     private readonly Dictionary<T, string> _animationFileNames;
     
     private Vector2 _rawPosition;
-    private float _scale;
     private bool _loop;
     private bool _isPlaying;
     private bool _toSwitchBackToDefault;
@@ -55,8 +56,9 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
     }
     
     public Vector2 RawPosition { get => _rawPosition; set => _rawPosition = value; }
-    
-    public float Scale { get => _scale; set => _scale = value; }
+
+    private float _scale;
+    public float Scale { get => _scale; set => _scale = value * TargetHeight / FrameSize.Y; }
     
     public bool Loop { get => _loop; set => _loop = value; }
     
@@ -79,7 +81,7 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
         _frameTime = 1f / 10f;
         _timeElapsed = 0;
         _rawPosition = Vector2.Zero;
-        _scale = 1f;
+        Scale = 1f;
         _loop = true;
         _isPlaying = true;
         _toSwitchBackToDefault = false;
@@ -121,7 +123,7 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
             Color.White,
             0f,
             Vector2.Zero,
-            _scale,
+            Scale,
             FacingDirection == Direction.Right ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
             0f
         );
@@ -167,16 +169,16 @@ public abstract class CharacterAnimationBase<T> where T : System.Enum
     private Vector2 RawToLogicalPosition(Vector2 rawPosition)
     {
         return new Vector2(
-            rawPosition.X + (FrameSize.X * _scale) / 2,
-            rawPosition.Y + FrameSize.Y * _scale
+            rawPosition.X + (FrameSize.X * Scale) / 2,
+            rawPosition.Y + FrameSize.Y * Scale
         );
     }
 
     private Vector2 LogicalToRawPosition(Vector2 logicalPosition)
     {
         return new Vector2(
-            logicalPosition.X - (FrameSize.X * _scale) / 2,
-            logicalPosition.Y - FrameSize.Y * _scale
+            logicalPosition.X - (FrameSize.X * Scale) / 2,
+            logicalPosition.Y - FrameSize.Y * Scale
         );
     }
     
