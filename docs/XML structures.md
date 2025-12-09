@@ -3,11 +3,11 @@
 ```mermaid
 classDiagram
     class EchoReborn {
-        +initialState: InitialState
+        +gameData: GameData
         +gameState: GameState
     }
 
-    class InitialState {
+    class GameData {
         +location: Locations
         +enemies: Enemies
         +caracter: Character
@@ -51,7 +51,7 @@ classDiagram
     }
 
     class SkillRefs {
-        +SkillRefs: List~Int~
+        +SkillRef: List~Int~
     }
 
     class Locations {
@@ -62,10 +62,7 @@ classDiagram
         +Id: Int
         +Name: String
         +Difficulty: Int
-        +NextLocationId: Int
         +EnemyEncounter: EnemyRefs
-        +IsStartLocation: Boolean
-        +IsFinalLocation: Boolean
         +fragment: Fragment
         +background: String
     }
@@ -89,7 +86,7 @@ classDiagram
     }
 
     class EnemyRefs {
-        +EnemyRefs: List~Int~
+        +EnemyRef: List~Int~
     }
 
     class GameState {
@@ -114,26 +111,26 @@ classDiagram
         +LatestClearedLocationId: Int
     }
 
-    EchoReborn *-- InitialState : initialState
-    EchoReborn *-- GameState : gameState
-    GameState *-- Character
-    GameState *-- World
+    EchoReborn *-- "1" GameData : gameData
+    EchoReborn *-- "1" GameState : gameState
+    GameState *-- "1" Character
+    GameState *-- "1" World
 
-    InitialState *-- Skills : skills
-    InitialState *-- Locations : location
-    InitialState *-- Enemies : enemies
-    InitialState *-- Character : character
+    GameData *-- "1"Skills : skills
+    GameData *--"1"Locations : location
+    GameData *--"1" Enemies : enemies
+    GameData *--"1" Character : character
 
     World ..> Location
-    EnemyRefs "1" ..> "*" Enemy
-    SkillRefs "1" ..> "*" Skill
+    EnemyRefs  ..>  Enemy
+    SkillRefs  ..>  Skill
 
-    Locations *-- Location
-    Enemies *-- Enemy : EnemyList
-    Enemy *-- SkillRefs : uses
-    Skills *-- Skill
-    Character *-- SkillRefs : starts with
-    Location *-- EnemyRefs : encounters
+    Locations *-- "5"Location
+    Enemies *-- "1..*"Enemy : EnemyList
+    Enemy "1..*"<-- "1..*"SkillRefs : uses
+    Skills *-- "1..*"Skill
+    Character *-- "1" SkillRefs : skillRefs
+    Location *-- "1..*"EnemyRefs : encounters
     Location *-- "1" Fragment : fragment
 
   
