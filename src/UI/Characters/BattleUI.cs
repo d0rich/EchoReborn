@@ -81,7 +81,7 @@ public class BattleUI
         enemy.Animations.Position = new Vector2(900, 200);
         enemy.Animations.Scale = 3;
         
-        _enemylevel = new LevelDiamond(new Vector2(1260, 580), enemy.Level);
+        _enemylevel = new LevelDiamond(new Vector2(1200, 580), enemy.Level);
         _enemyHpBar = new HpBar(_hpBar.Position + new Vector2(800, 0), enemy);
         PlayEnemyEnteringAnimation();
     }
