@@ -99,9 +99,9 @@
             <xs:element name="animationClass" type="xs:string"/>
             <xs:element name="rewardXP" type="xs:int"/>
             <xs:element name="skills" type="er:SkillRefs">
-                <xs:key name="skilKey">
-                    <xs:selector xpath="."/>
-                    <xs:field xpath="er:skillRef"/>
+                <xs:key name="skillRefKey">
+                    <xs:selector xpath="er:skillRef"/>
+                    <xs:field xpath="."/>
                 </xs:key>
             </xs:element>
         </xs:sequence>
