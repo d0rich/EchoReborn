@@ -40,12 +40,9 @@ public class BattleUI
 
     public BattleUI(Character character)
     {
-        if (character.Animations == null)
-        {
-            character.Animations = new UI.Characters.WandererMagicianAnimation();
-            character.Animations.Position = new Vector2(200, 200);
-            character.Animations.Scale = 3;
-        }
+        character.LoadAnimations();
+        character.Animations.Position = new Vector2(200, 200);
+        character.Animations.Scale = 3;
 
         _character = character;
 
@@ -79,13 +76,10 @@ public class BattleUI
         _enemy = enemy;
         _battleSystem = battleSystem;
         
-        if (enemy.Animations == null)
-        {
-            enemy.Animations = new UI.Characters.PlantAnimation();
-            enemy.Animations.FaceLeft();
-            enemy.Animations.Position = new Vector2(900, 200);
-            enemy.Animations.Scale = 3;
-        }
+        enemy.LoadAnimations();
+        enemy.Animations.FaceLeft();
+        enemy.Animations.Position = new Vector2(900, 200);
+        enemy.Animations.Scale = 3;
         
         _enemylevel = new LevelDiamond(new Vector2(1260, 580), enemy.Level);
         _enemyHpBar = new HpBar(_hpBar.Position + new Vector2(800, 0), enemy);

@@ -7,14 +7,16 @@ public class Character : BattleActor
 {
     public int Exp { get; private set; }
     public int NextLevelExp => 100;
-    public Character(int level, int exp, List<BattleAction> skills): base(level, skills)
+    public Character(int level, int exp, List<BattleAction> skills)
+        : base(level: level, skills: skills, animationClassName: "WandererMagicianAnimation")
     {
         Exp = exp;
     }
 
     public Character(Models.Character model) : base(
-        model.Level, 
-        model.Skills
+        level: model.Level, 
+        skillRefs: model.Skills,
+        animationClassName: "WandererMagicianAnimation"
     )
     {
         Exp = model.Experience;

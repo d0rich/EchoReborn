@@ -43,6 +43,11 @@ public static class DataManager
         CheckInitialized();
         return DeserializeData<Enemies>(EnemiesFilePath).Enemy.ToList();
     }
+    
+    public static Enemy LoadEnemyById(int enemyId)
+    {
+        return LoadAllEnemies().FirstOrDefault(e => e.Id == enemyId);
+    }
 
     public static List<Skill> LoadAllSkills()
     {
@@ -71,6 +76,17 @@ public static class DataManager
         }
 
         return selectedSkills;
+    }
+    
+    public static List<Location> LoadAllLocations()
+    {
+        CheckInitialized();
+        return DeserializeData<Locations>(LocationsFilePath).Location.ToList();
+    }
+
+    public static Location LoadLocationById(int locationId)
+    {
+        return LoadAllLocations().FirstOrDefault(l => l.Id == locationId);
     }
     
     private static void GenerateStatistiques(string inputXmlPath, string outputXmlPath)

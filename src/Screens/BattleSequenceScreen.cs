@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using EchoReborn.Data;
-using ModelMesh = EchoReborn.Data.Models.Generated;
+using Models = EchoReborn.Data.Models.Generated;
 using System.Linq;
 
 namespace EchoReborn.Screens
@@ -17,6 +17,7 @@ namespace EchoReborn.Screens
         private Character _player;
         private BattleUI _hud;
         private BattleSystem _battleSystem;
+        private Models.Location _location;
         
         private Queue<Enemy> _enemyQueue = new Queue<Enemy>();
 
@@ -25,9 +26,11 @@ namespace EchoReborn.Screens
         {
             _player = new Character(DataManager.LoadBaseCharacter());
             _hud = new BattleUI( _player );
-            for (int i = 0; i < 5; i++)
+            _location = DataManager.LoadLocationById(1);
+            
+            foreach (int enemyRef in _location.Enemies)
             {
-                var enemyData = new Enemy(1, DataManager.LoadAllEnemies().First());
+                var enemyData = new Enemy(1, DataManager.LoadEnemyById(enemyRef));
                 _enemyQueue.Enqueue(enemyData);
             }
         }
