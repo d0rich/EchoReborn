@@ -100,9 +100,9 @@
             <xs:element name="rewardXP" type="xs:int"/>
             <xs:element name="skills" type="er:SkillRefs">
                 <xs:key name="skilKey">
-                    <xs:selector xpath="."/>
+                    <xs:selector xpath="./."/>
                     <xs:field xpath="er:skillRef"/>
-                </xs:key>
+</xs:key>
             </xs:element>
         </xs:sequence>
         <xs:attribute name="id" type="xs:int" use="required"/>
