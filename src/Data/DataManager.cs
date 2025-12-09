@@ -85,32 +85,29 @@ public static class DataManager
     {
         CheckInitialized();
         
-        string fullPath = RessourcePath(relativePath);
-        
-        if (!File.Exists(fullPath))
-            throw new FileNotFoundException($"Could not find XML file: {fullPath}");
-        
-        using (FileStream fileStream = new FileStream(fullPath, FileMode.Open))
+        using (FileStream fileStream = new FileStream(RessourcePath(relativePath, true), FileMode.Open))
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
             return (T)xmlSerializer.Deserialize(fileStream);
         }
     }
 
-    private static void SerializeData<T>(string assetName, T data)
+    private static void SerializeData<T>(string assetName, T data, XmlSerializerNamespaces ns)
     {
         CheckInitialized();
-        // Note: XNA's ContentManager does not support saving data at runtime.
-        // This method is a placeholder to indicate where serialization logic would go.
-        throw new System.NotImplementedException("Serialization is not supported in XNA ContentManager.");
+        using (TextWriter writer = new StreamWriter(RessourcePath(assetName)))
+        {
+            var xml = new XmlSerializer(typeof(T));
+            xml.Serialize(writer, data, ns);
+        }
     }
 
     private static void SplitXmlData()
     {
-        ApplyXsl(RessourcePath("xslt/copyof/Character.xslt"), RessourcePath(CharacterFilePath));
-        ApplyXsl(RessourcePath("xslt/copyof/Enemies.xslt"), RessourcePath(EnemiesFilePath));
-        ApplyXsl(RessourcePath("xslt/copyof/Skills.xslt"), RessourcePath(SkillsFilePath));
-        ApplyXsl(RessourcePath("xslt/copyof/Locations.xslt"), RessourcePath(LocationsFilePath));
+        ApplyXsl(RessourcePath("xslt/copyof/Character.xslt", true), RessourcePath(CharacterFilePath));
+        ApplyXsl(RessourcePath("xslt/copyof/Enemies.xslt", true), RessourcePath(EnemiesFilePath));
+        ApplyXsl(RessourcePath("xslt/copyof/Skills.xslt", true), RessourcePath(SkillsFilePath));
+        ApplyXsl(RessourcePath("xslt/copyof/Locations.xslt", true), RessourcePath(LocationsFilePath));
     }
 
     private static void ApplyXsl(string xslPath, string outputPath)
@@ -120,14 +117,19 @@ public static class DataManager
         xslt.Load(xslPath);
 
         
-        using var htmlWriter = new XmlTextWriter(outputPath, null);
-        xslt.Transform(xpathDoc, null, htmlWriter);
+        using var writer = new XmlTextWriter(outputPath, null);
+        xslt.Transform(xpathDoc, null, writer);
     }
     
-    private static string RessourcePath(string relativePath)
+    private static string RessourcePath(string relativePath, bool ensureExists = false)
     {
         CheckInitialized();
-        return Path.Combine(_contentRootPath, relativePath);
+        var path = Path.Combine(_contentRootPath, relativePath);
+        
+        if (ensureExists && !File.Exists(path))
+            throw new FileNotFoundException($"Could not find file: {path}");
+
+        return path;
     }
 
     private static void CheckInitialized()
