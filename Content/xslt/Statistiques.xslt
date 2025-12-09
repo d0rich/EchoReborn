@@ -4,30 +4,25 @@
         xmlns:er="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn"
         version="1.0">
 
+    <xsl:output method="xml" indent="yes" />
 
-
-
-    <xsl:output method="xml" indent="yes"/>
     <xsl:template match="/">
         <Statistiques>
-
-            <!--nombre total de fragments-->
+           <!-- nombre fragment -->
             <fragments>
                 <totalFragments>
                     <xsl:value-of
                             select="count(er:initialState/er:locations/er:location/er:fragment)"/>
                 </totalFragments>
             </fragments>
-
-            <!--compétence ennemis-->
-            <enemySkills>
+             <!-- skills d'enemies -->
+            <enemySkillsStats>
                 <totalEnemySkills>
                     <xsl:value-of
                             select="count(er:initialState/er:enemies/er:enemy/er:skills/er:skillRef)"/>
                 </totalEnemySkills>
-            </enemySkills>
-
-            <!--enemies faciles-->
+            </enemySkillsStats>
+           <!--les enemies -->
             <enemyDifficulty>
                 <enemiesFaciles>
                     <xsl:value-of
@@ -35,24 +30,20 @@
                 </enemiesFaciles>
             </enemyDifficulty>
 
-            <!--locations importantes -->
+            <!--nbr total locations -->
             <locationStats>
-                <nombreStart>
+                <nombreLocations>
                     <xsl:value-of
-                            select="count(er:initialState/er:locations/er:location[er:isStartLocation='true'])"/>
-                </nombreStart>
-                <nombreFinal>
-                    <xsl:value-of
-                            select="count(er:initialState/er:locations/er:location[er:isFinalLocation='true'])"/>
-                </nombreFinal>
+                            select="count(er:initialState/er:locations/er:location)"/>
+                </nombreLocations>
             </locationStats>
 
-            <!--repartition des types de skills -->
             <skillsStats>
                 <nombreBasic>
                     <xsl:value-of
                             select="count(er:initialState/er:skills/er:skill[er:type='BASIC'])"/>
                 </nombreBasic>
+
                 <nombreComplex>
                     <xsl:value-of
                             select="count(er:initialState/er:skills/er:skill[er:type='COMPLEX'])"/>
