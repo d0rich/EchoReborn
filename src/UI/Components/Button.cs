@@ -16,7 +16,7 @@ public class Button
     private static ButtonState _currentMouseState = ButtonState.Released;
     
     private Rectangle _bounds;
-    private string _text;
+    public string Text { get; set; }
     private SpriteFont _font;
     private bool _isHovered;
     private Action _onClickCallback;
@@ -40,7 +40,7 @@ public class Button
     public Button(Rectangle bounds, string text, SpriteFont font, Action onClickCallback = null)
     {
         _bounds = bounds;
-        _text = text;
+        Text = text;
         _font = font;
         _isHovered = false;
         _onClickCallback = onClickCallback;
@@ -109,14 +109,14 @@ public class Button
     {
         if (_font != null)
         {
-            Vector2 textSize = _font.MeasureString(_text);
+            Vector2 textSize = _font.MeasureString(Text);
             Vector2 textPosition = new Vector2(
                 _bounds.X + (_bounds.Width - textSize.X) / 2,
                 _bounds.Y + (_bounds.Height - textSize.Y) / 2
             );
 
             Color textColor = _isHovered ? Color.Black : Color.White;
-            DrawingContext.SpriteBatch.DrawString(_font, _text, textPosition, textColor);
+            DrawingContext.SpriteBatch.DrawString(_font, Text, textPosition, textColor);
         }
     }
 }
