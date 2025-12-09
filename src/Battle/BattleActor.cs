@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using EchoReborn.Data;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System;
 
 namespace EchoReborn.Battle;
 
@@ -26,7 +27,8 @@ public abstract  class BattleActor
     public int Energy { get; protected set; }
     public int MaxEnergy => 100;
 
-    public IBattleActorAnimations Animations { get; set; }
+    public IBattleActorAnimations Animations { get; protected set; }
+    protected String AnimationClassName = null;
     
 
     public bool IsDead => HP <= 0;
@@ -36,21 +38,53 @@ public abstract  class BattleActor
 
     public List<BattleAction> Skills => new List<BattleAction>(_skills);
 
-    protected BattleActor(int level, List<BattleAction> skills)
+    protected BattleActor(int level, List<BattleAction> skills, string animationClassName = null)
     {
         Level = level;
         HP = MaxHP;
         Energy = MaxEnergy;
         _skills = skills;
+        AnimationClassName = animationClassName;
     }
 
-    protected BattleActor(int level, Collection<int> skillRefs) : this(
-        level, 
-        DataManager
+    protected BattleActor(int level, Collection<int> skillRefs, string animationClassName = null) : this(
+        level: level, 
+        skills: DataManager
             .LoadSkillsByIds(skillRefs)
             .Select(s => new BattleAction(s))
-            .ToList()
+            .ToList(),
+        animationClassName: animationClassName
         ) { }
+
+    public bool LoadAnimations(IBattleActorAnimations animations)
+    {
+        if (Animations != null)
+        {
+            return false;
+        }
+        Animations = animations;
+        return true;
+    }
+    
+    public bool LoadAnimations(string className)
+    { 
+        Type animType = Type.GetType($"EchoReborn.UI.Characters.{className}");
+        if (animType == null)
+        {
+            throw new Exception($"Animation class '{className}' not found.");
+        }
+        IBattleActorAnimations animations = (IBattleActorAnimations)Activator.CreateInstance(animType);
+        return LoadAnimations(animations);
+    }
+
+    public bool LoadAnimations()
+    {
+        if (AnimationClassName == null)
+        {
+            return false;
+        }
+        return LoadAnimations(AnimationClassName);
+    }
 
     public void SpendEnergy(int amount)
     {

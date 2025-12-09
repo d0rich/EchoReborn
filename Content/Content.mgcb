@@ -27,6 +27,15 @@
 /build:Fonts/ButtonFont.spritefont
 
 #============================================================================#
+#                         Background Images                                  #
+#============================================================================#
+
+#begin Locations/BackgroundMenu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/BackgroundMenu.png
+
+#============================================================================#
 #                    WandererMagician Character Sprites                      #
 #============================================================================#
 

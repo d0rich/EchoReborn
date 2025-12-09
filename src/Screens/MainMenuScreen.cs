@@ -9,12 +9,14 @@ namespace EchoReborn.Screens
 {
     public class MainMenuScreen : IScreen
     {
+        private Texture2D _backgroundTexture;
         private Button _startGameButton;
         private Button _testsButton;
         private Button _exitButton;
 
         public MainMenuScreen()
         {
+            _backgroundTexture = DrawingContext.ContentManager.Load<Texture2D>("Locations/BackgroundMenu");
             // bouton Start Game
             _startGameButton = new Button(
                 bounds: new Rectangle(540, 200, 200, 60),
@@ -52,6 +54,7 @@ namespace EchoReborn.Screens
             DrawingContext.GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
 
+            DrawBackground();
             DrawTitle();
             _startGameButton.Draw();
             _testsButton.Draw();
@@ -63,6 +66,17 @@ namespace EchoReborn.Screens
         public void Destroy()
         {
             // rien à détruire
+        }
+        
+        private void DrawBackground()
+        {
+            var graphicsDevice = DrawingContext.GraphicsDevice;
+            var spriteBatch = DrawingContext.SpriteBatch;
+            spriteBatch.Draw(
+                _backgroundTexture,
+                new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height),
+                Color.White
+            );
         }
 
         private void DrawTitle()

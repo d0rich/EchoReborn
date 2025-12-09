@@ -9,12 +9,16 @@ public class Enemy : BattleActor
 {
 
 
-    public Enemy(int level, List<BattleAction> skills) : base(level, skills)
-    { }
+    public Enemy(int level, List<BattleAction> skills, IBattleActorAnimations animations = null)
+        : base(level: level, skills: skills)
+    {
+        LoadAnimations(animations);
+    }
 
     public Enemy(int level, Models.Enemy model) : base(
-        level, 
-        model.Skills
+        level: level, 
+        skillRefs: model.Skills,
+        animationClassName: model.AnimationClass
     ) { }
 
 

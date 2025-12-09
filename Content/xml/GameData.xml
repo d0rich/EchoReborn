@@ -8,10 +8,13 @@
             <isStartLocation>true</isStartLocation>
             <isFinalLocation>false</isFinalLocation>
             <connectedLocationId>2</connectedLocationId>
-            <enemyEncounterId>
-                <enemyRefs>1</enemyRefs>
-                <enemyRefs>2</enemyRefs>
-            </enemyEncounterId>
+            <enemies>
+                <enemyRefs>101</enemyRefs>
+                <enemyRefs>102</enemyRefs>
+                <enemyRefs>101</enemyRefs>
+                <enemyRefs>101</enemyRefs>
+                <enemyRefs>103</enemyRefs>
+            </enemies>
             <fragment id="10">
                 <name>Broken Statue Fragment</name>
                 <image>assets/fragments/statue.png</image>
@@ -23,9 +26,9 @@
             <isStartLocation>false</isStartLocation>
             <isFinalLocation>false</isFinalLocation>
             <connectedLocationId>3</connectedLocationId>
-            <enemyEncounterId>
+            <enemies>
                 <enemyRefs>3</enemyRefs>
-            </enemyEncounterId>
+            </enemies>
             <fragment id="11">
                 <name>Mysterious Rune</name>
                 <image>assets/fragments/rune.png</image>
@@ -37,9 +40,9 @@
             <isStartLocation>false</isStartLocation>
             <isFinalLocation>true</isFinalLocation>
             <connectedLocationId>2</connectedLocationId>
-            <enemyEncounterId>
+            <enemies>
                 <enemyRefs>4</enemyRefs>
-            </enemyEncounterId>
+            </enemies>
             <fragment id="12">
                 <name>Ancient Bark</name>
                 <image>assets/fragments/bark.png</image>
@@ -47,31 +50,31 @@
         </location>
     </locations>
     <enemies>
-        <enemy id="1">
-            <name>Wolf</name>
+        <enemy id="101">
+            <name>Elf Archer</name>
             <difficulty>1</difficulty>
             <maxHP>50</maxHP>
-            <animationClass>WolfAnim</animationClass>
+            <animationClass>SkeletonArcherAnimation</animationClass>
             <rewardXP>10</rewardXP>
             <skills>
                 <skillRef>1</skillRef>
             </skills>
         </enemy>
-        <enemy id="2">
-            <name>Forest Spirit</name>
+        <enemy id="102">
+            <name>Elf Swordsman</name>
             <difficulty>2</difficulty>
             <maxHP>80</maxHP>
-            <animationClass>SpiritAnim</animationClass>
+            <animationClass>Elfe2Animation</animationClass>
             <rewardXP>20</rewardXP>
             <skills>
                 <skillRef>2</skillRef>
             </skills>
         </enemy>
-        <enemy id="3">
-            <name>Dark Ent</name>
+        <enemy id="103">
+            <name>Elf Wizard</name>
             <difficulty>3</difficulty>
             <maxHP>120</maxHP>
-            <animationClass>EntAnim</animationClass>
+            <animationClass>Elfe3Animation</animationClass>
             <rewardXP>40</rewardXP>
             <skills>
                 <skillRef>1</skillRef>

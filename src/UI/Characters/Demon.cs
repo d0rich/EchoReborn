@@ -16,7 +16,7 @@ public class DemonAnimation : CharacterAnimationBase<DemonAnimationState>, IBatt
 {
     private static readonly Dictionary<DemonAnimationState, int> FrameCount = new()
     {
-        { DemonAnimationState.Idle,   2 }, 
+        { DemonAnimationState.Idle,   3 }, 
         { DemonAnimationState.Walk,   6 }, 
         { DemonAnimationState.Attack, 4 }, 
         { DemonAnimationState.Hurt,   2 }, 

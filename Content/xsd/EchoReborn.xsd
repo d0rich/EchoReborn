@@ -17,6 +17,8 @@
     <xs:element name="character" type="er:Character"/>
     <!-- Element racine pour skills -->
     <xs:element name="skills" type="er:Skills"/>
+    <!-- Element racine pour locations -->
+    <xs:element name="locations" type="er:Locations"/>
     
     <!-- 2 elements : initialState, gameState -->
     <xs:complexType name="EchoReborn">
@@ -51,7 +53,7 @@
             <xs:element name="isStartLocation" type="xs:boolean"/>
             <xs:element name="isFinalLocation" type="xs:boolean"/>
             <xs:element name="connectedLocationId" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="enemyEncounterId" type="er:EnemyRefs"/>
+            <xs:element name="enemies" type="er:EnemyRefs"/>
             <xs:element name="fragment" type="er:Fragment"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:int" use="required"/>
@@ -126,8 +128,8 @@
     <!--  Type énuméré pour le targetType  -->
     <xs:simpleType name="TargetType">
         <xs:restriction base="xs:string">
-            <!--      ALLIER     -->
-            <xs:enumeration value="ALLIER"/>
+            <!--      ALLIES     -->
+            <xs:enumeration value="ALLIES"/>
             <!--      ENEMIES      -->
             <xs:enumeration value="ENEMIES"/>
             <!--      ALL      -->
