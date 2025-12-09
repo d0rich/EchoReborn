@@ -155,11 +155,15 @@ public class BattleUI
         _enemylevel?.Draw();
         _enemyHpBar?.Draw();
 
-        spriteBatch.DrawString(
-            GameFonts.ButtonFont,
-            "Enemy",
-            new Vector2(1200, 680),
-            Color.Black);
+        if (_enemy != null)
+        {
+            spriteBatch.DrawString(
+                        GameFonts.ButtonFont,
+                        _enemy.Name,
+                        new Vector2(1100, 680),
+                        Color.Black);
+        }
+        
 
         if (_battleSystem?.State == BattleEtape.PENDING_PLAYER)
         {
