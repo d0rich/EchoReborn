@@ -22,7 +22,7 @@ namespace EchoReborn.Screens
                 bounds: new Rectangle(540, 200, 200, 60),
                 text: "Start Game",
                 font: GameFonts.ButtonFont,
-                onClickCallback: () => ScreenManager.SwitchScreen(new BattleSequenceScreen())
+                onClickCallback: () => ScreenManager.SwitchScreen(new BattleSequenceScreen(1))
             );
 
             _testsButton = new Button(
