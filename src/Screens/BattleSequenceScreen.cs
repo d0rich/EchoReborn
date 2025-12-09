@@ -18,15 +18,20 @@ namespace EchoReborn.Screens
         private BattleUI _hud;
         private BattleSystem _battleSystem;
         private Models.Location _location;
+        private Texture2D _backgroundTexture;
+        private Texture2D _fragmentTexture;
         
         private Queue<Enemy> _enemyQueue = new Queue<Enemy>();
 
 
-        public BattleSequenceScreen()
+        public BattleSequenceScreen(int locationId)
         {
             _player = new Character(DataManager.LoadBaseCharacter());
             _hud = new BattleUI( _player );
-            _location = DataManager.LoadLocationById(1);
+            _location = DataManager.LoadLocationById(locationId);
+            
+            _backgroundTexture = DrawingContext.ContentManager.Load<Texture2D>($"Locations/Location{locationId}/bg");
+            _fragmentTexture = DrawingContext.ContentManager.Load<Texture2D>($"Locations/Location{locationId}/{_location.Fragment.Image}");
             
             foreach (int enemyRef in _location.Enemies)
             {
@@ -55,6 +60,7 @@ namespace EchoReborn.Screens
             SpriteBatch sb = DrawingContext.SpriteBatch;
             sb.Begin();
 
+            DrawBackground();
             _hud.Draw(gameTime);
 
             sb.End();
@@ -63,6 +69,17 @@ namespace EchoReborn.Screens
         public void Destroy()
         {
             
+        }
+        
+        private void DrawBackground()
+        {
+            var graphicsDevice = DrawingContext.GraphicsDevice;
+            var spriteBatch = DrawingContext.SpriteBatch;
+            spriteBatch.Draw(
+                _backgroundTexture,
+                new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height),
+                Color.White
+            );
         }
     }
 }

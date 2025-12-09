@@ -11,6 +11,11 @@
         <Start>&#32;</Start>
         <End>&#126;</End>
       </CharacterRegion>
+      <!-- French accented characters -->
+      <CharacterRegion>
+        <Start>&#192;</Start>
+        <End>&#255;</End>
+      </CharacterRegion>
     </CharacterRegions>
   </Asset>
 </XnaContent>

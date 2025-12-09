@@ -5,52 +5,83 @@
 
     <locations>
         <location id="1">
-            <name>Forest Entrance</name>
+            <name>Campmenet Orc</name>
             <difficulty>1</difficulty>
             <enemies>
                 <enemyRef>101</enemyRef>
                 <enemyRef>102</enemyRef>
-                <enemyRef>101</enemyRef>
-                <enemyRef>101</enemyRef>
                 <enemyRef>103</enemyRef>
             </enemies>
             <fragment id="10">
-                <name>Broken Statue Fragment</name>
-                <image>assets/fragments/statue.png</image>
+                <name>Oreilles</name>
+                <image>Oreilles</image>
             </fragment>
         </location>
         <location id="2">
-            <name>Deep Forest</name>
-            <difficulty>3</difficulty>
+            <name>Forêt Sacré</name>
+            <difficulty>2</difficulty>
             <enemies>
-                <enemyRef>3</enemyRef>
+                <enemyRef>201</enemyRef>
+                <enemyRef>202</enemyRef>
+                <enemyRef>203</enemyRef>
             </enemies>
             <fragment id="11">
-                <name>Mysterious Rune</name>
-                <image>assets/fragments/rune.png</image>
+                <name>Les Bras</name>
+                <image>les_bras</image>
             </fragment>
         </location>
         <location id="3">
-            <name>Ancient Tree</name>
-            <difficulty>5</difficulty>
+            <name>Cimetière Oublié</name>
+            <difficulty>3</difficulty>
             <enemies>
-                <enemyRef>4</enemyRef>
+                <enemyRef>301</enemyRef>
+                <enemyRef>302</enemyRef>
+                <enemyRef>303</enemyRef>
             </enemies>
             <fragment id="12">
-                <name>Ancient Bark</name>
-                <image>assets/fragments/bark.png</image>
+                <name>Yeux de Vision Magique</name>
+                <image>yeux</image>
             </fragment>
         </location>
+        <location id="4">
+            <name>Cimetière Oublié</name>
+            <difficulty>3</difficulty>
+            <enemies>
+                <enemyRef>401</enemyRef>
+                <enemyRef>402</enemyRef>
+                <enemyRef>403</enemyRef>
+            </enemies>
+            <fragment id="14">
+                <name>Les Jambes Mysterieux</name>
+                <image>Jambes</image>
+            </fragment>
+        </location>
+        <location id="5">
+            <name>Fortress Des Chevaliers</name>
+            <difficulty>4</difficulty>
+            <enemies>
+                <enemyRef>501</enemyRef>
+                <enemyRef>502</enemyRef>
+                <enemyRef>503</enemyRef>
+            </enemies>
+            <fragment id="15">
+                <name>Le Coeur</name>
+                <image>Coeur</image>
+            </fragment>
+        </location>
+
+
     </locations>
     <enemies>
         <enemy id="101">
             <name>Elf Archer</name>
             <difficulty>1</difficulty>
             <maxHP>50</maxHP>
-            <animationClass>SkeletonArcherAnimation</animationClass>
+            <animationClass>Elfe1Animation</animationClass>
             <rewardXP>10</rewardXP>
             <skills>
                 <skillRef>1</skillRef>
+                <skillRef>2</skillRef>
             </skills>
         </enemy>
         <enemy id="102">
@@ -61,6 +92,7 @@
             <rewardXP>20</rewardXP>
             <skills>
                 <skillRef>2</skillRef>
+                <skillRef>3</skillRef>
             </skills>
         </enemy>
         <enemy id="103">
@@ -74,17 +106,144 @@
                 <skillRef>3</skillRef>
             </skills>
         </enemy>
-
-        <enemy id="4">
-            <name>Ancient Guardian</name>
-            <difficulty>5</difficulty>
-            <maxHP>200</maxHP>
-            <animationClass>GuardianAnim</animationClass>
-            <rewardXP>100</rewardXP>
+        <enemy id="201">
+            <name>Spear Knight</name>
+            <difficulty>1</difficulty>
+            <maxHP>130</maxHP>
+            <animationClass>Knigth1Animation</animationClass>
+            <rewardXP>50</rewardXP>
             <skills>
+                <skillRef>2</skillRef>
                 <skillRef>4</skillRef>
             </skills>
         </enemy>
+        <enemy id="202">
+            <name>Axe Knight</name>
+            <difficulty>2</difficulty>
+            <maxHP>200</maxHP>
+            <animationClass>Knight2Animation</animationClass>
+            <rewardXP>80</rewardXP>
+            <skills>
+                <skillRef>3</skillRef>
+                <skillRef>4</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="203">
+            <name>Sword Knight</name>
+            <difficulty>3</difficulty>
+            <maxHP>250</maxHP>
+            <animationClass>Knight3Animation</animationClass>
+            <rewardXP>110</rewardXP>
+            <skills>
+                <skillRef>4</skillRef>
+                <skillRef>5</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="301">
+            <name>Hammer Orc</name>
+            <difficulty>1</difficulty>
+            <maxHP>300</maxHP>
+            <animationClass>Orc1Animation</animationClass>
+            <rewardXP>120</rewardXP>
+            <skills>
+                <skillRef>4</skillRef>
+                <skillRef>5</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="302">
+            <name>Mohawk Orc</name>
+            <difficulty>2</difficulty>
+            <maxHP>350</maxHP>
+            <animationClass>Orc2Animation</animationClass>
+            <rewardXP>140</rewardXP>
+            <skills>
+                <skillRef>3</skillRef>
+                <skillRef>4</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="303">
+            <name>Armored Orc</name>
+            <difficulty>3</difficulty>
+            <maxHP>400</maxHP>
+            <animationClass>Orc3Animation</animationClass>
+            <rewardXP>180</rewardXP>
+            <skills>
+                <skillRef>4</skillRef>
+                <skillRef>6</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="401">
+            <name>Skeleton Archer</name>
+            <difficulty>1</difficulty>
+            <maxHP>450</maxHP>
+            <animationClass>SkeletonArcherAnimation</animationClass>
+            <rewardXP>200</rewardXP>
+            <skills>
+                <skillRef>4</skillRef>
+                <skillRef>3</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="402">
+            <name>Skeleton Spearman</name>
+            <difficulty>2</difficulty>
+            <maxHP>500</maxHP>
+            <animationClass>SkeletonSpearmanAnimation</animationClass>
+            <rewardXP>250</rewardXP>
+            <skills>
+                <skillRef>4</skillRef>
+                <skillRef>6</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="403">
+            <name>Skeleton Warrior</name>
+            <difficulty>3</difficulty>
+            <maxHP>550</maxHP>
+            <animationClass>SkeletonWarriorAnimation</animationClass>
+            <rewardXP>300</rewardXP>
+            <skills>
+                <skillRef>3</skillRef>
+                <skillRef>6</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="501">
+            <name>Demon</name>
+            <difficulty>1</difficulty>
+            <maxHP>600</maxHP>
+            <animationClass>DemonAnimation</animationClass>
+            <rewardXP>400</rewardXP>
+            <skills>
+                <skillRef>5</skillRef>
+                <skillRef>7</skillRef>
+            </skills>
+        </enemy>
+        <enemy id="502">
+            <name>Dragon</name>
+            <difficulty>2</difficulty>
+            <maxHP>700</maxHP>
+            <animationClass>DragonAnimation</animationClass>
+            <rewardXP>500</rewardXP>
+            <skills>
+                <skillRef>5</skillRef>
+                <skillRef>7</skillRef>
+            </skills>
+        </enemy>
+
+        <enemy id="503">
+            <name>Meduasa</name>
+            <difficulty>3</difficulty>
+            <maxHP>800</maxHP>
+            <animationClass>MedusaAnimation</animationClass>
+            <rewardXP>700</rewardXP>
+            <skills>
+                <skillRef>6</skillRef>
+                <skillRef>7</skillRef>
+            </skills>
+        </enemy>
+        
+        
+
+
+
     </enemies>
     <character>
         <level>1</level>
@@ -95,8 +254,8 @@
         <maxMana>50</maxMana>
 
         <skills>
-            <skillRef>1</skillRef>
-            <skillRef>2</skillRef>
+            <skillRef>5</skillRef>
+            <skillRef>6</skillRef>
         </skills>
     </character>
     <skills>
@@ -109,8 +268,6 @@
             <HealthCost>0</HealthCost>
             <Damage>15</Damage>
             <Heal>0</Heal>
-            <AnimationClass>SlashAnim</AnimationClass>
-            <SkillClass>BasicSkill</SkillClass>
         </skill>
         <skill id="2">
             <type>BASIC</type>
@@ -121,11 +278,21 @@
             <HealthCost>0</HealthCost>
             <Damage>25</Damage>
             <Heal>0</Heal>
-            <AnimationClass>FireballAnim</AnimationClass>
-            <SkillClass>BasicSkill</SkillClass>
+            
         </skill>
         <skill id="3">
-            <type>COMPLEX</type>
+            <type>BASIC</type>
+            <name>Punch</name>
+            <description>Punching Attack</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>12</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>30</Damage>
+            <Heal>0</Heal>
+        </skill>
+        
+        <skill id="4">
+            <type>BASIC</type>
             <name>Root Bind</name>
             <description>Immobilizes the enemy</description>
             <TargetType>ENEMIES</TargetType>
@@ -133,20 +300,41 @@
             <HealthCost>0</HealthCost>
             <Damage>5</Damage>
             <Heal>0</Heal>
-            <AnimationClass>RootAnim</AnimationClass>
-            <SkillClass>ComplexSkill</SkillClass>
         </skill>
-        <skill id="4">
-            <type>COMPLEX</type>
+        <skill id="5">
+            <type>BASIC</type>
             <name>Nature's Wrath</name>
             <description>Massive AoE nature attack</description>
-            <TargetType>ALL</TargetType>
+            <TargetType>ENEMIES</TargetType>
             <ManaCost>30</ManaCost>
             <HealthCost>0</HealthCost>
             <Damage>60</Damage>
             <Heal>0</Heal>
-            <AnimationClass>WrathAnim</AnimationClass>
-            <SkillClass>ComplexSkill</SkillClass>
+        </skill>
+
+        <skill id="6">
+            <type>BASIC</type>
+            <name>Kick HIT</name>
+            <description>Fast Kick Hit</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>40</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>70</Damage>
+            <Heal>0</Heal>
+            <AnimationClass>IceLanceAnim</AnimationClass>
+            <SkillClass>BasicSkill</SkillClass>
+        </skill>
+
+        <skill id="7">
+            <type>BASIC</type>
+            <name>Void Strike</name>
+            <description>Condensed dark energy blast</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>18</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>100</Damage>
+            <Heal>0</Heal>
+            
         </skill>
     </skills>
 

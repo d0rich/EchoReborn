@@ -27,8 +27,8 @@ public class LevelDiamond
         int size = 32;
 
         Rectangle dest = new Rectangle(
-            (int)(center.X - size / 2),
-            (int)(center.Y - size / 2),
+            (int)(center.X + size / 2),
+            (int)(center.Y + size / 2),
             size,
             size);
 
@@ -39,7 +39,7 @@ public class LevelDiamond
             sourceRectangle: null,
             color: Color.White,
             rotation: MathHelper.ToRadians(45),
-            origin: new Vector2(size/2, size/2),
+            origin: new Vector2(0.5f, 0.5f),
             effects: SpriteEffects.None,
             layerDepth: 0f);
 
@@ -47,8 +47,8 @@ public class LevelDiamond
         string levelText = _level.ToString();
         Vector2 textSize = _font.MeasureString(levelText);
         Vector2 textPos = new Vector2(
-            center.X - textSize.X / 2,
-            center.Y - textSize.Y / 2);
+            center.X + 5 + textSize.X / 2,
+            center.Y + 2);
 
         spriteBatch.DrawString(_font, levelText, textPos, Color.Black);
     }

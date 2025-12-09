@@ -35,6 +35,56 @@
 /processor:TextureProcessor
 /build:Locations/BackgroundMenu.png
 
+#begin Locations/Location1/bg.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/Location1/bg.jpg
+
+#begin Locations/Location1/Oreilles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/Location1/Oreilles.png
+
+#begin Locations/Location2/bg.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/Location2/bg.jpg
+
+#begin Locations/Location2/les_bras.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/Location2/les_bras.png
+
+#begin Locations/Location3/bg.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/Location3/bg.jpg
+
+#begin Locations/Location3/yeux.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/Location3/yeux.png
+
+#begin Locations/Location4/bg.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/Location4/bg.jpg
+
+#begin Locations/Location4/Jambes.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/Location4/Jambes.png
+
+#begin Locations/Location5/bg.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/Location5/bg.jpg
+
+#begin Locations/Location5/Coeur.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:Locations/Location5/Coeur.png
+
 #============================================================================#
 #                    WandererMagician Character Sprites                      #
 #============================================================================#
