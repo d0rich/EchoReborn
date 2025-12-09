@@ -28,7 +28,7 @@ public static class DataManager
     {
         _contentRootPath = contentManager.RootDirectory;
         IsInitialized = true;
-        SplitXmlData();
+        SplitXmlDataWithDom();
         GenerateStatistiques(GameDataFilePath, StatistiquesFilePath);
     }
 
@@ -118,12 +118,38 @@ public static class DataManager
         }
     }
 
-    private static void SplitXmlData()
+    private static void SplitXmlDataWithXslt()
     {
         ApplyXsl(RessourcePath("xslt/copyof/Character.xslt", true), RessourcePath(CharacterFilePath));
         ApplyXsl(RessourcePath("xslt/copyof/Enemies.xslt", true), RessourcePath(EnemiesFilePath));
         ApplyXsl(RessourcePath("xslt/copyof/Skills.xslt", true), RessourcePath(SkillsFilePath));
         ApplyXsl(RessourcePath("xslt/copyof/Locations.xslt", true), RessourcePath(LocationsFilePath));
+    }
+    
+    private static void SplitXmlDataWithDom()
+    {
+        var doc = new XmlDocument();
+        doc.Load(RessourcePath(GameDataFilePath, true));
+
+        void SaveSmallXml(string tagName, string outputPath)
+        {
+            XmlDocument smallXml = new XmlDocument();
+            XmlDeclaration xmlDeclaration = smallXml.CreateXmlDeclaration("1.0", "UTF-8", null);
+            smallXml.AppendChild(xmlDeclaration);
+            XmlNamespaceManager nsManager = new XmlNamespaceManager(doc.NameTable);
+            nsManager.AddNamespace("er", "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn");
+            var sourceNode = doc.SelectSingleNode($"//er:initialState/er:{tagName}", nsManager);
+            // TODO remarquer dans rapporte 
+            var smallRoot = smallXml.ImportNode(sourceNode, true);
+            ((XmlElement)smallRoot).SetAttribute("xmlns", "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn");
+            smallXml.AppendChild(smallRoot);
+            smallXml.Save(outputPath);
+        }
+        
+        SaveSmallXml("character", RessourcePath(CharacterFilePath));
+        SaveSmallXml("enemies", RessourcePath(EnemiesFilePath));
+        SaveSmallXml("skills", RessourcePath(SkillsFilePath));
+        SaveSmallXml("locations", RessourcePath(LocationsFilePath));
     }
 
     private static void ApplyXsl(string xslPath, string outputPath)

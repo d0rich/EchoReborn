@@ -54,7 +54,7 @@
             <name>Elf Archer</name>
             <difficulty>1</difficulty>
             <maxHP>50</maxHP>
-            <animationClass>Elfe1Animation</animationClass>
+            <animationClass>SkeletonArcherAnimation</animationClass>
             <rewardXP>10</rewardXP>
             <skills>
                 <skillRef>1</skillRef>
