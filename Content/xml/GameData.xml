@@ -27,7 +27,7 @@
             </enemies>
             <fragment id="11">
                 <name>Les Bras</name>
-                <image>Locations/les_bras.png</image>
+                <image>les_bras</image>
             </fragment>
         </location>
         <location id="3">
@@ -40,7 +40,7 @@
             </enemies>
             <fragment id="12">
                 <name>Yeux de Vision Magique</name>
-                <image>Location/yeux.png</image>
+                <image>yeux</image>
             </fragment>
         </location>
         <location id="4">
@@ -53,7 +53,7 @@
             </enemies>
             <fragment id="14">
                 <name>Les Jambes Mysterieux</name>
-                <image>Location/Jambes.png</image>
+                <image>Jambes</image>
             </fragment>
         </location>
         <location id="5">
@@ -66,7 +66,7 @@
             </enemies>
             <fragment id="15">
                 <name>Le Coeur</name>
-                <image>Location/Coeurs.png</image>
+                <image>Coeur</image>
             </fragment>
         </location>
 
