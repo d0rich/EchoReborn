@@ -37,9 +37,20 @@
                     <xs:field xpath="@id"/>
                 </xs:key>
             </xs:element>
-            <xs:element name="enemies" type="er:Enemies"/>
-            <xs:element name="character" type="er:Character"/>
-            <xs:element name="skills" type="er:Skills"/>
+            <xs:element name="enemies" type="er:Enemies">
+                <xs:key name="enmieKey">
+                    <xs:selector xpath="er:enemy"/>
+                    <xs:field xpath="@id"/>
+                </xs:key>
+            </xs:element>
+            <xs:element name="character" type="er:Character">
+            </xs:element>
+            <xs:element name="skills" type="er:Skills">
+                <xs:key name="skillKey">
+                    <xs:selector xpath="er:skill"/>
+                    <xs:field xpath="@id"/>
+                </xs:key>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     
@@ -55,7 +66,9 @@
         <xs:sequence>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="difficulty" type="xs:int"/>
-            <xs:element name="enemies" type="er:EnemyRefs"/>
+            <xs:element name="enemies" type="er:EnemyRefs">
+               
+            </xs:element>
             <xs:element name="fragment" type="er:Fragment"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:int" use="required"/>
@@ -85,7 +98,12 @@
             <xs:element name="maxHP" type="xs:int"/>
             <xs:element name="animationClass" type="xs:string"/>
             <xs:element name="rewardXP" type="xs:int"/>
-            <xs:element name="skills" type="er:SkillRefs"/>
+            <xs:element name="skills" type="er:SkillRefs">
+                <xs:key name="skillRefKey">
+                    <xs:selector xpath="er:skillRef"/>
+                    <xs:field xpath="."/>
+                </xs:key>
+            </xs:element>
         </xs:sequence>
         <xs:attribute name="id" type="xs:int" use="required"/>
     </xs:complexType>
