@@ -31,7 +31,12 @@
     <!-- 4 elements : locations, enemies, character,skills -->
     <xs:complexType name="GameData">
         <xs:sequence>
-            <xs:element name="locations" type="er:Locations"/>
+            <xs:element name="locations" type="er:Locations">
+                <xs:key name="locationKey">
+                    <xs:selector xpath="er:location"/>
+                    <xs:field xpath="@id"/>
+                </xs:key>
+            </xs:element>
             <xs:element name="enemies" type="er:Enemies"/>
             <xs:element name="character" type="er:Character"/>
             <xs:element name="skills" type="er:Skills"/>

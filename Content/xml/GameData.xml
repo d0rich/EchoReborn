@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<initialState xmlns="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn">
+<gameData xmlns="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:schemaLocation="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn ../xsd/EchoReborn.xsd">
 
     <locations>
         <location id="1">
             <name>Forest Entrance</name>
             <difficulty>1</difficulty>
-            <isStartLocation>true</isStartLocation>
-            <isFinalLocation>false</isFinalLocation>
-            <connectedLocationId>2</connectedLocationId>
             <enemies>
                 <enemyRef>101</enemyRef>
                 <enemyRef>102</enemyRef>
@@ -23,9 +22,6 @@
         <location id="2">
             <name>Deep Forest</name>
             <difficulty>3</difficulty>
-            <isStartLocation>false</isStartLocation>
-            <isFinalLocation>false</isFinalLocation>
-            <connectedLocationId>3</connectedLocationId>
             <enemies>
                 <enemyRef>3</enemyRef>
             </enemies>
@@ -37,9 +33,6 @@
         <location id="3">
             <name>Ancient Tree</name>
             <difficulty>5</difficulty>
-            <isStartLocation>false</isStartLocation>
-            <isFinalLocation>true</isFinalLocation>
-            <connectedLocationId>2</connectedLocationId>
             <enemies>
                 <enemyRef>4</enemyRef>
             </enemies>
@@ -157,4 +150,4 @@
         </skill>
     </skills>
 
-</initialState>
+</gameData>
