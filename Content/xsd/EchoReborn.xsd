@@ -175,7 +175,12 @@
             <xs:element name="maxHealth" type="xs:int"/>
             <xs:element name="currentMana" type="xs:int"/>
             <xs:element name="maxMana" type="xs:int"/>
-            <xs:element name="skills" type="er:SkillRefs"/>
+            <xs:element name="skills" type="er:SkillRefs">
+                <xs:key name="characterSkillRefKey">
+                    <xs:selector xpath="er:skillRef"/>
+                    <xs:field xpath="."/>
+                </xs:key>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     
