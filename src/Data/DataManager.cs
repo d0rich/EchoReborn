@@ -138,7 +138,7 @@ public static class DataManager
             smallXml.AppendChild(xmlDeclaration);
             XmlNamespaceManager nsManager = new XmlNamespaceManager(doc.NameTable);
             nsManager.AddNamespace("er", "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn");
-            var sourceNode = doc.SelectSingleNode($"//er:initialState/er:{tagName}", nsManager);
+            var sourceNode = doc.SelectSingleNode($"//er:gameData/er:{tagName}", nsManager);
             // TODO remarquer dans rapporte 
             var smallRoot = smallXml.ImportNode(sourceNode, true);
             ((XmlElement)smallRoot).SetAttribute("xmlns", "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn");

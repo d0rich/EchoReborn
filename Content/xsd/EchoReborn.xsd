@@ -7,8 +7,8 @@
     
     <!-- Element racine -->
     <xs:element name="echoReborn" type="er:EchoReborn"/>
-    <!-- Element racine pour InitialState -->
-    <xs:element name="initialState" type="er:InitialState"/>
+    <!-- Element racine pour GameData -->
+    <xs:element name="gameData" type="er:GameData"/>
     <!-- Element racine pour GameState -->
     <xs:element name="gameState" type="er:GameState"/>
     <!-- Element racine pour enemies-->
@@ -20,18 +20,23 @@
     <!-- Element racine pour locations -->
     <xs:element name="locations" type="er:Locations"/>
     
-    <!-- 2 elements : initialState, gameState -->
+    <!-- 2 elements : gameData, gameState -->
     <xs:complexType name="EchoReborn">
         <xs:sequence>
-            <xs:element name="initialState" type="er:InitialState"/>
+            <xs:element name="gameData" type="er:GameData"/>
             <xs:element name="gameState" type="er:GameState"/>
         </xs:sequence>
     </xs:complexType>
     
     <!-- 4 elements : locations, enemies, character,skills -->
-    <xs:complexType name="InitialState">
+    <xs:complexType name="GameData">
         <xs:sequence>
-            <xs:element name="locations" type="er:Locations"/>
+            <xs:element name="locations" type="er:Locations">
+                <xs:key name="locationKey">
+                    <xs:selector xpath="er:location"/>
+                    <xs:field xpath="@id"/>
+                </xs:key>
+            </xs:element>
             <xs:element name="enemies" type="er:Enemies"/>
             <xs:element name="character" type="er:Character"/>
             <xs:element name="skills" type="er:Skills"/>
@@ -50,9 +55,6 @@
         <xs:sequence>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="difficulty" type="xs:int"/>
-            <xs:element name="isStartLocation" type="xs:boolean"/>
-            <xs:element name="isFinalLocation" type="xs:boolean"/>
-            <xs:element name="connectedLocationId" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="enemies" type="er:EnemyRefs"/>
             <xs:element name="fragment" type="er:Fragment"/>
         </xs:sequence>
@@ -91,7 +93,7 @@
     <!-- Collection des refEnemys -->
     <xs:complexType name="EnemyRefs">
         <xs:sequence>
-            <xs:element name="enemyRefs" type="xs:int" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="enemyRef" type="xs:int" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <!-- Collection des Skills -->

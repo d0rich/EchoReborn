@@ -23,8 +23,8 @@ namespace EchoReborn.Data.Models.Generated
     {
         
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("initialState")]
-        public InitialState InitialState { get; set; }
+        [System.Xml.Serialization.XmlElementAttribute("gameData")]
+        public GameData GameData { get; set; }
         
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("gameState")]
@@ -33,11 +33,11 @@ namespace EchoReborn.Data.Models.Generated
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "3.0.1188.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InitialState", Namespace="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
+    [System.Xml.Serialization.XmlTypeAttribute("GameData", Namespace="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute("initialState", Namespace="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
-    public partial class InitialState
+    [System.Xml.Serialization.XmlRootAttribute("gameData", Namespace="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
+    public partial class GameData
     {
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
@@ -59,9 +59,9 @@ namespace EchoReborn.Data.Models.Generated
         }
         
         /// <summary>
-        /// <para xml:lang="en">Initializes a new instance of the <see cref="InitialState" /> class.</para>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="GameData" /> class.</para>
         /// </summary>
-        public InitialState()
+        public GameData()
         {
             this._locations = new System.Collections.ObjectModel.Collection<Location>();
             this._enemies = new System.Collections.ObjectModel.Collection<Enemy>();
@@ -160,57 +160,12 @@ namespace EchoReborn.Data.Models.Generated
         [System.Xml.Serialization.XmlElementAttribute("difficulty")]
         public int Difficulty { get; set; }
         
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("isStartLocation")]
-        public bool IsStartLocation { get; set; }
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("isFinalLocation")]
-        public bool IsFinalLocation { get; set; }
-        
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        private System.Collections.ObjectModel.Collection<int> _connectedLocationId;
-        
-        [System.Xml.Serialization.XmlElementAttribute("connectedLocationId")]
-        public System.Collections.ObjectModel.Collection<int> ConnectedLocationId
-        {
-            get
-            {
-                return _connectedLocationId;
-            }
-            private set
-            {
-                _connectedLocationId = value;
-            }
-        }
-        
-        /// <summary>
-        /// <para xml:lang="en">Gets a value indicating whether the ConnectedLocationId collection is empty.</para>
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ConnectedLocationIdSpecified
-        {
-            get
-            {
-                return (this.ConnectedLocationId.Count != 0);
-            }
-        }
-        
-        /// <summary>
-        /// <para xml:lang="en">Initializes a new instance of the <see cref="Location" /> class.</para>
-        /// </summary>
-        public Location()
-        {
-            this._connectedLocationId = new System.Collections.ObjectModel.Collection<int>();
-            this._enemies = new System.Collections.ObjectModel.Collection<int>();
-        }
-        
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<int> _enemies;
         
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlArrayAttribute("enemies")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("enemyRefs", Namespace="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("enemyRef", Namespace="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")]
         public System.Collections.ObjectModel.Collection<int> Enemies
         {
             get
@@ -221,6 +176,14 @@ namespace EchoReborn.Data.Models.Generated
             {
                 _enemies = value;
             }
+        }
+        
+        /// <summary>
+        /// <para xml:lang="en">Initializes a new instance of the <see cref="Location" /> class.</para>
+        /// </summary>
+        public Location()
+        {
+            this._enemies = new System.Collections.ObjectModel.Collection<int>();
         }
         
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
@@ -241,19 +204,19 @@ namespace EchoReborn.Data.Models.Generated
     {
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        private System.Collections.ObjectModel.Collection<int> _enemyRefsProperty;
+        private System.Collections.ObjectModel.Collection<int> _enemyRef;
         
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("enemyRefs")]
-        public System.Collections.ObjectModel.Collection<int> EnemyRefsProperty
+        [System.Xml.Serialization.XmlElementAttribute("enemyRef")]
+        public System.Collections.ObjectModel.Collection<int> EnemyRef
         {
             get
             {
-                return _enemyRefsProperty;
+                return _enemyRef;
             }
             private set
             {
-                _enemyRefsProperty = value;
+                _enemyRef = value;
             }
         }
         
@@ -262,7 +225,7 @@ namespace EchoReborn.Data.Models.Generated
         /// </summary>
         public EnemyRefs()
         {
-            this._enemyRefsProperty = new System.Collections.ObjectModel.Collection<int>();
+            this._enemyRef = new System.Collections.ObjectModel.Collection<int>();
         }
     }
     

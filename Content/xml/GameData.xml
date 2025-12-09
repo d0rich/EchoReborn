@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<initialState xmlns="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn">
+<gameData xmlns="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:schemaLocation="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn ../xsd/EchoReborn.xsd">
 
     <locations>
         <location id="1">
             <name>Forest Entrance</name>
             <difficulty>1</difficulty>
-            <isStartLocation>true</isStartLocation>
-            <isFinalLocation>false</isFinalLocation>
-            <connectedLocationId>2</connectedLocationId>
             <enemies>
-                <enemyRefs>101</enemyRefs>
-                <enemyRefs>102</enemyRefs>
-                <enemyRefs>101</enemyRefs>
-                <enemyRefs>101</enemyRefs>
-                <enemyRefs>103</enemyRefs>
+                <enemyRef>101</enemyRef>
+                <enemyRef>102</enemyRef>
+                <enemyRef>101</enemyRef>
+                <enemyRef>101</enemyRef>
+                <enemyRef>103</enemyRef>
             </enemies>
             <fragment id="10">
                 <name>Broken Statue Fragment</name>
@@ -23,11 +22,8 @@
         <location id="2">
             <name>Deep Forest</name>
             <difficulty>3</difficulty>
-            <isStartLocation>false</isStartLocation>
-            <isFinalLocation>false</isFinalLocation>
-            <connectedLocationId>3</connectedLocationId>
             <enemies>
-                <enemyRefs>3</enemyRefs>
+                <enemyRef>3</enemyRef>
             </enemies>
             <fragment id="11">
                 <name>Mysterious Rune</name>
@@ -37,11 +33,8 @@
         <location id="3">
             <name>Ancient Tree</name>
             <difficulty>5</difficulty>
-            <isStartLocation>false</isStartLocation>
-            <isFinalLocation>true</isFinalLocation>
-            <connectedLocationId>2</connectedLocationId>
             <enemies>
-                <enemyRefs>4</enemyRefs>
+                <enemyRef>4</enemyRef>
             </enemies>
             <fragment id="12">
                 <name>Ancient Bark</name>
@@ -157,4 +150,4 @@
         </skill>
     </skills>
 
-</initialState>
+</gameData>
