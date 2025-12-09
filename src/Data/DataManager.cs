@@ -1,4 +1,6 @@
-using Microsoft.Xna.Framework;
+using System.Xml.XPath;
+using System.Xml.Xsl;
+using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 using Microsoft.Xna.Framework.Content;
@@ -13,10 +15,12 @@ namespace EchoReborn.Data;
 public static class DataManager
 {
     private static string _contentRootPath;
-    private static readonly string _characterFilePath = "xml/Character.xml";
-    private static readonly string _enemiesFilePath = "xml/Enemies.xml";
-    private static readonly string _skillsFilePath = "xml/Skills.xml";
-    private static readonly string _statistiquesFilePath = "xml/Statistiques.xml";
+    private static readonly string GameDataFilePath = "xml/GameData.xml";
+    private static readonly string CharacterFilePath = "xml/Character.xml";
+    private static readonly string EnemiesFilePath = "xml/Enemies.xml";
+    private static readonly string SkillsFilePath = "xml/Skills.xml";
+    private static readonly string LocationsFilePath = "xml/Locations.xml";
+    private static readonly string StatistiquesFilePath = "xml/Statistiques.xml";
 
     public static bool IsInitialized { get; private set; } = false;
 
@@ -24,24 +28,26 @@ public static class DataManager
     {
         _contentRootPath = contentManager.RootDirectory;
         IsInitialized = true;
+        SplitXmlData();
+        GenerateStatistiques(GameDataFilePath, StatistiquesFilePath);
     }
 
     public static Character LoadBaseCharacter()
     {
         CheckInitialized();
-        return DeserializeData<Character>(_characterFilePath);
+        return DeserializeData<Character>(CharacterFilePath);
     }
 
     public static List<Enemy> LoadAllEnemies()
     {
         CheckInitialized();
-        return DeserializeData<Enemies>(_enemiesFilePath).Enemy.ToList();
+        return DeserializeData<Enemies>(EnemiesFilePath).Enemy.ToList();
     }
 
     public static List<Skill> LoadAllSkills()
     {
         CheckInitialized();
-        return DeserializeData<Skills>(_skillsFilePath).Skill.ToList();
+        return DeserializeData<Skills>(SkillsFilePath).Skill.ToList();
     }
 
     public static List<Skill> LoadSkillsByIds(SkillRefs skillRefs)
@@ -66,21 +72,20 @@ public static class DataManager
 
         return selectedSkills;
     }
-    // code de ahcene
-    public static void GenerateStatistiques(string inputXmlPath, string outputXmlPath)
+    
+    private static void GenerateStatistiques(string inputXmlPath, string outputXmlPath)
     {
         CheckInitialized();
 
-        DomUtiles dom = new DomUtiles(inputXmlPath);
-        dom.CreationStatistiques(outputXmlPath);
+        DomUtiles dom = new DomUtiles(RessourcePath(inputXmlPath));
+        dom.CreationStatistiques(RessourcePath(outputXmlPath));
     }
-    // code de ahcene
 
     private static T DeserializeData<T>(string relativePath)
     {
         CheckInitialized();
         
-        string fullPath = Path.Combine(_contentRootPath, relativePath);
+        string fullPath = RessourcePath(relativePath);
         
         if (!File.Exists(fullPath))
             throw new FileNotFoundException($"Could not find XML file: {fullPath}");
@@ -98,6 +103,31 @@ public static class DataManager
         // Note: XNA's ContentManager does not support saving data at runtime.
         // This method is a placeholder to indicate where serialization logic would go.
         throw new System.NotImplementedException("Serialization is not supported in XNA ContentManager.");
+    }
+
+    private static void SplitXmlData()
+    {
+        ApplyXsl(RessourcePath("xslt/copyof/Character.xslt"), RessourcePath(CharacterFilePath));
+        ApplyXsl(RessourcePath("xslt/copyof/Enemies.xslt"), RessourcePath(EnemiesFilePath));
+        ApplyXsl(RessourcePath("xslt/copyof/Skills.xslt"), RessourcePath(SkillsFilePath));
+        ApplyXsl(RessourcePath("xslt/copyof/Locations.xslt"), RessourcePath(LocationsFilePath));
+    }
+
+    private static void ApplyXsl(string xslPath, string outputPath)
+    {
+        var xpathDoc = new XPathDocument(RessourcePath(GameDataFilePath));
+        var xslt = new XslCompiledTransform();
+        xslt.Load(xslPath);
+
+        
+        using var htmlWriter = new XmlTextWriter(outputPath, null);
+        xslt.Transform(xpathDoc, null, htmlWriter);
+    }
+    
+    private static string RessourcePath(string relativePath)
+    {
+        CheckInitialized();
+        return Path.Combine(_contentRootPath, relativePath);
     }
 
     private static void CheckInitialized()
