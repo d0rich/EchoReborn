@@ -71,7 +71,7 @@
             <rewardXP>40</rewardXP>
             <skills>
                 <skillRef>1</skillRef>
-                <skillRef>2</skillRef>
+                <skillRef>3</skillRef>
             </skills>
         </enemy>
 
