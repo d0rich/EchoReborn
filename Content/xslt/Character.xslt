@@ -4,8 +4,8 @@
         xmlns:er="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn"
         version="1.0">
 
-    <xsl:output method="xml" />
 
+    <xsl:output method="xml" indent="yes"/>
     <xsl:template match="/">
         <character>
             <xsl:apply-templates select="er:initialState/er:character"/>
@@ -21,10 +21,12 @@
         <maxMana><xsl:value-of select="er:maxMana"/></maxMana>
 
         <skills>
-            <xsl:for-each select="er:skills/er:skillRef">
-                <skillRef><xsl:value-of select="."/></skillRef>
-            </xsl:for-each>
+            <xsl:apply-templates select="er:skills/er:skillRef"/>
         </skills>
+    </xsl:template>
+
+    <xsl:template match="er:skillRef">
+        <skillRef><xsl:value-of select="."/></skillRef>
     </xsl:template>
 
 </xsl:stylesheet>

@@ -4,8 +4,7 @@
         xmlns:er="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn"
         version="1.0">
 
-    <xsl:output method="xml"/>
-
+    <xsl:output method="xml" indent="yes"/>
     <xsl:template match="/">
         <skills>
             <xsl:apply-templates select="er:initialState/er:skills/er:skill"/>

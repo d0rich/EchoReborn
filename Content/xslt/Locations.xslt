@@ -4,7 +4,7 @@
         xmlns:er="http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn"
         version="1.0">
 
-    <xsl:output method="xml" indent="yes" />
+    <xsl:output method="xml" indent="yes"/>
 
     <xsl:template match="/">
         <locations>
@@ -25,9 +25,7 @@
             </connectedLocationId>
 
             <enemyEncounterId>
-                <xsl:for-each select="er:enemyEncounterId/er:enemyRefs">
-                    <enemyRefs><xsl:value-of select="."/></enemyRefs>
-                </xsl:for-each>
+                <xsl:apply-templates select="er:enemyEncounterId/er:enemyRefs"/>
             </enemyEncounterId>
 
             <fragment>
@@ -36,6 +34,10 @@
                 <image><xsl:value-of select="er:fragment/er:image"/></image>
             </fragment>
         </location>
+    </xsl:template>
+
+    <xsl:template match="er:enemyRefs">
+        <enemyRefs><xsl:value-of select="."/></enemyRefs>
     </xsl:template>
 
 </xsl:stylesheet>
