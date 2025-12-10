@@ -19,7 +19,6 @@ namespace EchoReborn.Screens
         private BattleSystem _battleSystem;
         private Models.Location _location;
         private Texture2D _backgroundTexture;
-        private Texture2D _fragmentTexture;
         
         private Queue<Enemy> _enemyQueue = new Queue<Enemy>();
 
@@ -31,7 +30,6 @@ namespace EchoReborn.Screens
             _location = DataManager.LoadLocationById(locationId);
             
             _backgroundTexture = DrawingContext.ContentManager.Load<Texture2D>($"Locations/Location{locationId}/bg");
-            _fragmentTexture = DrawingContext.ContentManager.Load<Texture2D>($"Locations/Location{locationId}/{_location.Fragment.Image}");
             
             foreach (int enemyRef in _location.Enemies)
             {

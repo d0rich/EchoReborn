@@ -17,14 +17,21 @@ namespace EchoReborn.Screens
     {
         
         private Texture2D _backgroundTexture;
+        private Texture2D _fragmentTexture;
+
         private Models.Location _location;
         private Button _returnButton;
+        private Models.GameState _gameState;
+        private bool IsFirstClear { get; set; }
 
 
         public VictoryScreen(int locationId, Character character)
         {
+            _gameState = DataManager.LoadGameState();
             _location = DataManager.LoadLocationById(locationId);
+            IsFirstClear = _gameState.World.LatestClearedLocationId < _location.Id;
             _backgroundTexture = DrawingContext.ContentManager.Load<Texture2D>($"Locations/Location{locationId}/bg");
+            _fragmentTexture = DrawingContext.ContentManager.Load<Texture2D>($"Locations/Location{locationId}/{_location.Fragment.Image}");
             _returnButton = new Button(
                 bounds: new Rectangle(440, 600, 400, 60),
                 text: "Return to Map",
@@ -49,6 +56,11 @@ namespace EchoReborn.Screens
             DrawingContext.DrawBackground(_backgroundTexture);
             DrawLabel();
             _returnButton.Draw();
+            
+            if (IsFirstClear)
+            {
+                DrawFragment();
+            }
 
             sb.End();
         }
@@ -60,18 +72,17 @@ namespace EchoReborn.Screens
 
         private void UpdateSaveData(Character character)
         {
-            var state = DataManager.LoadGameState();
-            state.Player.Level = character.Level;
-            state.Player.Experience = character.Exp;
-            state.Player.MaxHealth = character.MaxHP;
-            state.Player.CurrentHealth = character.HP;
-            state.Player.MaxMana = character.MaxEnergy;
-            state.Player.CurrentMana = character.Energy;
-            if (state.World.LatestClearedLocationId < _location.Id)
+            _gameState.Player.Level = character.Level;
+            _gameState.Player.Experience = character.Exp;
+            _gameState.Player.MaxHealth = character.MaxHP;
+            _gameState.Player.CurrentHealth = character.HP;
+            _gameState.Player.MaxMana = character.MaxEnergy;
+            _gameState.Player.CurrentMana = character.Energy;
+            if (_gameState.World.LatestClearedLocationId < _location.Id)
             {
-                state.World.LatestClearedLocationId = _location.Id;
+                _gameState.World.LatestClearedLocationId = _location.Id;
             }
-            DataManager.SaveGameState(state);
+            DataManager.SaveGameState(_gameState);
         }
         
         private void DrawLabel()
@@ -88,6 +99,28 @@ namespace EchoReborn.Screens
                 "Victory",
                 position,
                 Color.Red);
+        }
+        
+        private void DrawFragment()
+        {
+            SpriteBatch spriteBatch = DrawingContext.SpriteBatch;
+            Rectangle position = new Rectangle(900, 300, 400, 300);
+
+            spriteBatch.Draw(
+                _fragmentTexture,
+                position,
+                Color.White);
+            
+            Vector2 textSize = GameFonts.ButtonFont.MeasureString(_location.Fragment.Name);
+            Vector2 textPosition = new Vector2(
+                1150 - textSize.X / 2,
+                720 - 150);
+            spriteBatch.DrawString(
+                GameFonts.ButtonFont,
+                _location.Fragment.Name,
+                textPosition,
+                Color.White
+            );
         }
     }
 }
