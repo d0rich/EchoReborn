@@ -54,7 +54,7 @@ namespace EchoReborn.Screens
             DrawingContext.GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
 
-            DrawBackground();
+            DrawingContext.DrawBackground(_backgroundTexture);
             DrawTitle();
             _startGameButton.Draw();
             _testsButton.Draw();
@@ -66,17 +66,6 @@ namespace EchoReborn.Screens
         public void Destroy()
         {
             // rien à détruire
-        }
-        
-        private void DrawBackground()
-        {
-            var graphicsDevice = DrawingContext.GraphicsDevice;
-            var spriteBatch = DrawingContext.SpriteBatch;
-            spriteBatch.Draw(
-                _backgroundTexture,
-                new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height),
-                Color.White
-            );
         }
 
         private void DrawTitle()

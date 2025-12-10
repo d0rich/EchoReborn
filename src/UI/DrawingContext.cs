@@ -55,6 +55,17 @@ public static class DrawingContext
             return _contentManager;
         }
     }
+
+    public static void DrawBackground(Texture2D texture)
+    {
+        var graphicsDevice = GraphicsDevice;
+        var spriteBatch = SpriteBatch;
+        spriteBatch.Draw(
+            texture,
+            new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height),
+            Color.White
+        );
+    }
     
     private static void CheckInitialized()
     {

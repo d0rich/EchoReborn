@@ -60,7 +60,7 @@ namespace EchoReborn.Screens
             SpriteBatch sb = DrawingContext.SpriteBatch;
             sb.Begin();
 
-            DrawBackground();
+            DrawingContext.DrawBackground(_backgroundTexture);
             _hud.Draw(gameTime);
 
             sb.End();
@@ -69,17 +69,6 @@ namespace EchoReborn.Screens
         public void Destroy()
         {
             
-        }
-        
-        private void DrawBackground()
-        {
-            var graphicsDevice = DrawingContext.GraphicsDevice;
-            var spriteBatch = DrawingContext.SpriteBatch;
-            spriteBatch.Draw(
-                _backgroundTexture,
-                new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height),
-                Color.White
-            );
         }
     }
 }
