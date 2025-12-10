@@ -50,6 +50,11 @@ namespace EchoReborn.Screens
                 ScreenManager.SwitchScreen(new DefeatScreen(_location.Id, _player));
             }
             
+            if (_hud.State == BattleUI.UiState.Victory && _hud.IsLastBattle)
+            {
+                ScreenManager.SwitchScreen(new VictoryScreen(_location.Id, _player));
+            }
+            
             if (_hud.CanInitiateNewBattle && _enemyQueue.Count > 0)
             {
                 var enemy = _enemyQueue.Dequeue();

@@ -121,7 +121,7 @@
             <name>Axe Knight</name>
             <difficulty>2</difficulty>
             <maxHP>200</maxHP>
-            <animationClass>Knight2Animation</animationClass>
+            <animationClass>Knigth2Animation</animationClass>
             <rewardXP>80</rewardXP>
             <skills>
                 <skillRef>3</skillRef>
@@ -132,7 +132,7 @@
             <name>Sword Knight</name>
             <difficulty>3</difficulty>
             <maxHP>250</maxHP>
-            <animationClass>Knight3Animation</animationClass>
+            <animationClass>Knigth3Animation</animationClass>
             <rewardXP>110</rewardXP>
             <skills>
                 <skillRef>4</skillRef>
