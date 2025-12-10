@@ -44,6 +44,11 @@ namespace EchoReborn.Screens
         {
             _hud.Update(gameTime);
             _battleSystem?.Update(gameTime);
+
+            if (_hud.State == BattleUI.UiState.Defeat)
+            {
+                ScreenManager.SwitchScreen(new DefeatScreen(_location.Id, _player));
+            }
             
             if (_hud.CanInitiateNewBattle && _enemyQueue.Count > 0)
             {

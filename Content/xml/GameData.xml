@@ -256,6 +256,7 @@
         <skills>
             <skillRef>5</skillRef>
             <skillRef>6</skillRef>
+            <skillRef>666</skillRef>
         </skills>
     </character>
     <skills>
@@ -334,7 +335,17 @@
             <HealthCost>0</HealthCost>
             <Damage>100</Damage>
             <Heal>0</Heal>
-            
+        </skill>
+
+        <skill id="666">
+            <type>BASIC</type>
+            <name>Hara-kiri</name>
+            <description>Kill yourself</description>
+            <TargetType>ALLIES</TargetType>
+            <ManaCost>0</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>999999</Damage>
+            <Heal>0</Heal>
         </skill>
     </skills>
 

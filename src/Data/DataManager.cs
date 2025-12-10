@@ -16,7 +16,7 @@ namespace EchoReborn.Data;
 public static class DataManager
 {
     private static string _contentRootPath;
-    private static DateTime _lastDataLoadTime;
+    private static DateTime _lastDataSaveTime = DateTime.Now;
     private static string _xmlns = "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn";
     private static string _xmlnsPrefix = "er";
     private static readonly string GameStateFilePath = "xml/GameState.xml";
@@ -33,7 +33,6 @@ public static class DataManager
     {
         _contentRootPath = contentManager.RootDirectory;
         IsInitialized = true;
-        _lastDataLoadTime = DateTime.Now;
         SplitXmlDataWithDom();
         GenerateStatistiques(GameDataFilePath, StatistiquesFilePath);
     }
@@ -98,7 +97,6 @@ public static class DataManager
     public static GameState LoadGameState()
     {
         var fullPath = RessourcePath(GameStateFilePath);
-        _lastDataLoadTime = DateTime.Now;
         
         if (!File.Exists(fullPath))
         {
@@ -112,14 +110,14 @@ public static class DataManager
     {
         CheckInitialized();
         
-        gameState.PlayTime = TimeSpanToString(StringToTimeSpan(gameState.PlayTime) + (DateTime.Now - _lastDataLoadTime));
+        gameState.PlayTime = TimeSpanToString(StringToTimeSpan(gameState.PlayTime) + (DateTime.Now - _lastDataSaveTime));
         gameState.SaveDate = DateTime.Now;
         
         XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
         ns.Add(_xmlnsPrefix, _xmlns);
         
         SerializeData(GameStateFilePath, gameState, ns);
-        _lastDataLoadTime = DateTime.Now;
+        _lastDataSaveTime = DateTime.Now;
         return LoadGameState();
     }
     
