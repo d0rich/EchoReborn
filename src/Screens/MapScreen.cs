@@ -17,14 +17,17 @@ namespace EchoReborn.Screens
     {
         
         private Texture2D _backgroundTexture;
+        private Models.GameState _gameState;
         private List<Models.Location> _locations;
         private List<Button> _locationButtons;
 
 
         public MapScreen()
         {
+            _gameState = DataManager.LoadGameState();
             _locations = DataManager.LoadAllLocations();
             _locationButtons = _locations
+                .Where(l => l.Id <= _gameState.World.LatestClearedLocationId + 1)
                 .Select((l, i) => new Button(
                     new Rectangle(440, 200 + i * 80, 400, 60),
                     l.Name,
