@@ -1,3 +1,4 @@
+using System;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 using System.Xml;
@@ -15,6 +16,10 @@ namespace EchoReborn.Data;
 public static class DataManager
 {
     private static string _contentRootPath;
+    private static DateTime _lastDataLoadTime;
+    private static string _xmlns = "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn";
+    private static string _xmlnsPrefix = "er";
+    private static readonly string GameStateFilePath = "xml/GameState.xml";
     private static readonly string GameDataFilePath = "xml/GameData.xml";
     private static readonly string CharacterFilePath = "xml/Character.xml";
     private static readonly string EnemiesFilePath = "xml/Enemies.xml";
@@ -28,6 +33,7 @@ public static class DataManager
     {
         _contentRootPath = contentManager.RootDirectory;
         IsInitialized = true;
+        _lastDataLoadTime = DateTime.Now;
         SplitXmlDataWithDom();
         GenerateStatistiques(GameDataFilePath, StatistiquesFilePath);
     }
@@ -83,10 +89,76 @@ public static class DataManager
         CheckInitialized();
         return DeserializeData<Locations>(LocationsFilePath).Location.ToList();
     }
-
+    
     public static Location LoadLocationById(int locationId)
     {
         return LoadAllLocations().FirstOrDefault(l => l.Id == locationId);
+    }
+    
+    public static GameState LoadGameState()
+    {
+        var fullPath = RessourcePath(GameStateFilePath);
+        _lastDataLoadTime = DateTime.Now;
+        
+        if (!File.Exists(fullPath))
+        {
+            return ConstructDefaultGameState();
+        }
+        
+        return DeserializeData<GameState>(GameStateFilePath);
+    }
+    
+    public static GameState SaveGameState(GameState gameState)
+    {
+        CheckInitialized();
+        
+        gameState.PlayTime = TimeSpanToString(StringToTimeSpan(gameState.PlayTime) + (DateTime.Now - _lastDataLoadTime));
+        gameState.SaveDate = DateTime.Now;
+        
+        XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+        ns.Add(_xmlnsPrefix, _xmlns);
+        
+        SerializeData(GameStateFilePath, gameState, ns);
+        _lastDataLoadTime = DateTime.Now;
+        return LoadGameState();
+    }
+    
+    private static GameState ConstructDefaultGameState()
+    {
+        CheckInitialized();
+        var baseCharacter = LoadBaseCharacter();
+        return new GameState
+        {
+            GameVersion = "0.0.1",
+            SaveDate = System.DateTime.Now,
+            PlayTime = TimeSpanToString(System.TimeSpan.Zero),
+            World = new World()
+            {
+                LatestClearedLocationId = 0
+            },
+            Player = baseCharacter
+        };
+    }
+    
+    private static string TimeSpanToString(System.TimeSpan timeSpan)
+    {
+        return string.Format("{0:D2}:{1:D2}:{2:D2}", 
+            timeSpan.Hours, 
+            timeSpan.Minutes, 
+            timeSpan.Seconds);
+    }
+    
+    private static System.TimeSpan StringToTimeSpan(string timeString)
+    {
+        var parts = timeString.Split(':');
+        if (parts.Length != 3)
+            throw new System.FormatException("Invalid time format. Expected HH:MM:SS");
+
+        int hours = int.Parse(parts[0]);
+        int minutes = int.Parse(parts[1]);
+        int seconds = int.Parse(parts[2]);
+
+        return new System.TimeSpan(hours, minutes, seconds);
     }
     
     private static void GenerateStatistiques(string inputXmlPath, string outputXmlPath)
@@ -137,11 +209,11 @@ public static class DataManager
             XmlDeclaration xmlDeclaration = smallXml.CreateXmlDeclaration("1.0", "UTF-8", null);
             smallXml.AppendChild(xmlDeclaration);
             XmlNamespaceManager nsManager = new XmlNamespaceManager(doc.NameTable);
-            nsManager.AddNamespace("er", "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn");
+            nsManager.AddNamespace(_xmlnsPrefix, _xmlns);
             var sourceNode = doc.SelectSingleNode($"//er:gameData/er:{tagName}", nsManager);
             // TODO remarquer dans rapporte 
             var smallRoot = smallXml.ImportNode(sourceNode, true);
-            ((XmlElement)smallRoot).SetAttribute("xmlns", "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn");
+            ((XmlElement)smallRoot).SetAttribute("xmlns", _xmlns);
             smallXml.AppendChild(smallRoot);
             smallXml.Save(outputPath);
         }
