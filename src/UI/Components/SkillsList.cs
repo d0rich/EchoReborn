@@ -34,18 +34,17 @@ public class SkillsList
         // Create buttons for each skill
         for (int i = 0; i < _maxSkillsPerPage; i++)
         {
-            BattleAction skill = _skills[i + _currentPage * _maxSkillsPerPage];
+            int skillIndex = i + _currentPage * _maxSkillsPerPage;
+
             Vector2 buttonPosition = new Vector2(
                 _position.X,
                 _position.Y + i * (ButtonHeight + _spacing));
-            
-            int capturedIndex = i;
 
             Button skillButton = new Button(
                 new Rectangle((int)buttonPosition.X, (int)buttonPosition.Y, ButtonWidth, ButtonHeight),
-                skill.Name,
+                skillIndex < _skills.Count ? _skills[skillIndex].Name : "",
                 GameFonts.ButtonFont,
-                () => onSkillButtonClicked(_skills[capturedIndex + _currentPage * _maxSkillsPerPage]));
+                () => onSkillButtonClicked(_skills[skillIndex]));
 
             _skillButtons.Add(skillButton);
         }
@@ -78,8 +77,11 @@ public class SkillsList
     {
         for (int i = 0; i < _maxSkillsPerPage; i++)
         {
+            int skillIndex = i + _currentPage * _maxSkillsPerPage;
+            if (skillIndex >= _skills.Count)
+                break;
             var button = _skillButtons[i];
-            BattleAction skill = _skills[i + _currentPage * _maxSkillsPerPage];
+            BattleAction skill = _skills[skillIndex];
             button.Update();
             button.Text = skill.Name;
         }
@@ -89,9 +91,12 @@ public class SkillsList
 
     public void Draw()
     {
-        foreach (var button in _skillButtons)
+        for (int i = 0; i < _maxSkillsPerPage; i++)
         {
-            button.Draw();
+            int skillIndex = i + _currentPage * _maxSkillsPerPage;
+            if (skillIndex >= _skills.Count)
+                break;
+            _skillButtons[i].Draw();
         }
         if (NextPageAvailable)
             _nextPageButton.Draw();
