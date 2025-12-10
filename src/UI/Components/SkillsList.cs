@@ -39,12 +39,14 @@ public class SkillsList
             Vector2 buttonPosition = new Vector2(
                 _position.X,
                 _position.Y + i * (ButtonHeight + _spacing));
+            
+            int capturedIndex = i; // Capture the current index for the lambda
 
             Button skillButton = new Button(
                 new Rectangle((int)buttonPosition.X, (int)buttonPosition.Y, ButtonWidth, ButtonHeight),
                 skillIndex < _skills.Count ? _skills[skillIndex].Name : "",
                 GameFonts.ButtonFont,
-                () => onSkillButtonClicked(_skills[skillIndex]));
+                () => onSkillButtonClicked(_skills[capturedIndex + _currentPage * _maxSkillsPerPage]));
 
             _skillButtons.Add(skillButton);
         }
