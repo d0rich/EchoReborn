@@ -16,6 +16,7 @@
                 <name>Oreilles</name>
                 <image>Oreilles</image>
             </fragment>
+            <rewardSkillId>1001</rewardSkillId>
         </location>
         <location id="2">
             <name>Forêt Sacré</name>
@@ -29,6 +30,7 @@
                 <name>Les Bras</name>
                 <image>les_bras</image>
             </fragment>
+            <rewardSkillId>1002</rewardSkillId>
         </location>
         <location id="3">
             <name>Cimetière Oublié</name>
@@ -42,6 +44,7 @@
                 <name>Yeux de Vision Magique</name>
                 <image>yeux</image>
             </fragment>
+            <rewardSkillId>1003</rewardSkillId>
         </location>
         <location id="4">
             <name>Cimetière Oublié</name>
@@ -55,6 +58,7 @@
                 <name>Les Jambes Mysterieux</name>
                 <image>Jambes</image>
             </fragment>
+            <rewardSkillId>1004</rewardSkillId>
         </location>
         <location id="5">
             <name>Fortress Des Chevaliers</name>
@@ -68,6 +72,7 @@
                 <name>Le Coeur</name>
                 <image>Coeur</image>
             </fragment>
+            <rewardSkillId>1005</rewardSkillId>
         </location>
 
 
@@ -347,6 +352,62 @@
             <Damage>999999</Damage>
             <Heal>0</Heal>
         </skill>
+
+        <skill id="1001">
+            <type>BASIC</type>
+            <name>Hear the Wind</name>
+            <description>Get energy and heal</description>
+            <TargetType>ALLIES</TargetType>
+            <ManaCost>-50</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>0</Damage>
+            <Heal>50</Heal>
+        </skill>
+
+        <skill id="1002">
+            <type>BASIC</type>
+            <name>Punch</name>
+            <description>Get energy and heal</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>0</ManaCost>
+            <HealthCost>5</HealthCost>
+            <Damage>70</Damage>
+            <Heal>0</Heal>
+        </skill>
+
+        <skill id="1003">
+            <type>BASIC</type>
+            <name>See the difference</name>
+            <description>Replenish energy</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>-99999</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>5</Damage>
+            <Heal>0</Heal>
+        </skill>
+
+        <skill id="1004">
+            <type>BASIC</type>
+            <name>Kick</name>
+            <description>Powerful kick</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>0</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>150</Damage>
+            <Heal>0</Heal>
+        </skill>
+
+        <skill id="1005">
+            <type>BASIC</type>
+            <name>Understand the Universe</name>
+            <description>Win</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>0</ManaCost>
+            <HealthCost>0</HealthCost>
+            <Damage>999999999</Damage>
+            <Heal>0</Heal>
+        </skill>
+        
     </skills>
 
 </gameData>

@@ -81,6 +81,7 @@ namespace EchoReborn.Screens
             if (_gameState.World.LatestClearedLocationId < _location.Id)
             {
                 _gameState.World.LatestClearedLocationId = _location.Id;
+                _gameState.Player.Skills.Add(_location.RewardSkillId);
             }
             DataManager.SaveGameState(_gameState);
         }

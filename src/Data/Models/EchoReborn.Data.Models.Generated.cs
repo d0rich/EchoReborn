@@ -191,6 +191,10 @@ namespace EchoReborn.Data.Models.Generated
         public Fragment Fragment { get; set; }
         
         [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.Xml.Serialization.XmlElementAttribute("rewardSkillId")]
+        public int RewardSkillId { get; set; }
+        
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlAttributeAttribute("id")]
         public int Id { get; set; }
     }
@@ -513,11 +517,9 @@ namespace EchoReborn.Data.Models.Generated
         [System.Xml.Serialization.XmlElementAttribute("Heal")]
         public int Heal { get; set; }
         
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("AnimationClass")]
         public string AnimationClass { get; set; }
         
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
         [System.Xml.Serialization.XmlElementAttribute("SkillClass")]
         public string SkillClass { get; set; }
         

@@ -50,9 +50,15 @@ public class BattleAction
         caster.Animations?.PlayAttack();
         if (EnergyCost > 0) {
             caster.SpendEnergy(EnergyCost);
+        } else if (EnergyCost < 0)
+        {
+            caster.RestoreEnergy(-EnergyCost);
         }
         if (HealthCost > 0) {
             caster.SpendHealth(HealthCost);
+        } else if (HealthCost < 0)
+        {
+            caster.GetHeal(-HealthCost);
         }
         if (Damage > 0) {
             target.TakeDamage(Damage);
