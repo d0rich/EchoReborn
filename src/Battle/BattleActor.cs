@@ -8,24 +8,11 @@ namespace EchoReborn.Battle;
 
 public abstract  class BattleActor
 {
-    
-    /*
-     *
-     * +Level: int
-       
-       +HP: int
-       
-       +MaxHP: int
-       
-       +Energy: int
-       
-       +MaxEnergy: int
-     */
-    public int Level { get; }
-    public int MaxHP => 100;
+    public int Level { get; protected set; }
+    public int MaxHP { get; protected set; }
     public int HP { get; protected set; }
     public int Energy { get; protected set; }
-    public int MaxEnergy => 100;
+    public int MaxEnergy { get; protected set; }
 
     public IBattleActorAnimations Animations { get; protected set; }
     protected String AnimationClassName = null;
@@ -38,17 +25,21 @@ public abstract  class BattleActor
 
     public List<BattleAction> Skills => new List<BattleAction>(_skills);
 
-    protected BattleActor(int level, List<BattleAction> skills, string animationClassName = null)
+    protected BattleActor(int level, int maxEnergy, int maxHP, List<BattleAction> skills, string animationClassName = null)
     {
         Level = level;
+        MaxHP = maxHP;
         HP = MaxHP;
+        MaxEnergy = maxEnergy;
         Energy = MaxEnergy;
         _skills = skills;
         AnimationClassName = animationClassName;
     }
 
-    protected BattleActor(int level, Collection<int> skillRefs, string animationClassName = null) : this(
+    protected BattleActor(int level, int maxEnergy, int maxHP, Collection<int> skillRefs, string animationClassName = null) : this(
         level: level, 
+        maxEnergy: maxEnergy,
+        maxHP: maxHP,
         skills: DataManager
             .LoadSkillsByIds(skillRefs)
             .Select(s => new BattleAction(s))

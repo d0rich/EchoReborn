@@ -26,7 +26,7 @@ namespace EchoReborn.Screens
 
         public BattleSequenceScreen(int locationId)
         {
-            _player = new Character(DataManager.LoadBaseCharacter());
+            _player = new Character(DataManager.LoadGameState().Player);
             _hud = new BattleUI( _player );
             _location = DataManager.LoadLocationById(locationId);
             
@@ -35,7 +35,7 @@ namespace EchoReborn.Screens
             
             foreach (int enemyRef in _location.Enemies)
             {
-                var enemyData = new Enemy(1, DataManager.LoadEnemyById(enemyRef));
+                var enemyData = new Enemy(DataManager.LoadEnemyById(enemyRef));
                 _enemyQueue.Enqueue(enemyData);
             }
         }

@@ -49,7 +49,7 @@ public class BattleUI
         // Layout
         int barSpacing = 8;
 
-        _charlevel = new LevelDiamond(new Vector2(60, 580), character.Level);
+        _charlevel = new LevelDiamond(new Vector2(60, 580), character);
         Vector2 barsPsn = new Vector2(160, 580);
         _hpBar = new HpBar(barsPsn, character);
         _energyBar = new EnergyBar(barsPsn + new Vector2(0, RessourceBar.Size.Y + barSpacing), character);
@@ -81,7 +81,7 @@ public class BattleUI
         enemy.Animations.Position = new Vector2(900, 200);
         enemy.Animations.Scale = 3;
         
-        _enemylevel = new LevelDiamond(new Vector2(1200, 580), enemy.Level);
+        _enemylevel = new LevelDiamond(new Vector2(1200, 580), enemy);
         _enemyHpBar = new HpBar(_hpBar.Position + new Vector2(800, 0), enemy);
         PlayEnemyEnteringAnimation();
     }

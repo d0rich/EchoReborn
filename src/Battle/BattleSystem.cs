@@ -107,6 +107,7 @@ public class BattleSystem
         if (!enemy.IsAlive)
         {
             enemy.Animations?.PlayDeath();
+            _character.GainExp(enemy.RewardXp);
             state = BattleEtape.VICTORY;
             return true;
         }

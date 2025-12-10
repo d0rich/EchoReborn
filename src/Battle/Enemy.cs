@@ -7,22 +7,19 @@ namespace EchoReborn.Battle;
 public class Enemy : BattleActor
 
 {
-    public string Name { get; private set; }
+    public string Name { get; init; }
+    public int RewardXp { get; init; }
 
-    public Enemy(string name, int level, List<BattleAction> skills, IBattleActorAnimations animations = null)
-        : base(level: level, skills: skills)
-    {
-        LoadAnimations(animations);
-        Name = name;
-    }
-
-    public Enemy(int level, Models.Enemy model) : base(
-        level: level,
+    public Enemy(Models.Enemy model) : base(
+        level: model.Difficulty,
+        maxEnergy: 999999,
+        maxHP: model.MaxHp,
         skillRefs: model.Skills,
         animationClassName: model.AnimationClass
     )
     {
         Name = model.Name;
+        RewardXp = model.RewardXp;
     }
 
 

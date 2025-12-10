@@ -60,8 +60,13 @@ namespace EchoReborn.Screens
 
         private void UpdateSaveData(Character character)
         {
-            // En cas de défaite, on recharge simplement l'état de jeu précédent
             var state = DataManager.LoadGameState();
+            state.Player.Level = character.Level;
+            state.Player.Experience = character.Exp;
+            state.Player.MaxHealth = character.MaxHP;
+            state.Player.CurrentHealth = character.HP;
+            state.Player.MaxMana = character.MaxEnergy;
+            state.Player.CurrentMana = character.Energy;
             if (state.World.LatestClearedLocationId < _location.Id)
             {
                 state.World.LatestClearedLocationId = _location.Id;

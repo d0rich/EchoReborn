@@ -25,7 +25,7 @@ namespace EchoReborn.Screens
         public BattleScreen()
         {
             _player = new Character(DataManager.LoadBaseCharacter());
-            _enemy = new Enemy(1, DataManager.LoadAllEnemies().First());
+            _enemy = new Enemy(DataManager.LoadAllEnemies().First());
             _battleSystem = new BattleSystem(_player, _enemy);
             _hud = new BattleUI( _player );
         }

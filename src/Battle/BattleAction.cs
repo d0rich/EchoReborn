@@ -6,6 +6,7 @@ using Models = EchoReborn.Data.Models.Generated;
 public class BattleAction
 {
     public enum TargetType { Enemy, Ally }
+    public int Id { get; init; }
     public string Name { get; }
     public string Description { get; }
     public TargetType Target { get; }
@@ -15,6 +16,7 @@ public class BattleAction
     public int HealAmount { get; }
     
     public BattleAction(
+        int id,
         string name,
         string description,
         TargetType target,
@@ -33,6 +35,7 @@ public class BattleAction
     }
 
     public BattleAction(Models.Skill skillData) : this(
+        id: skillData.Id,
         name: skillData.Name,
         description: skillData.Description,
         target: skillData.TargetType == Models.TargetType.Enemies ? TargetType.Enemy : TargetType.Ally,

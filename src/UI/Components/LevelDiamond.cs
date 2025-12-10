@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using EchoReborn.Battle;
 using EchoReborn.UI;
 
 namespace EchoReborn.UI.Components;
@@ -9,13 +10,14 @@ namespace EchoReborn.UI.Components;
 public class LevelDiamond
 {
     private Vector2 _position;
-    private int _level;
+    private BattleActor _actor;
+    private int Level => _actor.Level;
     private SpriteFont _font;
 
-    public LevelDiamond(Vector2 position, int level)
+    public LevelDiamond(Vector2 position, BattleActor actor)
     {
         _position = position;
-        _level = level;
+        _actor = actor;
         _font = GameFonts.ButtonFont;
     }
 
@@ -44,7 +46,7 @@ public class LevelDiamond
             layerDepth: 0f);
 
         // On dessine le niveau au centre
-        string levelText = _level.ToString();
+        string levelText = Level.ToString();
         Vector2 textSize = _font.MeasureString(levelText);
         Vector2 textPos = new Vector2(
             center.X + 5 + textSize.X / 2,
