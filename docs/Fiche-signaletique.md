@@ -1,6 +1,11 @@
-﻿# Fiche signalétique — EchoReborn (version 0.1)
+﻿# Fiche signalétique — EchoReborn (version 0.2)
 
-> Fiche d'identité du projet — première version.
+## Auteurs
+
+- DOROFEEV Nikolai
+- BENTAHA Ahcene
+- DJAFRI Halim
+- CHEIKH Mohamed Amine
 
 ## Informations générales
 
