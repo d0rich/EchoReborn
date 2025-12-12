@@ -96,7 +96,7 @@ Premier écran au lancement du jeu. Affiche le titre "Echo Reborn" en grand et p
 
 ![Main Menu](./Screens/Main%20Menu.png)
 
-## La Carte du monde
+### La Carte du monde
 
 Le monde est composé de 5 locations reliées entre elles, formant un réseau progressif :
 Location 1 → Location 2 ↔ Location 3 ↔ Location 4 ↔ Location 5.
