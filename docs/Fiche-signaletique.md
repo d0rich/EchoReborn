@@ -148,79 +148,137 @@ Interface de combat au tour par tour divisée en deux zones :
 
 ```mermaid
 classDiagram
-    %% Composants principaux
-    class GameApp {
-        +Initialize()
-        +LoadContent()
-        +Update(GameTime)
-        +Draw(GameTime)
+    class EchoReborn {
+        +gameData: GameData
+        +gameState: GameState
     }
 
-    class UI {
-        +MainMenu()
-        +MapUI()
-        +CombatUI()
+    class GameData {
+        +location: Locations
+        +enemies: Enemies
+        +caracter: Character
     }
 
-    class ContentPipeline {
-        +LoadTexture()
-        +LoadSound()
-        +LoadData()
+    class Skill {
+        +id: Int
+        +type: SkillType
+        +name: String
+        +description: String
+        +targetType: TargetType
+
+        +manaCost: Int
+        +healthCost: Int
+        +damage: Int
+        +heal: Int
+        +animationClass: String
+
+        +skillClass: String
+        
     }
 
-    class BattleSystem {
-        +StartBattle()
-        +Update()
-        +EndBattle()
+    class TargetType {
+        <<Enum>>
+        ALLIES
+        ENEMIES
+        ALL
     }
 
-    class Character {
-        -name
-        -hp
-        -attack
-        -defense
-        +TakeDamage()
-        +IsAlive()
+    class SkillType {
+        <<Enum>>
+        BASIC
+        COMPLEX
     }
 
-    class Inventory {
-        +UseItem()
-        +AddItem()
+    Skill *-- SkillType
+    Skill *-- TargetType
+
+    class Skills {
+        +skills: Skills
+    }
+
+    class SkillRefs {
+        +skillRef: List~Int~
+    }
+
+    class Locations {
+        +locationList: List~Location~
+    }
+
+    class Location {
+        +id: Int
+        +name: String
+        +difficulty: Int
+        +enemyEncounter: EnemyRefs
+        +fragment: Fragment
+        +rewardSkillId: Int
+    }
+    class Fragment {
+        +id: Int
+        +mame: String
+        +image: String
+    }
+
+    class Enemies {
+        +enemyList: List~Enemy~
+    }
+
+    class Enemy {
+        +id: Int
+        +name: String
+        +maxHP: Int
+        +skill: SkillRefs
+        +animationClass: String
+        +rewardXP: Int
+    }
+
+    class EnemyRefs {
+        +enemyRef: List~Int~
     }
 
     class GameState {
-        +SaveDate
-        +GameVersion
-        +Player
-        +World
-        +SerializeXML()
-        +DeserializeXML()
+        +saveDate: DateTime
+        +gameVersion: String
+        +playTime: TimeSpan
+        +player: Character
+        +world: World
     }
 
-    class XMLSerializer {
-        +Serialize(obj)
-        +Deserialize(xml)
+    class Character {
+        +level: Int
+        +experience: Int
+        +currentHealth: Int
+        +maxHealth: Int
+        +currentMana: Int
+        +maxMana: Int
+        +skills: SkillRefs
     }
 
-    class Platforms {
-        +Windows
-        +macOS
-        +Linux
+    class World {
+        +latestClearedLocationId: Int
     }
 
-    %% Relations
-    GameApp --> UI : utilise
-    GameApp --> ContentPipeline : charge
-    GameApp --> BattleSystem : orchestre
-    BattleSystem --> Character : manipule
-    BattleSystem --> Inventory : consulte/utilise
-    Character --> Inventory : possède
-    GameApp --> GameState : sauvegarde/charge
-    GameState --> XMLSerializer : sérialise
-    ContentPipeline --> GameApp : fournit assets
-    GameApp --> Platforms : target
+    EchoReborn *-- "1" GameData : gameData
+    EchoReborn *-- "1" GameState : gameState
+    GameState *-- "1" Character
+    GameState *-- "1" World
 
-    %% Notes
-    note for GameState "Inclut Player, World, Quests, Inventory" 
-    note for ContentPipeline "Contenu géré via Content.mgcb (MonoGame)" 
+    GameData *-- "1"Skills : skills
+    GameData *--"1"Locations : location
+    GameData *--"1" Enemies : enemies
+    GameData *--"1" Character : character
+
+    World ..> Location
+    EnemyRefs  ..>  Enemy
+    SkillRefs  ..>  Skill
+    Location  ..>  Skill : rewardSkillId
+
+    Locations *-- "5"Location
+    Enemies *-- "1..*"Enemy : EnemyList
+    Enemy "1..*"*-- "1..*"SkillRefs : uses
+    Skills *-- "1..*"Skill
+    Character *-- "1" SkillRefs : skillRefs
+    Location *-- "1..*"EnemyRefs : encounters
+    Location *-- "1" Fragment : fragment
+
+  
 ```
