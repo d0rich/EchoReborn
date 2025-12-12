@@ -14,19 +14,19 @@ classDiagram
     }
 
     class Skill {
-        +Id: Int
-        +Type: SkillType
-        +Name: String
-        +Description: String
-        +TargetType: TargetType
+        +id: Int
+        +type: SkillType
+        +name: String
+        +description: String
+        +targetType: TargetType
 
-        +ManaCost: Int
-        +HealthCost: Int
-        +Damage: Int
-        +Heal: Int
-        +AnimationClass: String
+        +manaCost: Int
+        +healthCost: Int
+        +damage: Int
+        +heal: Int
+        +animationClass: String
 
-        +SkillClass: String
+        +skillClass: String
         
     }
 
@@ -47,68 +47,68 @@ classDiagram
     Skill *-- TargetType
 
     class Skills {
-        +Skills: Skills
+        +skills: Skills
     }
 
     class SkillRefs {
-        +SkillRef: List~Int~
+        +skillRef: List~Int~
     }
 
     class Locations {
-        +LocationList: List~Location~
+        +locationList: List~Location~
     }
 
     class Location {
-        +Id: Int
-        +Name: String
-        +Difficulty: Int
-        +EnemyEncounter: EnemyRefs
+        +id: Int
+        +name: String
+        +difficulty: Int
+        +enemyEncounter: EnemyRefs
         +fragment: Fragment
-        +background: String
+        +rewardSkillId: Int
     }
     class Fragment {
-        +Id: Int
-        +Name: String
-        +Image: String
+        +id: Int
+        +mame: String
+        +image: String
     }
 
     class Enemies {
-        +EnemyList: List~Enemy~
+        +enemyList: List~Enemy~
     }
 
     class Enemy {
-        +Id: Int
-        +Name: String
-        +MaxHP: Int
-        +Skill: SkillRefs
-        +AnimationClass: String
-        +RewardXP: Int
+        +id: Int
+        +name: String
+        +maxHP: Int
+        +skill: SkillRefs
+        +animationClass: String
+        +rewardXP: Int
     }
 
     class EnemyRefs {
-        +EnemyRef: List~Int~
+        +enemyRef: List~Int~
     }
 
     class GameState {
-        +SaveDate: DateTime
-        +GameVersion: String
-        +PlayTime: TimeSpan
-        +Player: Character
-        +World: World
+        +saveDate: DateTime
+        +gameVersion: String
+        +playTime: TimeSpan
+        +player: Character
+        +world: World
     }
 
     class Character {
-        +Level: Int
-        +Experience: Int
-        +CurrentHealth: Int
-        +MaxHealth: Int
-        +CurrentMana: Int
-        +MaxMana: Int
-        +Skills: SkillRefs
+        +level: Int
+        +experience: Int
+        +currentHealth: Int
+        +maxHealth: Int
+        +currentMana: Int
+        +maxMana: Int
+        +skills: SkillRefs
     }
 
     class World {
-        +LatestClearedLocationId: Int
+        +latestClearedLocationId: Int
     }
 
     EchoReborn *-- "1" GameData : gameData
@@ -124,10 +124,11 @@ classDiagram
     World ..> Location
     EnemyRefs  ..>  Enemy
     SkillRefs  ..>  Skill
+    Location  ..>  Skill : rewardSkillId
 
     Locations *-- "5"Location
     Enemies *-- "1..*"Enemy : EnemyList
-    Enemy "1..*"<-- "1..*"SkillRefs : uses
+    Enemy "1..*"*-- "1..*"SkillRefs : uses
     Skills *-- "1..*"Skill
     Character *-- "1" SkillRefs : skillRefs
     Location *-- "1..*"EnemyRefs : encounters
