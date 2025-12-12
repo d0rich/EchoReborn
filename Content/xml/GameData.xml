@@ -261,6 +261,7 @@
         <skills>
             <skillRef>5</skillRef>
             <skillRef>6</skillRef>
+            <skillRef>69</skillRef>
             <skillRef>666</skillRef>
         </skills>
     </character>
@@ -350,6 +351,17 @@
             <ManaCost>0</ManaCost>
             <HealthCost>0</HealthCost>
             <Damage>999999</Damage>
+            <Heal>0</Heal>
+        </skill>
+
+        <skill id="69">
+            <type>BASIC</type>
+            <name>Montrer le Jeu au Prof</name>
+            <description>Insta win</description>
+            <TargetType>ENEMIES</TargetType>
+            <ManaCost>-9999</ManaCost>
+            <HealthCost>-9999</HealthCost>
+            <Damage>99999</Damage>
             <Heal>0</Heal>
         </skill>
 
