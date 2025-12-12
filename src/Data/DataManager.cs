@@ -3,6 +3,7 @@ using System.Xml.XPath;
 using System.Xml.Xsl;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Xml.Schema;
 using System.IO;
 using Microsoft.Xna.Framework.Content;
 
@@ -19,6 +20,7 @@ public static class DataManager
     private static DateTime _lastDataSaveTime = DateTime.Now;
     private static string _xmlns = "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn";
     private static string _xmlnsPrefix = "er";
+    private static readonly string SchemaFilePath = "xsd/EchoReborn.xsd";
     private static readonly string GameStateFilePath = "xml/GameState.xml";
     private static readonly string GameDataFilePath = "xml/GameData.xml";
     private static readonly string CharacterFilePath = "xml/Character.xml";
@@ -198,6 +200,7 @@ public static class DataManager
     
     private static void SplitXmlDataWithDom()
     {
+        ValidateXmlFile(RessourcePath(SchemaFilePath), RessourcePath(GameDataFilePath));
         var doc = new XmlDocument();
         doc.Load(RessourcePath(GameDataFilePath, true));
 
@@ -247,6 +250,24 @@ public static class DataManager
         
         using var writer = new XmlTextWriter(outputPath, null);
         xslt.Transform(xpathDoc, null, writer);
+    }
+    
+    public static void ValidateXmlFile(
+        string xsdFilePath, 
+        string xmlFilePath,
+        string schemaNamespace = "http://www.univ-grenoble-alpes.fr/l3miage/EchoReborn")
+    {
+        var setting = new XmlReaderSettings();
+        setting.Schemas.Add(schemaNamespace, xsdFilePath);
+        setting.ValidationType = ValidationType.Schema;
+        
+        void ValidationCallBack(object? sender, ValidationEventArgs e)
+        {
+            throw new Exception(e.Message);
+        }
+        setting.ValidationEventHandler += ValidationCallBack;
+        var readItems = XmlReader.Create(xmlFilePath, setting);
+        while (readItems.Read()){}
     }
     
     private static string RessourcePath(string relativePath, bool ensureExists = false)

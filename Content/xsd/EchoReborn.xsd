@@ -9,18 +9,22 @@
     <xs:element name="echoReborn" type="er:EchoReborn"/>
     <!-- Element racine pour GameData -->
     <xs:element name="gameData" type="er:GameData">
-        <xs:keyref name="enemySkillKeyRef" refer="er:skillKey">
+        <xs:keyref name="enemySkillKeyRef" refer="er:skillKeyGlob">
             <xs:selector xpath="er:enemies/er:enemy/er:skills/er:skillRef"/>
             <xs:field xpath="."/>
         </xs:keyref>
-        <xs:keyref name="characterSkillKeyRef" refer="er:skillKey">
+        <xs:keyref name="characterSkillKeyRef" refer="er:skillKeyGlob">
             <xs:selector xpath="er:character/er:skills/er:skillRef"/>
             <xs:field xpath="."/>
         </xs:keyref>
-        <xs:keyref name="locationSkillKeyRef" refer="er:skillKey">
+        <xs:keyref name="locationSkillKeyRef" refer="er:skillKeyGlob">
             <xs:selector xpath="er:locations/er:location/er:rewardSkillId"/>
             <xs:field xpath="."/>
         </xs:keyref>
+        <xs:key name="skillKeyGlob">
+            <xs:selector xpath="er:skills/er:skill"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
     </xs:element>
     <!-- Element racine pour GameState -->
     <xs:element name="gameState" type="er:GameState"/>
