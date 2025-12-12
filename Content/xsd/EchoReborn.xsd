@@ -21,6 +21,7 @@
             <xs:selector xpath="er:locations/er:location/er:rewardSkillId"/>
             <xs:field xpath="."/>
         </xs:keyref>
+        <!--   Pour quelque raison validation dans C# ne marche pas avec skillKey    -->
         <xs:key name="skillKeyGlob">
             <xs:selector xpath="er:skills/er:skill"/>
             <xs:field xpath="@id"/>
