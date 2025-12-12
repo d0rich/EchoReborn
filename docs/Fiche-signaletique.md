@@ -68,16 +68,14 @@ Fonctionnalités minimales à livrer pour une version jouable :
 - Mécanique de progression liée au pitch : dans chaque location un boss principal détient une partie du corps de la protagoniste ; la victoire donne la partie récupérée et débloque une compétence spéciale associée.
 - Assets graphiques (MVP) : utilisation de sprites gratuits image par image (frame-by-frame) provenant de CraftPix — https://craftpix.net/freebies/filter/sprites/ — à utiliser comme ressources/placeholder pour le prototype (prévoir vérification de la licence d'utilisation pour le contexte pédagogique).
 
-(Source : `docs/README.md`)
+
 
 ## Système de combat
 
 - Tour par tour avec alternance joueur / IA.
 - Actions disponibles : Attaque, Défendre, etc.
 - Tour : détermination de l'ordre, sélection d'action, exécution, vérification des conditions de fin (victoire, défaite, fuite), distribution des récompenses.
-- Architecture suggérée : `BattleSystem`, `Character` (Player/Enemy), `Action`, `Inventory`, `ActionAnimation`, `AnimationController`.
 
-(Source : `docs/Battle.md`)
 
 ## Persistance / sauvegarde
 
@@ -85,7 +83,7 @@ Fonctionnalités minimales à livrer pour une version jouable :
 - Entités principales sauvegardées : GameState (date, version, temps de jeu), Player (stats, position, inventaire, skills), World (locations, NPCs, objets), Quests, InventoryItem, Skills.
 - Conventions : Int pour identifiants, DateTime ISO 8601, TimeSpan en format ISO 8601.
 
-(Source : `docs/Persistent.md`)
+
 
 ## Écrans
 
