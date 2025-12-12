@@ -12,21 +12,21 @@
             <fragments>
                 <totalFragments>
                     <xsl:value-of
-                            select="count(er:initialState/er:locations/er:location/er:fragment)"/>
+                            select="count(er:gameData/er:locations/er:location/er:fragment)"/>
                 </totalFragments>
             </fragments>
              <!-- skills d'enemies -->
             <enemySkillsStats>
                 <totalEnemySkills>
                     <xsl:value-of
-                            select="count(er:initialState/er:enemies/er:enemy/er:skills/er:skillRef)"/>
+                            select="count(er:gameData/er:enemies/er:enemy/er:skills/er:skillRef)"/>
                 </totalEnemySkills>
             </enemySkillsStats>
            <!--les enemies -->
             <enemyDifficulty>
                 <enemiesFaciles>
                     <xsl:value-of
-                            select="count(er:initialState/er:enemies/er:enemy[er:difficulty &lt;= 2])"/>
+                            select="count(er:gameData/er:enemies/er:enemy[er:difficulty &lt;= 2])"/>
                 </enemiesFaciles>
             </enemyDifficulty>
 
@@ -34,19 +34,19 @@
             <locationStats>
                 <nombreLocations>
                     <xsl:value-of
-                            select="count(er:initialState/er:locations/er:location)"/>
+                            select="count(er:gameData/er:locations/er:location)"/>
                 </nombreLocations>
             </locationStats>
 
             <skillsStats>
                 <nombreBasic>
                     <xsl:value-of
-                            select="count(er:initialState/er:skills/er:skill[er:type='BASIC'])"/>
+                            select="count(er:gameData/er:skills/er:skill[er:type='BASIC'])"/>
                 </nombreBasic>
 
                 <nombreComplex>
                     <xsl:value-of
-                            select="count(er:initialState/er:skills/er:skill[er:type='COMPLEX'])"/>
+                            select="count(er:gameData/er:skills/er:skill[er:type='COMPLEX'])"/>
                 </nombreComplex>
             </skillsStats>
 

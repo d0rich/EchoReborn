@@ -7,7 +7,7 @@
     <xsl:output method="xml"/>
 
     <xsl:template match="/">
-        <xsl:copy-of select="er:initialState/er:enemies" />
+        <xsl:copy-of select="er:gameData/er:enemies" />
     </xsl:template>
 
 </xsl:stylesheet>

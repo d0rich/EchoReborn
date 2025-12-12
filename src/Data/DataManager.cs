@@ -34,7 +34,7 @@ public static class DataManager
         _contentRootPath = contentManager.RootDirectory;
         IsInitialized = true;
         SplitXmlDataWithDom();
-        GenerateStatistiques(GameDataFilePath, StatistiquesFilePath);
+        GenerateStatistiquesWithXslt();
     }
 
     public static Character LoadBaseCharacter()
@@ -159,7 +159,7 @@ public static class DataManager
         return new System.TimeSpan(hours, minutes, seconds);
     }
     
-    private static void GenerateStatistiques(string inputXmlPath, string outputXmlPath)
+    private static void GenerateStatistiquesWithDom(string inputXmlPath, string outputXmlPath)
     {
         CheckInitialized();
 
@@ -221,6 +221,22 @@ public static class DataManager
         SaveSmallXml("skills", RessourcePath(SkillsFilePath));
         SaveSmallXml("locations", RessourcePath(LocationsFilePath));
     }
+    
+    private static void GenerateStatistiquesWithXslt()
+    {
+        // Create html folder
+        var htmlFolderPath = Path.Combine(_contentRootPath, "html");
+        if (!Directory.Exists(htmlFolderPath))
+        {
+            Directory.CreateDirectory(htmlFolderPath);
+        }
+        
+        ApplyXsl(RessourcePath("xslt/Statistiqueshtml.xslt"), RessourcePath("html/Statistiques.html"));    
+        ApplyXsl(RessourcePath("xslt/TopSkills.xslt"), RessourcePath("html/TopSkills.html"));    
+        
+        CommandOpenFile(RessourcePath("html/Statistiques.html"));
+        CommandOpenFile(RessourcePath("html/TopSkills.html"));
+    }
 
     private static void ApplyXsl(string xslPath, string outputPath)
     {
@@ -242,6 +258,33 @@ public static class DataManager
             throw new FileNotFoundException($"Could not find file: {path}");
 
         return path;
+    }
+
+    private static void CommandOpenFile(string filePath)
+    {
+        try
+        {
+            if (OperatingSystem.IsWindows())
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = filePath,
+                    UseShellExecute = true
+                });
+            }
+            else if (OperatingSystem.IsMacOS())
+            {
+                System.Diagnostics.Process.Start("open", filePath);
+            }
+            else if (OperatingSystem.IsLinux())
+            {
+                System.Diagnostics.Process.Start("xdg-open", filePath);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to open file {filePath}: {ex.Message}");
+        }
     }
 
     private static void CheckInitialized()

@@ -63,7 +63,7 @@
                     </tr>
 
                     <!-- tri des skills par damage décroissant -->
-                    <xsl:apply-templates select="er:initialState/er:skills/er:skill">
+                    <xsl:apply-templates select="er:gameData/er:skills/er:skill">
                         <xsl:sort select="er:Damage" data-type="number" order="descending"/>
                     </xsl:apply-templates>
 

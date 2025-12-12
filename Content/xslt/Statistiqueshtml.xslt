@@ -31,7 +31,7 @@
                         Nombre total de fragments :
                         <span class="value">
                             <xsl:value-of
-                                    select="count(er:initialState/er:locations/er:location/er:fragment)"/>
+                                    select="count(er:gameData/er:locations/er:location/er:fragment)"/>
                         </span>
                     </p>
                 </div>
@@ -42,7 +42,7 @@
                         Nombre total de compétences utilisées par les ennemis :
                         <span class="value">
                             <xsl:value-of
-                                    select="count(er:initialState/er:enemies/er:enemy/er:skills/er:skillRef)"/>
+                                    select="count(er:gameData/er:enemies/er:enemy/er:skills/er:skillRef)"/>
                         </span>
                     </p>
                 </div>
@@ -53,7 +53,7 @@
                         Nombre d'ennemis faciles :
                         <span class="value">
                             <xsl:value-of
-                                    select="count(er:initialState/er:enemies/er:enemy[er:difficulty &lt;= 2])"/>
+                                    select="count(er:gameData/er:enemies/er:enemy[er:difficulty &lt;= 2])"/>
                         </span>
                     </p>
                 </div>
@@ -65,7 +65,7 @@
                         Nombre total de locations :
                         <span class="value">
                             <xsl:value-of
-                                    select="count(er:initialState/er:locations/er:location)"/>
+                                    select="count(er:gameData/er:locations/er:location)"/>
                         </span>
                     </p>
                 </div>
@@ -76,13 +76,13 @@
                         BASIC SKILLS :
                         <span class="value">
                             <xsl:value-of
-                                    select="count(er:initialState/er:skills/er:skill[er:type='BASIC'])"/>
+                                    select="count(er:gameData/er:skills/er:skill[er:type='BASIC'])"/>
                         </span>
                         <br/>
                         COMPLEX SKILLS :
                         <span class="value">
                             <xsl:value-of
-                                    select="count(er:initialState/er:skills/er:skill[er:type='COMPLEX'])"/>
+                                    select="count(er:gameData/er:skills/er:skill[er:type='COMPLEX'])"/>
                         </span>
                     </p>
                 </div>
