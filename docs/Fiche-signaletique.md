@@ -105,45 +105,45 @@ Location 1 → Location 2 ↔ Location 3 ↔ Location 4 ↔ Location 5.
 
 **Le joueur peut** :
 
--Naviguer entre les lieux accessibles
+- Naviguer entre les lieux accessibles
 
--Suivre sa progression à travers le monde
+- Suivre sa progression à travers le monde
 
--Affronter des ennemis spécifiques à chaque zone
+- Affronter des ennemis spécifiques à chaque zone
 
--Récupérer un fragment du corps dans chaque location
+- Récupérer un fragment du corps dans chaque location
 
 **Détail des locations**:
 
 **Location 1 – Campement Orc**
 
--Ennemis : Orcs
+- Ennemis : Orcs
 
--Fragment récupéré : Les bras
+- Fragment récupéré : Les bras
 
 **Location 2 – Forêt Sacrée**
 
--Ennemis : Elfes
+- Ennemis : Elfes
 
--Fragment récupéré : Les oreilles
+- Fragment récupéré : Les oreilles
 
 **Location 3 – Cimetière Oublié**
 
--Ennemis : créatures du cimetière
+- Ennemis : créatures du cimetière
 
--Fragment récupéré : Les yeux
+- Fragment récupéré : Les yeux
 
 **Location 4 – Forteresse des Chevaliers**
 
--Ennemis : Knights
+- Ennemis : Knights
 
--Fragment récupéré : Les jambes
+- Fragment récupéré : Les jambes
 
 **Location 5 – Antre Magma**
 
--Ennemis : Monstres Spirits
+- Ennemis : Monstres Spirits
 
--Fragment récupéré : Le cœur
+- Fragment récupéré : Le cœur
 
 ![World Map](./Screens/Map.png)
 
