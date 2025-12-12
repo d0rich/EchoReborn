@@ -103,7 +103,7 @@ Premier écran au lancement du jeu. Affiche le titre "Echo Reborn" en grand et p
 Le monde est composé de 5 locations reliées entre elles, formant un réseau progressif :
 Location 1 → Location 2 ↔ Location 3 ↔ Location 4 ↔ Location 5.
 
-Le joueur peut :
+**Le joueur peut** :
 
 -Naviguer entre les lieux accessibles
 
@@ -113,34 +113,33 @@ Le joueur peut :
 
 -Récupérer un fragment du corps dans chaque location
 
-Détail des locations
+**Détail des locations**:
 
-Location 1 – Campement Orc
+**Location 1 – Campement Orc**
 
 -Ennemis : Orcs
 
 -Fragment récupéré : Les bras
 
-Location 2 – Forêt Sacrée
+**Location 2 – Forêt Sacrée**
 
 -Ennemis : Elfes
 
 -Fragment récupéré : Les oreilles
 
-Location 3 – Cimetière Oublié
+**Location 3 – Cimetière Oublié**
 
 -Ennemis : créatures du cimetière
 
 -Fragment récupéré : Les yeux
 
-Location 4 – Forteresse des Chevaliers
-
+**Location 4 – Forteresse des Chevaliers**
 
 -Ennemis : Knights
 
 -Fragment récupéré : Les jambes
 
-Location 5 – Antre Magma
+**Location 5 – Antre Magma**
 
 -Ennemis : Monstres Spirits
 
